@@ -14,10 +14,10 @@ class CreateSekolahsTable extends Migration
     public function up()
     {
         Schema::create('sekolahs', function (Blueprint $table) {
-            $table->string('kode');
+            $table->integer('id')->primary();
             $table->string('nama');
-            $table->integer('ballot');
-            $table->integer('pinalti');
+            $table->float('ballot');
+            $table->float('pinalti');
             $table->timestamps();
         });
     }

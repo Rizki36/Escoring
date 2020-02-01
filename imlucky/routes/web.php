@@ -11,6 +11,14 @@
 |
 */
 
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('admin/pralomba');
 });
+Route::group(['prefix'=>'admin'],function(){
+    Route::resource('sekolah','SekolahController',['parameters' => ['sekolah' => 'id']]);
+    Route::resource('juri','JuriController',['parameters' => ['juri' => 'id']]);
+    Route::resource('kategori','KategoriController',['parameters' => ['kategori' => 'id']]);
+});
+Route::get('admin/pralomba','PralombaController@index');
