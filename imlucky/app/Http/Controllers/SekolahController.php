@@ -26,7 +26,8 @@ class SekolahController extends Controller
      */
     public function create()
     {
-        
+        $action = route('sekolah.store');
+        return view('admin.pralomba._form-sekolah',['action'=>$action]);
     }
 
     /**
@@ -37,13 +38,16 @@ class SekolahController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'id'=>'bail|required|unique:sekolahs|integer',
+            'nama' =>'required|string'
+        ]);
         $sekolah = new Sekolah;
-        $sekolah->id = 2;
-        $sekolah->nama = 'rizki';
+        $sekolah->id = $request->id;
+        $sekolah->nama = $request->nama;
         $sekolah->ballot = 1;
         $sekolah->pinalti = 1;
         $sekolah->save();
-        return 'sukses';
     }
 
     /**
@@ -54,7 +58,7 @@ class SekolahController extends Controller
      */
     public function show($id)
     {
-        //
+        // return view('pralomba._form-sekolah');
     }
 
     /**
@@ -65,7 +69,9 @@ class SekolahController extends Controller
      */
     public function edit($id)
     {
-        //
+        $action = route('sekolah.update',['id'=>$id]);
+        $sekolah = Sekolah::find($id);
+        return view('admin.pralomba._form-sekolah',['sekolah'=>$sekolah,'action'=>$action]);
     }
 
     /**
@@ -77,13 +83,14 @@ class SekolahController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $sekolah = Sekolah::find(1);
-        $sekolah->id = 3;
-        $sekolah->nama = 'rizki';
-        $sekolah->ballot = 1;
-        $sekolah->pinalti = 1;
+        $request->validate([
+            'id'=>'bail|required|integer|unique:sekolahs,id,'.$id,
+            'nama' =>'required|string'
+        ]);
+        $sekolah = Sekolah::find($id);
+        $sekolah->id = $request->id;
+        $sekolah->nama = $request->nama;
         $sekolah->save();
-        return "halooooo";
     }
 
     /**
@@ -94,6 +101,6 @@ class SekolahController extends Controller
      */
     public function destroy($id)
     {
-        $sekolah = Sekolah::destroy(2);
+        Sekolah::destroy($id);
     }
 }

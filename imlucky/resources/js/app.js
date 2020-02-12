@@ -5,3 +5,5 @@ require('pace');
 require('perfect-scrollbar');
 require('@coreui/coreui');
 require('chart.js');
+require('bootstrap-select');
+require('sweetalert2');

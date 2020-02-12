@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Sekolah;
 use Illuminate\Http\Request;
 
 class PralombaController extends Controller
 {
+    public function listSekolah()
+    {
+        return view('admin.pralomba._list-sekolah',['sekolahs'=>Sekolah::all()]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +18,8 @@ class PralombaController extends Controller
      */
     public function index()
     {
-        return view('admin.pralomba.index');
+        $listSekolah = view('admin.pralomba._list-sekolah',['sekolahs'=>Sekolah::all()]);
+        return view('admin.pralomba.index',['listSekolah'=>$listSekolah]);
     }
 
     /**

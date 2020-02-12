@@ -17,6 +17,7 @@ Route::get('/', function () {
     return redirect('admin/pralomba');
 });
 Route::group(['prefix'=>'admin'],function(){
+    Route::get('pralomba/list-sekolah','PralombaController@listSekolah')->name('pralomba.listSekolah');
     Route::resource('sekolah','SekolahController',['parameters' => ['sekolah' => 'id']]);
     Route::resource('juri','JuriController',['parameters' => ['juri' => 'id']]);
     Route::resource('kategori','KategoriController',['parameters' => ['kategori' => 'id']]);

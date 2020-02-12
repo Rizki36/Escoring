@@ -1,11 +1,11 @@
-<div class="modal" tabindex="-1" role="dialog" id="modal" data-backdrop="static" data-keyboard="false">
+<div id="modal" class="modal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" style="margin: 0 auto">Modal title</h5>
+                <h5 id="modal-title" class="modal-title" style="margin: 0 auto">Modal title</h5>
                 
             </div>
-            <div class="modal-body">
+            <div id="modal-body" class="modal-body">
                 
             </div>
             <div class="modal-footer">
