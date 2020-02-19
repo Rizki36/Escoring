@@ -26,7 +26,8 @@ class JuriController extends Controller
      */
     public function create()
     {
-        //
+        $action = route('juri.store');
+        return view('admin.pralomba._form-juri',['action'=>$action]);
     }
 
     /**
@@ -37,12 +38,16 @@ class JuriController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'kode'=>'bail|required|string|unique:juris',
+            'nama' =>'required|string',
+            'password' =>'required|string'
+        ]);
         $juri = new Juri;
-        $juri->kode = 'juri1';
-        $juri->nama = 'rizki fitra rahman';
-        $juri->password = 'juri1';
+        $juri->kode = $request->kode;
+        $juri->nama = $request->nama;
+        $juri->password = $request->password;
         $juri->save();
-        return 'halooo';
     }
 
     /**
@@ -64,7 +69,10 @@ class JuriController extends Controller
      */
     public function edit($id)
     {
-        //
+        $action = route('juri.update');
+        $juri = Juri::find($id);
+
+        return view('admin.pralomba._form-juri',['action'=>$action,'juri'=>$juri]);
     }
 
     /**
@@ -76,12 +84,16 @@ class JuriController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $juri = Juri::find('juri3');
-        $juri->kode = 'juri10';
-        $juri->nama = 'rizki rahman rahman';
-        $juri->password = '00';
+        $request->validate([
+            'kode'=>'bail|required|string|unique:juris,kode,'.$id,
+            'nama' =>'required|string',
+            'password' =>'required|string'
+        ]);
+        $juri = Juri::find($id);
+        $juri->kode = $request->id;
+        $juri->nama = $request->nama;
+        $juri->password = $request->password;
         $juri->save();
-        return 'halooo';
     }
 
     /**
@@ -92,6 +104,6 @@ class JuriController extends Controller
      */
     public function destroy($id)
     {
-        Juri::destroy('juri10');
+        Juri::destroy($id);
     }
 }

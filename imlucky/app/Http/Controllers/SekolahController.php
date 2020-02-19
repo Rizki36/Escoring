@@ -16,7 +16,7 @@ class SekolahController extends Controller
     {
         // $this->store(new Request);   
         // $this->update(new Request,1);   
-        $this->destroy(2);
+        // $this->destroy(2);
     }
 
     /**
@@ -45,8 +45,8 @@ class SekolahController extends Controller
         $sekolah = new Sekolah;
         $sekolah->id = $request->id;
         $sekolah->nama = $request->nama;
-        $sekolah->ballot = 1;
-        $sekolah->pinalti = 1;
+        $sekolah->ballot = 0;
+        $sekolah->pinalti = 0;
         $sekolah->save();
     }
 

@@ -18,8 +18,9 @@ Route::get('/', function () {
 });
 Route::group(['prefix'=>'admin'],function(){
     Route::get('pralomba/list-sekolah','PralombaController@listSekolah')->name('pralomba.listSekolah');
+    Route::get('pralomba/list-juri','PralombaController@listJuri')->name('pralomba.listJuri');
     Route::resource('sekolah','SekolahController',['parameters' => ['sekolah' => 'id']]);
     Route::resource('juri','JuriController',['parameters' => ['juri' => 'id']]);
-    Route::resource('kategori','KategoriController',['parameters' => ['kategori' => 'id']]);
+    Route::resource('kategori','KategoriController',['parameters' => ['kategori' => 'id']]);      
 });
 Route::get('admin/pralomba','PralombaController@index');

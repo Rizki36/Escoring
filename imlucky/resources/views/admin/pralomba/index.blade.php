@@ -2,14 +2,14 @@
 @section('content')
 <div class="mt-4 mb-4 d-flex">
     <a id="btn-add-sekolah" href="{{ route('sekolah.create') }}" style="width: 180px;margin-right: 5px" class="btn bg-blue text-white">Tambah Sekolah</button>
-    <a id="btn-add-juri" style="width: 180px;margin-right: 5px" class="btn bg-orange text-white">Tambah Juri</button>
+    <a id="btn-add-juri" href="{{ route('juri.create') }}" style="width: 180px;margin-right: 5px" class="btn bg-orange text-white">Tambah Juri</button>
     <a id="btn-add-kategori" style="width: 180px;margin-right: 5px" class="btn bg-indigo text-white">Tambah Kategori</button>
     <a id="btn-add-penilaian" style="width: 180px;margin-right: 5px" class="btn bg-teal text-white">Buat Penilaian</a>
     <button class="btn ml-auto">Edit mode</button>
 </div>
 
 
-<table id="table-juri" class="table table-sm table-bordered">
+<table id="table-juri" class="table table-sm table-bordered" data-href="{{ route('pralomba.listJuri') }}">
     <thead>
         <tr>
             <th class="text-center" colspan="4">List Juri</th>
@@ -22,33 +22,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr class="text-center">
-            <th scope="row" class="align-middle">J1</th>
-            <td class="align-middle">Mark</td>
-            <td class="align-middle">J1</td>
-            <td class="align-middle">
-                <button type="button" class="btn btn-link btn-sm inline-block">Edit</button>
-                <button type="button" class="btn btn-link btn-sm inline-block">Delete</button>
-            </td>
-        </tr>
-        <tr class="text-center">
-            <th scope="row" class="align-middle">J2</th>
-            <td class="align-middle">Mark</td>
-            <td class="align-middle">J1</td>
-            <td class="align-middle">
-                <button type="button" class="btn btn-link btn-sm inline-block">Edit</button>
-                <button type="button" class="btn btn-link btn-sm inline-block">Delete</button>
-            </td>
-        </tr>
-        <tr class="text-center">
-            <th scope="row" class="align-middle">J3</th>
-            <td class="align-middle">Mark</td>
-            <td class="align-middle">J1</td>
-            <td class="align-middle">
-                <button type="button" class="btn btn-link btn-sm inline-block">Edit</button>
-                <button type="button" class="btn btn-link btn-sm inline-block">Delete</button>
-            </td>
-        </tr>
+        {!! $listJuri !!}
     </tbody>
 </table>
 
@@ -159,170 +133,203 @@
 @endsection
 
 @push('scripts')
+
 <script>
+    class Crud{
+        constructor(name,urlRefresh){
+            // ,urlCreate,urlStore,urlEdit,urlUpdate,urlDestroy
+            this.name = name;
+            this.urlRefresh = urlRefresh;
+            // this.urlCreate = urlCreate;
+            // this.urlStore = urlStore;
+            // this.urlEdit = urlEdit;
+            // this.urlUpdate = urlUpdate;
+            // this.urlDestroy = urlDestroy;
+        }
+        create(){
+            let href = $(`#btn-add-${this.name}`).attr('href'),
+                parent = this
+            // alert(`#btn-add-${this.name}`)
+            $.ajax({
+                type: "Get",
+                url: href,
+                success: function (response) {
+                    $('#modal-title').html('Tambah ' + parent.name)
+                    $('#modal-body').html(response)
+                    $('#modal').modal('show')
+                    $('#btn-modal-submit').off('click').on('click',(e) => {
+                        parent.store()
+                    })        
+                },error: function (response){
+                    alert('Terjadi kesalahan, Lihat Console untuk detailnya')
+                    console.log(response)
+                }
+            });
+        }
+        store(){
+            let form = $('#form-'+this.name),
+                data = $(form).serialize(),
+                action = $(form).attr('action'),
+                parent = this
+            $.ajax({
+                type: "POST",
+                url: action,
+                data: data,
+                success: function (response) {
+                    $('#modal').modal('hide');
+                    Swal.fire(
+                        'Success',
+                        `${parent.name} berhasil ditambahkan!`,
+                        'success'
+                    )   
+                    parent.refresh();
+                },error(response){
+                    $.each(response.responseJSON.errors, function (index, value) { 
+                            $('#'+index).addClass('is-invalid');
+                        //  console.log('#'+index + ' .invalid-feedback')
+                            $('#'+index).siblings('.invalid-feedback').html(value);
+                    });
+                    console.log(response)
+                }
+            });            
+        }
+        edit(href){
+            let parent = this
+            $.ajax({
+                type: "GET",
+                url: href,
+                success: function (response) {
+                    $('#modal-title').html('Update '+parent.name)
+                    $('#modal-body').html(response);
+                    $('#btn-modal-submit').html('Update');
+                    $('#modal').modal('show');
+                    $('#btn-modal-submit').off('click').on('click',function(e){
+                        parent.update()
+                    })        
+                },error(response){
+                    alert('Terjadi kesalahan, Lihat Console untuk detailnya')
+                    console.log(response);
+                }
+            });
+        }
+        update(){
+            let form = $(`#form-${this.name}`),
+                data = $(form).serialize(),
+                action = $(form).attr('action'),
+                parent = this
+            $.ajax({
+                type: "PUT",
+                url: action,
+                data: data,
+                success: function (response) {
+                    $('#modal').modal('hide');
+                    Swal.fire(
+                        'Updated',
+                        `Update ${parent.name} berhasil!`,
+                        'success'
+                    )
+                    parent.refresh()
+                },error(response){
+                    $.each(response.responseJSON.errors, function (index, value) { 
+                        $('#'+index).addClass('is-invalid');
+                        $('#'+index).siblings('.invalid-feedback').html(value);
+                    });
+                    console.log(response)
+                }
+            });
+        }
+        destroy(href){
+            let parent = this
+            Swal.fire({
+                title: 'Apakah kamu yakin?',
+                text: "Kamu akan menghapus pleton!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+                }).then((result) => {
+                // action if answer is true
+                if (result.value) {
+                    // ajax delete sekolah
+                    $.ajax({
+                        type: "DELETE",
+                        url: href,
+                        success: function (response) {
+                            parent.refresh()
+                            // Swal if ajax success
+                            Swal.fire(
+                                'Deleted!',
+                                `${parent.name} berhasil dihapus!`,
+                                'success'
+                            )        
+
+                        },error(e){
+                            Swal.fire(
+                                'Error',
+                                `${parent.name} gagal dihapus!`,
+                                'error'
+                            )
+                            console.log(e);
+                        }
+                    });
+                }
+            })
+            
+        }
+        refresh(){
+            let parent = this
+            $.ajax({
+                type: "GET",
+                url: parent.urlRefresh,
+                success: function (response) {
+                    $(`#table-${parent.name} tbody`).html(response);
+                },error(e){
+                    Swal.fire(
+                        'Error',
+                        `Gagal merefresh data ${parent.name}`,
+                        'error'
+                    )
+                    console.log(e);
+                }
+            });
+        }
+    }
     let refreshSekolah = $('#table-sekolah').attr('data-href');
+    let refreshJuri = $('#table-juri').attr('data-href');
+    let sekolah = new Crud('sekolah',refreshSekolah);
+    let juri = new Crud('juri',refreshJuri);
 
-    $('#btn-add-sekolah').click(function (e) { 
-        e.preventDefault();
-        let href = $(this).attr('href');
-        sekolahStore(href);
-    });
-    function sekolahStore(href){
-        $.ajax({
-            type: "GET",
-            url: href,
-            success: function (response) {
-                $('#modal-body').html(response);
-                $('#modal-title').html('Tambah Pleton');
-                $('#btn-modal-submit').html('Submit');
-                $('#modal').modal('show');
-                $('#btn-modal-submit').off('click').on('click',function(e){
-                    e.preventDefault();
-                    ajaxSekolahStore();
-                })
-            },error(e){
-                console.log(e)
-            }
-        });
-    }
-    function ajaxSekolahStore(){
-        let form = $('#form-sekolah'),
-            data = $(form).serialize(),
-            action = $(form).attr('action');
-        $.ajax({
-            type: "POST",
-            url: action,
-            data: data,
-            success: function (response) {
-                $('#modal').modal('hide');
-                Swal.fire(
-                    'Success',
-                    'Pleton berhasil ditambahkan!',
-                    'success'
-                )   
-                refreshListSekolah();
-            },error(response){
-                $.each(response.responseJSON.errors, function (index, value) { 
-                     $('#'+index).addClass('is-invalid');
-                    //  console.log('#'+index + ' .invalid-feedback')
-                     $('#'+index).siblings('.invalid-feedback').html(value);
-                });
-                console.log(response)
-            }
-        });
-    }
-    
+    $('#btn-add-sekolah').click(function (e) {
+        e.preventDefault()
+        sekolah.create()
+    })    
     $('body').on('click','.btn-edit-sekolah',function(e){
-        e.preventDefault();
-        let href = $(this).attr('href');
-        sekolahUpdate(href);
+        e.preventDefault()
+        let href = $(this).attr('href')
+        sekolah.edit(href)
     })
-    function sekolahUpdate(href){
-        $.ajax({
-            type: "GET",
-            url: href,
-            success: function (response) {
-                $('#modal-title').html('Update Pleton')
-                $('#modal-body').html(response);
-                $('#btn-modal-submit').html('Update');
-                $('#modal').modal('show');
-                $('#btn-modal-submit').off('click').on('click',function(e){
-                    ajaxSekolahUpdate();
-                })        
-            },error(response){
-                console.log(response);
-            }
-        });
-        
-    }
-    function ajaxSekolahUpdate(){
-        let form = $('#form-sekolah'),
-            data = $(form).serialize(),
-            action = $(form).attr('action');
-        $.ajax({
-            type: "PUT",
-            url: action,
-            data: data,
-            success: function (response) {
-                $('#modal').modal('hide');
-                Swal.fire(
-                    'Updated',
-                    'Update pleton berhasil!',
-                    'success'
-                )
-                refreshListSekolah();
-            },error(response){
-                $.each(response.responseJSON.errors, function (index, value) { 
-                     $('#'+index).addClass('is-invalid');
-                     $('#'+index).siblings('.invalid-feedback').html(value);
-                });
-                console.log(response)
-            }
-        });
-    }
-
     $('body').on('click','.btn-delete-sekolah',function(e){
-        e.preventDefault();
-        let href = $(this).attr('href');
-        sekolahDestroy(href);
-    });
-    function sekolahDestroy(href){
-        // Swal question
-        Swal.fire({
-            title: 'Apakah kamu yakin?',
-            text: "Kamu akan menghapus pleton!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes'
-            }).then((result) => {
-            // action if answer is true
-            if (result.value) {
-                // ajax delete sekolah
-                ajaxSekolahDistroy(href);
-            }
-        })
-    }
-    function ajaxSekolahDistroy(href){
-        $.ajax({
-            type: "DELETE",
-            url: href,
-            success: function (response) {
-                refreshListSekolah();
-                // Swal if ajax success
-                Swal.fire(
-                    'Deleted!',
-                    'Pleton berhasil dihapus!',
-                    'success'
-                )        
+        e.preventDefault()
+        let href = $(this).attr('href')
+        sekolah.destroy(href)
+    })
 
-            },error(e){
-                Swal.fire(
-                    'Error',
-                    'Pleton gagal dihapus!',
-                    'error'
-                )
-                console.log(e);
-            }
-        });
-    }
+    
+    $('#btn-add-juri').click(function (e) {
+        e.preventDefault()
+        juri.create()
+    })    
+    $('body').on('click','.btn-edit-juri',function(e){
+        e.preventDefault()
+        let href = $(this).attr('href')
+        juri.edit(href)
+    })
+    $('body').on('click','.btn-delete-juri',function(e){
+        e.preventDefault()
+        let href = $(this).attr('href')
+        juri.destroy(href)
+    })
 
-    function refreshListSekolah(){
-        $.ajax({
-            type: "GET",
-            url: refreshSekolah,
-            success: function (response) {
-                $('#table-sekolah tbody').html(response);
-            },error(e){
-                Swal.fire(
-                    'Error',
-                    'Gagal merefresh data pleton!',
-                    'error'
-                )
-                console.log(e);
-            }
-        });
-    }
 </script>
 @endpush
