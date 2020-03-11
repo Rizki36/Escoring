@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Kategori;
+use App\Sub;
 use Illuminate\Http\Request;
 
 class SubController extends Controller
@@ -13,7 +15,11 @@ class SubController extends Controller
      */
     public function index()
     {
-        //
+        // return 'halo';
+        // $request = new Request;
+        // $request->kode=1;
+        // $request->nama='test';
+        // return $this->create(1);
     }
 
     /**
@@ -21,9 +27,10 @@ class SubController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($kategori)
     {
-        //
+        $action = route('sub.store',['kategori'=>1]);
+        return  view('admin.pralomba.kategori._form-sub',['kategori'=>$kategori,'action'=>$action]);
     }
 
     /**
@@ -32,9 +39,18 @@ class SubController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,$kategori)
     {
-        //
+        $kategori  = Kategori::find($kategori);
+        $request->validate([
+            'kode'     => 'bail|required|string|max:2|min:2',
+            'nama'     => 'string'
+            ]);
+            $sub       = new Sub;
+        $sub->kode = $request->kode;
+        $sub->nama = $request->nama;
+        $kategori->sub()->save($sub);
+        return 'berhasil';
     }
 
     /**

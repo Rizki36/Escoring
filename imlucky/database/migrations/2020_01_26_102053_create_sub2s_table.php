@@ -18,7 +18,7 @@ class CreateSub2sTable extends Migration
             $table->string('kode',1);
             $table->string('nama');
             $table->string('kisaran_nilai');
-            $table->string('sub_id',2);
+            $table->bigInteger('sub_id')->unsigned();
             $table->timestamps();
         });
     }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSekolahsTable extends Migration
+class CreatePeletonsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class CreateSekolahsTable extends Migration
      */
     public function up()
     {
-        Schema::create('sekolahs', function (Blueprint $table) {
-            $table->integer('id')->primary();
+        Schema::create('peletons', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->integer('no');
             $table->string('nama');
             $table->float('ballot');
             $table->float('pinalti');
@@ -29,6 +30,6 @@ class CreateSekolahsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sekolahs');
+        Schema::dropIfExists('peletons');
     }
 }

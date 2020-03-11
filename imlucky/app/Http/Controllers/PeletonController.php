@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Sekolah;
+use App\Peleton;
 use Illuminate\Http\Request;
 
-class SekolahController extends Controller
+class PeletonController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,7 @@ class SekolahController extends Controller
      */
     public function index()
     {
-        // $this->store(new Request);   
-        // $this->update(new Request,1);   
-        // $this->destroy(2);
+        return Peleton::all()->sortBy('no');
     }
 
     /**
@@ -26,8 +24,8 @@ class SekolahController extends Controller
      */
     public function create()
     {
-        $action = route('sekolah.store');
-        return view('admin.pralomba._form-sekolah',['action'=>$action]);
+        $action = route('peleton.store');
+        return view('admin.pralomba._form-peleton',['action'=>$action]);
     }
 
     /**
@@ -39,68 +37,68 @@ class SekolahController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id'=>'bail|required|unique:sekolahs|integer',
+            'no'=>'bail|required|unique:peletons|integer',
             'nama' =>'required|string'
         ]);
-        $sekolah = new Sekolah;
-        $sekolah->id = $request->id;
-        $sekolah->nama = $request->nama;
-        $sekolah->ballot = 0;
-        $sekolah->pinalti = 0;
-        $sekolah->save();
+        $peleton = new Peleton;
+        $peleton->no = $request->no;
+        $peleton->nama = $request->nama;
+        $peleton->ballot = 0;
+        $peleton->pinalti = 0;
+        $peleton->save();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $no
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($no)
     {
-        // return view('pralomba._form-sekolah');
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $no
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($no)
     {
-        $action = route('sekolah.update',['id'=>$id]);
-        $sekolah = Sekolah::find($id);
-        return view('admin.pralomba._form-sekolah',['sekolah'=>$sekolah,'action'=>$action]);
+        $action = route('peleton.update',['no'=>$no]);
+        $peleton = Peleton::where('no',$no)->first();
+        return view('admin.pralomba._form-peleton',['peleton'=>$peleton,'action'=>$action]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  $no
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $no)
     {
         $request->validate([
-            'id'=>'bail|required|integer|unique:sekolahs,id,'.$id,
+            'no'=>'bail|required|integer|unique:peletons,no,'.$no.',no',
             'nama' =>'required|string'
         ]);
-        $sekolah = Sekolah::find($id);
-        $sekolah->id = $request->id;
-        $sekolah->nama = $request->nama;
-        $sekolah->save();
+        $peleton = peleton::where('no',$no)->first();
+        $peleton->no = $request->no;
+        $peleton->nama = $request->nama;
+        $peleton->save();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int  $no
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($no)
     {
-        Sekolah::destroy($id);
+        Peleton::where('no',$no)->first()->delete();
     }
 }

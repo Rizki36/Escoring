@@ -25,7 +25,8 @@ class KategoriController extends Controller
      */
     public function create()
     {
-        //
+        $action = route('kategori.store');
+        return view('admin.pralomba.kategori._form-kategori',['action'=>$action]);
     }
 
     /**
@@ -36,12 +37,15 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'kode'=>'bail|unique:kategoris|required|string|min:1|max:1',
+            'nama'=>'required|string'
+        ]);
         $kategori = new Kategori;
-        $kategori->kode = 'k';
-        $kategori->nama = 'kategori';
-        $kategori->sub()->attach(['kode'=>'s','nama'=>'sub']);
+
+        $kategori->kode = $request->kode;
+        $kategori->nama = $request->nama;
         $kategori->save();
-        return 'halo';
     }
 
     /**
@@ -63,7 +67,12 @@ class KategoriController extends Controller
      */
     public function edit($id)
     {
-        //
+        $kategori = Kategori::find($id);
+        // dd($kategori);
+        $action = route('kategori.update',['id'=>$id]);
+        return view('admin.pralomba.kategori._form-kategori')
+            ->with('kategori',$kategori)
+            ->with('action',$action);
     }
 
     /**
@@ -75,7 +84,13 @@ class KategoriController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'kode'=>'bail|required|string|min:1|max:1|unique:kategoris,id,'.$id.',id',
+            'nama'=>'required|string'
+        ]);
+        $kategori = Kategori::find($id);
+        $kategori->nama = $request->nama;
+        $kategori->save();
     }
 
     /**
@@ -86,11 +101,11 @@ class KategoriController extends Controller
      */
     public function destroy($id)
     {
-        Kategori::destroy('k');
+        Kategori::destroy($id);
     }
 
     public function attachSub()
-    {
+    {   
         
     }
 }

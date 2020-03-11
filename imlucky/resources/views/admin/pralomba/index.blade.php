@@ -1,9 +1,9 @@
 @extends('layouts.master')
 @section('content')
 <div class="mt-4 mb-4 d-flex">
-    <a id="btn-add-sekolah" href="{{ route('sekolah.create') }}" style="width: 180px;margin-right: 5px" class="btn bg-blue text-white">Tambah Sekolah</button>
+    <a id="btn-add-peleton" href="{{ route('peleton.create') }}" style="width: 180px;margin-right: 5px" class="btn bg-blue text-white">Tambah Peleton</button>
     <a id="btn-add-juri" href="{{ route('juri.create') }}" style="width: 180px;margin-right: 5px" class="btn bg-orange text-white">Tambah Juri</button>
-    <a id="btn-add-kategori" style="width: 180px;margin-right: 5px" class="btn bg-indigo text-white">Tambah Kategori</button>
+    
     <a id="btn-add-penilaian" style="width: 180px;margin-right: 5px" class="btn bg-teal text-white">Buat Penilaian</a>
     <button class="btn ml-auto">Edit mode</button>
 </div>
@@ -26,7 +26,7 @@
     </tbody>
 </table>
 
-<table id="table-kategori" class="table table-sm table-bordered">
+<table id="table-kategori" class="table table-sm table-bordered" data-href="{{ route('pralomba.listKategori') }}">
     <thead>
         <tr>
             <th class="text-center" colspan="5">List Kategori</th>
@@ -40,81 +40,14 @@
         </tr>
     </thead>
     <tbody>
-        <tr class="text-center">
-            <td class="align-middle" rowspan="3">
-                <span class="d-block">PBB</span>
-                <small><a href="">Edit</a> / <a href="">Hapus</a></small>
-            </td>
-            <td class="align-middle" rowspan="3">80</td>
-            <td class="align-middle" rowspan="2">
-                <span class="d-block">Gerakan Ditempat</span>
-                <small><a href="">Edit</a> / <a href="">Hapus</a></small>
-            </td> 
-            <td class="align-middle">
-                <span class="d-block">iuhisgdfishfisudhfiudhiuh</span>
-                <small><a href="">Edit</a> / <a href="">Hapus</a></small>
-            </td>
-            <td class="align-middle">Ka01</td>
-        </tr>
-        <tr class="text-center">            
-            <td class="align-middle">
-                <span class="d-block">iuhisgdfishfisudhfiudhiuh</span>
-                <small><a href="">Edit</a> / <a href="">Hapus</a></small>
-            </td>
-            <td class="align-middle">Ka02</td>
-        </tr>
-        <tr class="text-center">
-            <td class="align-middle">
-                <span class="d-block">Gerakan Pindah Tempat</span>
-                <small><a href="">Edit</a> / <a href="">Hapus</a></small>
-            </td> 
-            <td class="align-middle">
-                <span class="d-block">iuhisgdfishfisudhfiudhiuh</span>
-                <button type="button" class="btn btn-link btn-sm inline-block">Edit</button>
-                <button type="button" class="btn btn-link btn-sm inline-block">Delete</button>
-            </td>
-            <td class="align-middle">Ka03</td>
-        </tr>
-
-        <tr class="text-center">
-            <td class="align-middle" rowspan="3">
-                <span class="d-block">PBB</span>
-                <small><a href="">Edit</a> / <a href="">Hapus</a></small>
-            </td>
-            <td class="align-middle" rowspan="3">80</td>
-            <td class="align-middle" rowspan="2">
-                <span class="d-block">Gerakan Ditempat</span>
-                <small><a href="">Edit</a> / <a href="">Hapus</a></small>
-            </td> 
-            <td class="align-middle">
-                <span class="d-block">iuhisgdfishfisudhfiudhiuh</span>
-                <small><a href="">Edit</a> / <a href="">Hapus</a></small>
-            </td>
-            <td class="align-middle">Ka01</td>
-        </tr>
-        <tr class="text-center">            
-            <td class="align-middle">
-                <span class="d-block">iuhisgdfishfisudhfiudhiuh</span>
-                <small><a href="">Edit</a> / <a href="">Hapus</a></small>
-            </td>
-            <td class="align-middle">Ka02</td>
-        </tr>
-        <tr class="text-center">
-            <td class="align-middle">
-                <span class="d-block">Gerakan Pindah Tempat</span>
-                <small><a href="">Edit</a> / <a href="">Hapus</a></small>
-            </td> 
-            <td class="align-middle">
-                <span class="d-block">iuhisgdfishfisudhfiudhiuh</span>
-                <button type="button" class="btn btn-link btn-sm inline-block">Edit</button>
-                <button type="button" class="btn btn-link btn-sm inline-block">Delete</button>
-            </td>
-            <td class="align-middle">Ka03</td>
-        </tr>
+        {!! $listKategori !!}
     </tbody>
+    <tfoot>
+        <tr><td colspan="5"><a id="btn-add-kategori" style="width: 100%;margin-right: 5px" class="btn bg-indigo text-white" href="{{ route('kategori.create') }}">Tambah Kategori</button></td></tr>
+    </tfoot>
 </table>
 
-<table id="table-sekolah" class="table table-sm table-bordered" data-href="{{ route('pralomba.listSekolah') }}">
+<table id="table-peleton" class="table table-sm table-bordered" data-href="{{ route('pralomba.listPeleton') }}">
     <thead>
         <tr>
             <th class="text-center" colspan="3">List Pleton</th>
@@ -126,7 +59,7 @@
         </tr>
     </thead>
     <tbody>
-        {!! $listSekolah !!}
+        {!! $listPeleton !!}
     </tbody>
 </table>
 @include('common.modal')
@@ -137,30 +70,22 @@
 <script>
     class Crud{
         constructor(name,urlRefresh){
-            // ,urlCreate,urlStore,urlEdit,urlUpdate,urlDestroy
-            this.name = name;
-            this.urlRefresh = urlRefresh;
-            // this.urlCreate = urlCreate;
-            // this.urlStore = urlStore;
-            // this.urlEdit = urlEdit;
-            // this.urlUpdate = urlUpdate;
-            // this.urlDestroy = urlDestroy;
+            this.name = name
+            this.urlRefresh = urlRefresh
         }
-        create(){
-            let href = $(`#btn-add-${this.name}`).attr('href'),
-                parent = this
-            // alert(`#btn-add-${this.name}`)
+        create(href){
+            let parent = this
             $.ajax({
                 type: "Get",
                 url: href,
-                success: function (response) {
+                success: (response) => {
                     $('#modal-title').html('Tambah ' + parent.name)
                     $('#modal-body').html(response)
                     $('#modal').modal('show')
                     $('#btn-modal-submit').off('click').on('click',(e) => {
                         parent.store()
                     })        
-                },error: function (response){
+                },error: (response) => {
                     alert('Terjadi kesalahan, Lihat Console untuk detailnya')
                     console.log(response)
                 }
@@ -171,27 +96,28 @@
                 data = $(form).serialize(),
                 action = $(form).attr('action'),
                 parent = this
+            console.log(data)
             $.ajax({
                 type: "POST",
                 url: action,
                 data: data,
                 success: function (response) {
-                    $('#modal').modal('hide');
+                    $('#modal').modal('hide')
                     Swal.fire(
                         'Success',
                         `${parent.name} berhasil ditambahkan!`,
                         'success'
                     )   
-                    parent.refresh();
+                    parent.refresh()
                 },error(response){
                     $.each(response.responseJSON.errors, function (index, value) { 
-                            $('#'+index).addClass('is-invalid');
+                            $('#'+index).addClass('is-invalid')
                         //  console.log('#'+index + ' .invalid-feedback')
-                            $('#'+index).siblings('.invalid-feedback').html(value);
-                    });
+                            $('#'+index).siblings('.invalid-feedback').html(value)
+                    })
                     console.log(response)
                 }
-            });            
+            })
         }
         edit(href){
             let parent = this
@@ -200,17 +126,17 @@
                 url: href,
                 success: function (response) {
                     $('#modal-title').html('Update '+parent.name)
-                    $('#modal-body').html(response);
-                    $('#btn-modal-submit').html('Update');
-                    $('#modal').modal('show');
+                    $('#modal-body').html(response)
+                    $('#btn-modal-submit').html('Update')
+                    $('#modal').modal('show')
                     $('#btn-modal-submit').off('click').on('click',function(e){
                         parent.update()
                     })        
                 },error(response){
                     alert('Terjadi kesalahan, Lihat Console untuk detailnya')
-                    console.log(response);
+                    console.log(response)
                 }
-            });
+            })
         }
         update(){
             let form = $(`#form-${this.name}`),
@@ -222,7 +148,7 @@
                 url: action,
                 data: data,
                 success: function (response) {
-                    $('#modal').modal('hide');
+                    $('#modal').modal('hide')
                     Swal.fire(
                         'Updated',
                         `Update ${parent.name} berhasil!`,
@@ -231,8 +157,8 @@
                     parent.refresh()
                 },error(response){
                     $.each(response.responseJSON.errors, function (index, value) { 
-                        $('#'+index).addClass('is-invalid');
-                        $('#'+index).siblings('.invalid-feedback').html(value);
+                        $('#'+index).addClass('is-invalid')
+                        $('#'+index).siblings('.invalid-feedback').html(value)
                     });
                     console.log(response)
                 }
@@ -242,7 +168,7 @@
             let parent = this
             Swal.fire({
                 title: 'Apakah kamu yakin?',
-                text: "Kamu akan menghapus pleton!",
+                text: `Kamu akan menghapus ${parent.name}!`,
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -251,7 +177,7 @@
                 }).then((result) => {
                 // action if answer is true
                 if (result.value) {
-                    // ajax delete sekolah
+                    // ajax delete peleton
                     $.ajax({
                         type: "DELETE",
                         url: href,
@@ -270,9 +196,9 @@
                                 `${parent.name} gagal dihapus!`,
                                 'error'
                             )
-                            console.log(e);
+                            console.log(e)
                         }
-                    });
+                    })
                 }
             })
             
@@ -283,42 +209,45 @@
                 type: "GET",
                 url: parent.urlRefresh,
                 success: function (response) {
-                    $(`#table-${parent.name} tbody`).html(response);
+                    $(`#table-${parent.name} tbody`).html(response)
                 },error(e){
                     Swal.fire(
                         'Error',
                         `Gagal merefresh data ${parent.name}`,
                         'error'
                     )
-                    console.log(e);
+                    console.log(e)
                 }
             });
         }
     }
-    let refreshSekolah = $('#table-sekolah').attr('data-href');
-    let refreshJuri = $('#table-juri').attr('data-href');
-    let sekolah = new Crud('sekolah',refreshSekolah);
-    let juri = new Crud('juri',refreshJuri);
+    let refreshPeleton = $('#table-peleton').attr('data-href'),
+        peleton = new Crud('peleton',refreshPeleton);
 
-    $('#btn-add-sekolah').click(function (e) {
+    $('#btn-add-peleton').click(function (e) {
         e.preventDefault()
-        sekolah.create()
+        let href = $(this).attr('href')
+        peleton.create(href)
     })    
-    $('body').on('click','.btn-edit-sekolah',function(e){
+    $('body').on('click','.btn-edit-peleton',function(e){
         e.preventDefault()
         let href = $(this).attr('href')
-        sekolah.edit(href)
+        peleton.edit(href)
     })
-    $('body').on('click','.btn-delete-sekolah',function(e){
+    $('body').on('click','.btn-delete-peleton',function(e){
         e.preventDefault()
         let href = $(this).attr('href')
-        sekolah.destroy(href)
+        peleton.destroy(href)
     })
 
     
+    let refreshJuri = $('#table-juri').attr('data-href'),
+        juri = new Crud('juri',refreshJuri)
+
     $('#btn-add-juri').click(function (e) {
         e.preventDefault()
-        juri.create()
+        let href = $(this).attr('href')
+        juri.create(href)
     })    
     $('body').on('click','.btn-edit-juri',function(e){
         e.preventDefault()
@@ -330,6 +259,46 @@
         let href = $(this).attr('href')
         juri.destroy(href)
     })
+    
+    let refreshKategori = $('#table-kategori').attr('data-href'),
+        kategori = new Crud('kategori', refreshKategori)
 
+    $('body').on('click', '#btn-add-kategori', function (e) {
+        e.preventDefault()
+        let href = $(this).attr('href')
+        kategori.create(href)
+    })
+    $('body').on('click','.btn-edit-kategori',function(e){
+        e.preventDefault()
+        let href = $(this).attr('href')
+        kategori.edit(href)
+    })
+    $('body').on('click','.btn-delete-kategori',function(e){
+        e.preventDefault()
+        let href = $(this).attr('href')
+        kategori.destroy(href)
+    })
+   
+    let sub = new Crud('sub',refreshKategori)
+
+    $('body').on('click', '.btn-add-sub', function (e) {
+        e.preventDefault()
+        let href = $(this).attr('href')
+        sub.create(href)
+    })
+    $('body').on('click','.btn-edit-sub',function(e){
+        e.preventDefault()
+        let href = $(this).attr('href')
+        sub.edit(href)
+    })
+    $('body').on('click','.btn-delete-sub',function(e){
+        e.preventDefault()
+        let href = $(this).attr('href')
+        sub.destroy(href)
+    })
+    
+
+</script>
+<script>
 </script>
 @endpush

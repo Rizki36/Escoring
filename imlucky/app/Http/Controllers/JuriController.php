@@ -14,9 +14,7 @@ class JuriController extends Controller
      */
     public function index()
     {
-        // $this->store(new Request);
-        // $this->update(new Request,1);
-        // $this->destroy(1);
+        return Juri::all()->sortByDesc('kode');
     }
 
     /**
@@ -69,7 +67,7 @@ class JuriController extends Controller
      */
     public function edit($id)
     {
-        $action = route('juri.update');
+        $action = route('juri.update',['id'=>$id]);
         $juri = Juri::find($id);
 
         return view('admin.pralomba._form-juri',['action'=>$action,'juri'=>$juri]);
@@ -84,13 +82,15 @@ class JuriController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $juri = Juri::find($id);
         $request->validate([
-            'kode'=>'bail|required|string|unique:juris,kode,'.$id,
+            'id'=>'unique:juris,id,'.$id.',id',
+            'kode'=>'required|string|unique:juris,kode,'.$juri->kode.',kode',
             'nama' =>'required|string',
             'password' =>'required|string'
         ]);
         $juri = Juri::find($id);
-        $juri->kode = $request->id;
+        $juri->kode = $request->kode;
         $juri->nama = $request->nama;
         $juri->password = $request->password;
         $juri->save();

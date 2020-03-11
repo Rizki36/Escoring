@@ -14,11 +14,15 @@ class CreatePenilaianTable extends Migration
     public function up()
     {
         Schema::create('penilaian', function (Blueprint $table) {
-            $table->string('juri_id',30);
-            $table->integer('sekolah_id');
+            $table->bigInteger('juri_id')->unsigned();
+            $table->bigInteger('peleton_id')->unsigned();
+            
+            $table->bigInteger('kategori_id')->unsigned();
+            $table->bigInteger('sub_id')->unsigned();
             $table->bigInteger('sub2_id')->unsigned();
             $table->float('nilai');
-            $table->primary(['juri_id','sekolah_id','sub2_id']);
+
+            $table->primary(['juri_id','peleton_id','kategori_id','sub_id','sub2_id']);
         });
     }
 

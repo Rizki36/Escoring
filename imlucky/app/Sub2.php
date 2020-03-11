@@ -10,7 +10,7 @@ class Sub2 extends Model
     
     public function sub()
     {
-        return $this->belongsTo(Sub::class);
+        return $this->belongsTo(Sub::class,'sub_id','id');
     }
 
 }

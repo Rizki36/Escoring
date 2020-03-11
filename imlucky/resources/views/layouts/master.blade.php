@@ -19,9 +19,9 @@
   <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <title>Admin page sampah kita</title>
+  <title>E-Scoring | @yield('title')</title>
   <link href="{{ mix('css/app.css') }}" rel="stylesheet"> 
-
+  <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
 </head>
 
 <body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
@@ -39,7 +39,7 @@
     </main>
     {{-- @include('common.aside') --}}
   </div>
-  <script src="{{ asset('js/app.js') }}"></script>  
+  <script src="{{ mix('js/app.js') }}"></script>  
   <script>
     $.ajaxSetup({
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}

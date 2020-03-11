@@ -17,7 +17,7 @@ class CreateSubsTable extends Migration
             $table->bigIncrements('id');
             $table->string('kode',2);
             $table->string('nama')->nullable();
-            $table->string('kategori_id',1);
+            $table->bigInteger('kategori_id')->unsigned();
             $table->timestamps();
         });
     }

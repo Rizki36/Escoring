@@ -14,8 +14,9 @@ class CreateJurisTable extends Migration
     public function up()
     {
         Schema::create('juris', function (Blueprint $table) {
-            $table->string('kode',30)->primary();
-            $table->string('nama',30);
+            $table->bigIncrements('id');
+            $table->string('kode');
+            $table->string('nama');
             $table->string('password');
             $table->timestamps();
         });

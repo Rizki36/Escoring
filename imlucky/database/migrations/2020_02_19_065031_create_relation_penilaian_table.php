@@ -16,17 +16,30 @@ class CreateRelationPenilaianTable extends Migration
         Schema::table('penilaian', function (Blueprint $table) {
             
             $table->foreign('juri_id')
-                    ->references('kode')
+                    ->references('id')
                     ->on('juris')
                     ->onDelete('cascade')
                     ->onUpdate('cascade');
 
-            $table->foreign('sekolah_id')
+            $table->foreign('peleton_id')
                     ->references('id')
-                    ->on('sekolahs')
+                    ->on('peletons')
                     ->onDelete('cascade')
                     ->onUpdate('cascade');
             
+                    
+            $table->foreign('kategori_id')
+                    ->references('id')
+                    ->on('kategoris')
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
+
+            $table->foreign('sub_id')
+                    ->references('id')
+                    ->on('subs')
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
+
             $table->foreign('sub2_id')
                     ->references('id')
                     ->on('sub2s')
@@ -44,7 +57,7 @@ class CreateRelationPenilaianTable extends Migration
     public function down()
     {
         Schema::table('penilaian', function (Blueprint $table) {
-            $table->dropForeign(['juri_id','sekolah_id','sub2_id']);
+            $table->dropForeign(['juri_id','peleton_id','kategori_id','sub_id','sub2_id']);
         });
     }
 }
