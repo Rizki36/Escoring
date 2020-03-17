@@ -1,98 +1,78 @@
-<tr class="text-center">
-    <td class="hover-container align-middle" rowspan="3">
-        <div class="hover-middle">
-            <a role="button" class="btn btn-sm btn-success d-block" href=""> + Sub</a>
-            <a role="button" class="btn btn-sm btn-warning" href=""><i class="icon-edit"></i>Edit</a>
-            <a role="button" class="btn btn-sm btn-danger" href="">Hapus</a>
-        </div>
-        <span class="d-block">PBB</span>
-    </td>
-    <td class="align-middle" rowspan="3">80</td>
-    <td class="align-middle" rowspan="2">
-        <span class="d-block">Gerakan Ditempat</span>
-        <small><a href="">Edit</a> / <a href="">Hapus</a></small>
-    </td>
-    <td class="align-middle">
-        <span class="d-block">iuhisgdfishfisudhfiudhiuh</span>
-        <small><a href="">Edit</a> / <a href="">Hapus</a></small>
-    </td>
-    <td class="align-middle">Ka01</td>
-</tr>
-<tr class="text-center">
-    <td class="align-middle">
-        <span class="d-block">iuhisgdfishfisudhfiudhiuh</span>
-        <small><a href="">Edit</a> / <a href="">Hapus</a></small>
-    </td>
-    <td class="align-middle">Ka02</td>
-</tr>
-<tr class="text-center">
-    <td class="align-middle">
-        <span class="d-block">Gerakan Pindah Tempat</span>
-        <small><a href="">Edit</a> / <a href="">Hapus</a></small>
-    </td>
-    <td class="align-middle">
-        <span class="d-block">iuhisgdfishfisudhfiudhiuh</span>
-        <button type="button" class="btn btn-link btn-sm inline-block">Edit</button>
-        <button type="button" class="btn btn-link btn-sm inline-block">Delete</button>
-    </td>
-    <td class="align-middle">Ka03</td>
-</tr>
+{{-- jika ada data --}}
+@if (!is_null($kategoris))
+    @foreach ($kategoris as $kategori) 
+        {{-- jika kategori memiliki sub --}}
+        @if ($kategori->sub->count()>0)
+            @foreach ($kategori->sub as $sub)
+                    {{-- jika sub memiliki sub2 --}}
+                    @if ($sub->sub2->count() > 0)
+                        @foreach ($sub->sub2 as $sub2)
+                            <tr class="text-center" style="min-height: 200px">
+                                
+                                {{-- jika sub2 terletak pada awal sub dan sub2 --}}
+                                @if ($loop->parent->first && $loop->first)
+                                    @include('admin.pralomba.kategori.table._td-kategori',[
+                                            'rowspan'=>$kategori->rowspan,
+                                            'kode'=>$kategori->kode,
+                                            'nama'=>$kategori->nama])
+                                @endif
 
-<tr class="text-center">
-    <td class="align-middle" rowspan="3">
-        <span class="d-block">PBB</span>
-        <small><a href="">Edit</a> / <a href="">Hapus</a></small>
-    </td>
-    <td class="align-middle" rowspan="3">80</td>
-    <td class="align-middle" rowspan="2">
-        <span class="d-block">Gerakan Ditempat</span>
-        <small><a href="">Edit</a> / <a href="">Hapus</a></small>
-    </td>
-    <td class="align-middle">
-        <span class="d-block">iuhisgdfishfisudhfiudhiuh</span>
-        <small><a href="">Edit</a> / <a href="">Hapus</a></small>
-    </td>
-    <td class="align-middle">Ka01</td>
-</tr>
-<tr class="text-center">
-    <td class="align-middle">
-        <span class="d-block">iuhisgdfishfisudhfiudhiuh</span>
-        <small><a href="">Edit</a> / <a href="">Hapus</a></small>
-    </td>
-    <td class="align-middle">Ka02</td>
-</tr>
-<tr class="text-center">
-    <td class="align-middle">
-        <span class="d-block">Gerakan Pindah Tempat</span>
-        <small><a href="">Edit</a> / <a href="">Hapus</a></small>
-    </td>
-    <td class="align-middle">
-        <span class="d-block">iuhisgdfishfisudhfiudhiuh</span>
-        <button type="button" class="btn btn-link btn-sm inline-block">Edit</button>
-        <button type="button" class="btn btn-link btn-sm inline-block">Delete</button>
-    </td>
-    <td class="align-middle">Ka03</td>
-</tr>
+                                {{-- jika sub2 terletak pada awal sub2 --}}
+                                @if ($loop->first)
+                                    @include('admin.pralomba.kategori.table._td-sub',[
+                                            'nama'=>$sub->nama,
+                                            'rowspan'=>$sub->rowspan,
+                                            'link'=>''])
+                                @endif
 
-@foreach ($kategoris as $kategori)
-<tr class="text-center" style="min-height: 200px">
-    <td class="hover-container align-middle" rowspan="">
-        <div class="hover-middle">
-            <a role="button" class="btn-add-sub btn btn-sm btn-success d-block" href="{{ route('sub.create',['kategori'=>$kategori->kode]) }}"> + Sub</a>
-            <a role="button" class="btn-edit-kategori btn btn-sm btn-warning" href="{{ route('kategori.edit',['id'=>$kategori->kode]) }}"><i class="icon-edit"></i>Edit</a>
-            <a role="button" class="btn-delete-kategori btn-sm btn-danger" href="{{ route('kategori.destroy',['id'=>$kategori->kode]) }}">Hapus</a>
-        </div>
-        <span class="d-block">{{ $kategori->nama }}</span>
-    </td>
-    <td class="align-middle" rowspan="">80</td>
-    <td class="align-middle" rowspan="">
-        <span class="d-block">sub</span>
-        <small><a href="">Edit</a> / <a href="">Hapus</a></small>
-    </td>
-    <td class="align-middle">
-        <span class="d-block">iuhisgdfishfisudhfiudhiuh</span>
-        <small><a href="">Edit</a> / <a href="">Hapus</a></small>
-    </td>
-    <td class="align-middle">Ka01</td>
-</tr>
-@endforeach 
+                                @include('admin.pralomba.kategori.table._td-sub2',[
+                                    'nama'=>$sub2->nama,
+                                    'link'=>'',
+                                    'kode'=>$sub2->idsub2
+                                ])
+
+                            </tr>
+                        @endforeach   
+
+                    {{-- jika sub tidak memiliki sub2 --}}
+                    @else
+                        <tr class="text-center" style="min-height: 200px">
+                            {{-- jika letak sub terletak pada awal kategori --}}
+                            @if ($loop->first)
+                                @include('admin.pralomba.kategori.table._td-kategori',[
+                                        'rowspan'=>$kategori->rowspan,
+                                        'kode'=>$kategori->kode,
+                                        'nama'=>$kategori->nama])
+                            @endif
+
+                            @include('admin.pralomba.kategori.table._td-sub',[
+                                    'nama'=>$sub->nama,
+                                    'rowspan'=>$sub->rowspan,
+                                    'link'])
+
+                            <td class="align-middle" colspan="2">
+                                <span class="d-block">Belum ada sub2</span>
+                            </td>
+                        </tr>
+
+                    @endif
+
+            @endforeach
+        {{-- jika tidak memiliki kategori tidak meiliki sub sama sekali --}}
+        @else
+            <tr class="text-center" style="min-height: 200px">
+                @include('admin.pralomba.kategori.table._td-kategori',[
+                    'kode'=>$kategori->kode,
+                    'nama'=>$kategori->nama,
+                    'rowspan'=>0])
+                <td class="align-middle" colspan="3">Belum ada sub</td>
+            </tr>
+        @endif
+    @endforeach 
+
+{{-- jika data tidak ada sama sekali kategori--}}
+@else
+    <tr>
+        <td class="align-middle" colspan="5"> Data masih kosong </td>
+    </tr>
+@endif
