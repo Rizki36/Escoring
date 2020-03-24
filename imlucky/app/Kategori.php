@@ -10,6 +10,8 @@ class Kategori extends Model
 
     public function sub()
     {
-        return $this->hasMany(Sub::class);
+        return $this->hasMany(Sub::class)->orderBy('kode');
     }    
+
+    
 }

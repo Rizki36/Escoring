@@ -2,16 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Juri;
-use App\Kategori;
-use App\Peleton;
-use App\Sekolah;
-use App\Sub;
-use App\Sub2;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
-class PralombaController extends Controller
+class LaporanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,8 +12,8 @@ class PralombaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
-        //
+    {
+        return view('admin.laporan.index');
     }
 
     /**

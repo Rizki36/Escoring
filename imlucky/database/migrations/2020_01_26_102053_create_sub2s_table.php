@@ -15,9 +15,8 @@ class CreateSub2sTable extends Migration
     {
         Schema::create('sub2s', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('kode',1);
+            $table->string('kode',2);
             $table->string('nama');
-            $table->string('kisaran_nilai');
             $table->bigInteger('sub_id')->unsigned();
             $table->timestamps();
         });

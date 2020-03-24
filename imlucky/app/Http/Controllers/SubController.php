@@ -15,11 +15,7 @@ class SubController extends Controller
      */
     public function index()
     {
-        // return 'halo';
-        // $request = new Request;
-        // $request->kode=1;
-        // $request->nama='test';
-        // return $this->create(1);
+        
     }
 
     /**
@@ -29,7 +25,7 @@ class SubController extends Controller
      */
     public function create($kategori)
     {
-        $action = route('sub.store',['kategori'=>1]);
+        $action = route('sub.store',['kategori'=>$kategori]);
         return  view('admin.pralomba.kategori._form-sub',['kategori'=>$kategori,'action'=>$action]);
     }
 
@@ -41,14 +37,23 @@ class SubController extends Controller
      */
     public function store(Request $request,$kategori)
     {
-        $kategori  = Kategori::find($kategori);
+        $request->merge(['kategori_id'=>$kategori]);
+        
+        $model    = $this->transformModel($kategori);
+        
+        $kategori = $model->kategori;
+        $sub      = $request->kode;
+
         $request->validate([
-            'kode'     => 'bail|required|string|max:2|min:2',
-            'nama'     => 'string'
-            ]);
-            $sub       = new Sub;
+            'kode'          => 'required|string|max:1|min:1|unique:subs,kode,NULL,kode,kategori_id,'.$kategori->id,
+            'kategori_id'   => 'string|unique:subs,kategori_id,NULL,kategori_id,kode,'.$sub,
+            'nama'          => 'required|string',
+            'kisaran_nilai' => 'required',
+            ]);        
+        $sub       = new Sub;
         $sub->kode = $request->kode;
         $sub->nama = $request->nama;
+        $sub->kisaran_nilai = $request->kisaran_nilai;
         $kategori->sub()->save($sub);
         return 'berhasil';
     }
@@ -56,10 +61,10 @@ class SubController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $sub
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($sub)
     {
         //
     }
@@ -67,34 +72,74 @@ class SubController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $sub
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($kategori, $sub)
     {
-        //
+        $action   = route('sub.update',['kategori'=>$kategori,'sub'=>$sub]);
+        $model    = $this->transformModel($kategori,$sub);
+        $kategori = $model->kategori;
+        $sub      = $model->sub;
+
+        return view('admin.pralomba.kategori._form-sub',['action'=>$action,'sub'=>$sub]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  $sub
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    
+     public function update(Request $request, $kategori, $sub)
     {
-        //
+        $model = $this->transformModel($kategori,$sub);
+        $kategori = $model->kategori;
+        $request->validate([
+            'kode'          => 'required|string|max:1|min:1|unique:subs,kode,'.$sub.',kode,kategori_id,'.$kategori->id,
+            'kategori_id'   => 'unique:subs,kategori_id,'.$kategori->id.',kategori_id,kode,'.$sub,
+            'nama'          => 'required|string',
+            'kisaran_nilai' => 'required|string',
+        ]);
+        
+        $sub = $model->sub;
+        $sub->kode = $request->kode;
+        $sub->nama = $request->nama;
+        $sub->kisaran_nilai = $request->kisaran_nilai;
+        $sub->save();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int  $sub
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($kategori,$sub)
     {
-        //
+        $model = $this->transformModel($kategori,$sub);
+        
+        $sub = $model->sub;
+        $sub->delete();
+        return 'sukses';
+    }
+
+    private function transformModel($kategori,$sub=null)
+    {
+        // mencari id kategori dari kode kategori
+        $kategori = Kategori::where('kode',$kategori)
+                            ->first();
+        if (!is_null($sub)) {
+            // mencari id sub dari id kategori dan kode sub
+            $sub = Sub::where('kode',$sub)
+                        ->where('kategori_id',$kategori->id)
+                        ->first();
+        }
+        return (object) [
+            'kategori' => $kategori,
+            'sub'      => $sub,
+        ];
     }
 }

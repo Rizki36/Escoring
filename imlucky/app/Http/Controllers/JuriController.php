@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class JuriController extends Controller
 {
+    public function listJuri()
+    {
+        $juri = Juri::all()->sortBy('kode');
+        return view('admin.pralomba.juri._list-juri',['juris'=>$juri]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +20,8 @@ class JuriController extends Controller
      */
     public function index()
     {
-        return Juri::all()->sortByDesc('kode');
+        $listJuri = $this->listJuri();
+        return view('admin.pralomba.juri.index',['listJuri'=>$listJuri]);
     }
 
     /**
@@ -25,7 +32,7 @@ class JuriController extends Controller
     public function create()
     {
         $action = route('juri.store');
-        return view('admin.pralomba._form-juri',['action'=>$action]);
+        return view('admin.pralomba.juri._form-juri',['action'=>$action]);
     }
 
     /**
@@ -70,7 +77,7 @@ class JuriController extends Controller
         $action = route('juri.update',['id'=>$id]);
         $juri = Juri::find($id);
 
-        return view('admin.pralomba._form-juri',['action'=>$action,'juri'=>$juri]);
+        return view('admin.pralomba.juri._form-juri',['action'=>$action,'juri'=>$juri]);
     }
 
     /**

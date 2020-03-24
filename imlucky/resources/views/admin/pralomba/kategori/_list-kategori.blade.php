@@ -12,23 +12,27 @@
                                 {{-- jika sub2 terletak pada awal sub dan sub2 --}}
                                 @if ($loop->parent->first && $loop->first)
                                     @include('admin.pralomba.kategori.table._td-kategori',[
-                                            'rowspan'=>$kategori->rowspan,
-                                            'kode'=>$kategori->kode,
-                                            'nama'=>$kategori->nama])
+                                            'rowspan'  => $kategori->rowspan,
+                                            'kategori' => $kategori->kode,
+                                            'nama'     => $kategori->nama])
                                 @endif
 
                                 {{-- jika sub2 terletak pada awal sub2 --}}
                                 @if ($loop->first)
                                     @include('admin.pralomba.kategori.table._td-sub',[
-                                            'nama'=>$sub->nama,
-                                            'rowspan'=>$sub->rowspan,
-                                            'link'=>''])
+                                            'nama'     => $sub->nama,
+                                            'rowspan'  => $sub->rowspan,
+                                            'kategori' => $kategori->kode,
+                                            'sub'      => $sub->kode
+                                            ])      
                                 @endif
-
+                                
                                 @include('admin.pralomba.kategori.table._td-sub2',[
-                                    'nama'=>$sub2->nama,
-                                    'link'=>'',
-                                    'kode'=>$sub2->idsub2
+                                    'nama'     => $sub2->nama,
+                                    'kategori' => $kategori->kode,
+                                    'sub'      => $sub->kode,
+                                    'sub2'     => $sub2->kode,
+                                    'kode'     => $sub2->idsub2
                                 ])
 
                             </tr>
@@ -40,19 +44,22 @@
                             {{-- jika letak sub terletak pada awal kategori --}}
                             @if ($loop->first)
                                 @include('admin.pralomba.kategori.table._td-kategori',[
-                                        'rowspan'=>$kategori->rowspan,
-                                        'kode'=>$kategori->kode,
-                                        'nama'=>$kategori->nama])
+                                        'rowspan'  => $kategori->rowspan,
+                                        'kategori' => $kategori->kode,
+                                        'nama'     => $kategori->nama])
                             @endif
 
                             @include('admin.pralomba.kategori.table._td-sub',[
-                                    'nama'=>$sub->nama,
-                                    'rowspan'=>$sub->rowspan,
-                                    'link'])
+                                    'nama'     => $sub->nama,
+                                    'rowspan'  => $sub->rowspan,
+                                    'kategori' => $kategori->kode,
+                                    'sub'      => $sub->kode,
+                                    ])
 
-                            <td class="align-middle" colspan="2">
+                            <td class="align-middle">
                                 <span class="d-block">Belum ada sub2</span>
                             </td>
+                            <td class="align-middle">{{ $kategori->kode.$sub->kode }}</td>
                         </tr>
 
                     @endif
@@ -60,12 +67,13 @@
             @endforeach
         {{-- jika tidak memiliki kategori tidak meiliki sub sama sekali --}}
         @else
-            <tr class="text-center" style="min-height: 200px">
+            <tr class="text-center">
                 @include('admin.pralomba.kategori.table._td-kategori',[
-                    'kode'=>$kategori->kode,
-                    'nama'=>$kategori->nama,
-                    'rowspan'=>0])
-                <td class="align-middle" colspan="3">Belum ada sub</td>
+                    'kategori' => $kategori->kode,
+                    'nama'     => $kategori->nama,
+                    'rowspan'  => 1])
+                <td class="align-middle" colspan="2">Belum ada sub</td>
+                <td class="align-middle" >{{ $kategori->kode }}</td>
             </tr>
         @endif
     @endforeach 

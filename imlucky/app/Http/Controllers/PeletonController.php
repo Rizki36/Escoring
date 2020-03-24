@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class PeletonController extends Controller
 {
+    public function listPeleton()
+    {
+        $peleton = Peleton::all()->sortBy('no');
+        return view('admin.pralomba.peleton._list-peleton',['peletons'=>$peleton]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +20,8 @@ class PeletonController extends Controller
      */
     public function index()
     {
-        return Peleton::all()->sortBy('no');
+        $listPeleton = $this->listPeleton();
+        return view('admin.pralomba.peleton.index',['listPeleton'=>$listPeleton]);
     }
 
     /**
@@ -25,7 +32,7 @@ class PeletonController extends Controller
     public function create()
     {
         $action = route('peleton.store');
-        return view('admin.pralomba._form-peleton',['action'=>$action]);
+        return view('admin.pralomba.peleton._form-peleton',['action'=>$action]);
     }
 
     /**
@@ -69,7 +76,7 @@ class PeletonController extends Controller
     {
         $action = route('peleton.update',['no'=>$no]);
         $peleton = Peleton::where('no',$no)->first();
-        return view('admin.pralomba._form-peleton',['peleton'=>$peleton,'action'=>$action]);
+        return view('admin.pralomba.peleton._form-peleton',['peleton'=>$peleton,'action'=>$action]);
     }
 
     /**
