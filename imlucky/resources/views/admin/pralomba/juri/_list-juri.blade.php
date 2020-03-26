@@ -1,7 +1,8 @@
 @foreach ($juris as $juri) 
 <tr class="text-center">
     <th scope="row" class="align-middle">{{ $juri->kode }}</th>
-    <td class="align-middle">{{ $juri->nama }}</td>
+    <th class="align-middle">{{ $juri->group_juri->kategori }}</th>
+    <td class="align-middle">{{ $juri->nama }}</td> 
     <td class="align-middle">{{ $juri->password }}</td>
     <td class="align-middle">
         <a href="{{ route('juri.edit',['id'=>$juri->id]) }}" type="button" class="btn-edit-juri btn btn-link btn-sm inline-block">Edit</button>

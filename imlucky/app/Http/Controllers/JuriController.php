@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\GroupJuri;
 use App\Juri;
 use Illuminate\Http\Request;
 
@@ -9,7 +10,8 @@ class JuriController extends Controller
 {
     public function listJuri()
     {
-        $juri = Juri::all()->sortBy('kode');
+        // return
+        $juri = Juri::with('group_juri')->get()->sortBy('kode');
         return view('admin.pralomba.juri._list-juri',['juris'=>$juri]);
     }
 
@@ -31,8 +33,9 @@ class JuriController extends Controller
      */
     public function create()
     {
-        $action = route('juri.store');
-        return view('admin.pralomba.juri._form-juri',['action'=>$action]);
+        $action      = route('juri.store');
+        $group_juris = GroupJuri::all();
+        return view('admin.pralomba.juri._form-juri',['action'=>$action,'group_juris'=>$group_juris]);
     }
 
     /**
@@ -46,12 +49,14 @@ class JuriController extends Controller
         $request->validate([
             'kode'=>'bail|required|string|unique:juris',
             'nama' =>'required|string',
-            'password' =>'required|string'
+            'password' =>'required|string',
+            'group_juri'=>'required|integer'
         ]);
-        $juri = new Juri;
-        $juri->kode = $request->kode;
-        $juri->nama = $request->nama;
-        $juri->password = $request->password;
+        $juri                = new Juri;
+        $juri->kode          = $request->kode;
+        $juri->nama          = $request->nama;
+        $juri->password      = $request->password;
+        $juri->group_juri_id = $request->group_juri;
         $juri->save();
     }
 

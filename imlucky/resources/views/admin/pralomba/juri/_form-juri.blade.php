@@ -1,6 +1,18 @@
 <form id="form-juri" action="{{ $action }}">
+    @if (route('juri.store') == $action)
     <div class="form-group">
-        <label for="kode">Kode</label>
+        <label for="group_juri">Group Juri</label>
+        <select id="group_juri" class="form-control" name="group_juri">
+            @foreach ($group_juris as $group_juri)
+                <option value="{{ $group_juri->id }}">{{ $group_juri->kategori }}</option>
+            @endforeach
+        </select>
+        <div class="invalid-feedback"></div>
+    </div>  
+    @endif
+
+    <div class="form-group">
+        <label for="kode">User</label>
         <input id="kode" name="kode" type="text" class="form-control" value="{{ $juri->kode ?? '' }}">
         <div class="invalid-feedback"></div>
     </div>  

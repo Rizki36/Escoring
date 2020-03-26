@@ -6,7 +6,8 @@
 
 @section('content')
     @if($data->validated)
-        test
+        <a class="btn btn-primary" href="">input Manual Form Penilaian</a>
+        <a class="btn btn-success" href="">Generate Form Penilaian</a>
     @else
         {{ $data->message }}
     @endif

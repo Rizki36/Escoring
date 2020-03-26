@@ -9,16 +9,20 @@ class Crud {
         $.ajax({
             type: "Get",
             url: href,
+            beforeSend:function(){
+                $('#btn-modal-submit').attr("disabled",false)
+            },
             success: response => {
                 $("#modal-title").html("Tambah " + parent.name);
                 $("#modal-body").html(response);
                 $("#btn-modal-submit").html(`Tambah ${parent.name}`);
-                $("#modal").modal("show");
+                $("#modal").modal("show")    
                 $("#btn-modal-submit")
                     .off("click")
                     .on("click", e => {
                         parent.store();
-                    });
+                    })
+                
             },
             error: response => {
                 alert("Terjadi kesalahan, Lihat Console untuk detailnya");
@@ -36,6 +40,9 @@ class Crud {
             type: "POST",
             url: action,
             data: data,
+            beforeSend:function(){
+                $('#btn-modal-submit').attr("disabled",true)
+            },
             success: function(response) {
                 $("#modal").modal("hide");
                 Swal.fire(
@@ -62,6 +69,9 @@ class Crud {
         $.ajax({
             type: "GET",
             url: href,
+            beforeSend:function(){
+                $('#btn-modal-submit').attr("disabled",false)
+            },
             success: function(response) {
                 $("#modal-title").html("Update " + parent.name);
                 $("#modal-body").html(response);
@@ -88,6 +98,9 @@ class Crud {
             type: "PUT",
             url: action,
             data: data,
+            beforeSend:function(){
+                $('#btn-modal-submit').attr("disabled",true)
+            },
             success: function(response) {
                 $("#modal").modal("hide");
                 Swal.fire(

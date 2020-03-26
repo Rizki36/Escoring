@@ -13,5 +13,9 @@ class Kategori extends Model
         return $this->hasMany(Sub::class)->orderBy('kode');
     }    
 
+    public function groupJuri()
+    {
+        return $this->belongsToMany(GroupJuri::class);
+    }
     
 }

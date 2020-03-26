@@ -17,12 +17,20 @@
           <i class="nav-icon icon-pencil"></i> Pralomba</a>
         <ul class="nav-dropdown-items">
           <li class="nav-item">
+            <a class="nav-link" href="{{ route('group-juri.index') }}">
+              <i class="nav-icon fas fa-bell"></i>Group Juri</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="{{ route('juri.index') }}">
               <i class="nav-icon fas fa-bell"></i> Juri</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ route('kategori.index') }}">
               <i class="nav-icon fas fa-bell"></i> Kategori</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('group-kategori.index') }}">
+              <i class="nav-icon fas fa-bell"></i> Group Kategori</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ route('peleton.index') }}">
