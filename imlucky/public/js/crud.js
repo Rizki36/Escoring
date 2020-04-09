@@ -53,6 +53,7 @@ class Crud {
                 parent.refresh();
             },
             error(response) {
+                $('#btn-modal-submit').attr("disabled",false)
                 $(".is-invalid").removeClass("is-invalid");
                 $.each(response.responseJSON.errors, function(index, value) {
                     $("#" + index).addClass("is-invalid");
@@ -111,6 +112,7 @@ class Crud {
                 parent.refresh();
             },
             error(response) {
+                $('#btn-modal-submit').attr("disabled",false)
                 $(".is-invalid").removeClass("is-invalid");
                 $.each(response.responseJSON.errors, function(index, value) {
                     $("#" + index).addClass("is-invalid");

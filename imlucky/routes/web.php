@@ -25,7 +25,7 @@ Route::group(['prefix'=>'admin'],function(){
 
         Route::resource('peleton','PeletonController',['parameters' => ['peleton' => 'no']]);
         Route::resource('juri','JuriController',['parameters' => ['juri' => 'id']]);
-        Route::resource('group-juri-juri','GroupJuriController',['parameters' => ['group-juri-juri'=>'group-juri']])->names('group-juri');
+        Route::resource('group-juri-juri','GroupJuriController',['parameters' => ['group-juri-juri'=>'id']])->names('group-juri');
         Route::resource('kategori','KategoriController',['parameters' => []]);      
         
         Route::group(['prefix'=>'group-juri-kategori'],function(){
@@ -35,8 +35,19 @@ Route::group(['prefix'=>'admin'],function(){
             Route::get   ('/group-juri/{group_juri}/kategori/{kategori}/edit','GroupKategoriController@edit')->name('group-kategori.edit');
             Route::put   ('/group-juri/{group_juri}/kategori/{kategori}','GroupKategoriController@update')->name('group-kategori.update');
             Route::delete('/group-juri/{group_juri}/kategori/{kategori}','GroupKategoriController@destroy')->name('group-kategori.destroy');
-        });    
-        Route::resource('form-penilaian','PenilaianController',['parameters' => []]);      
+        }); 
+        
+        
+        Route::redirect('form-penilaian','form-penilaian/peleton');
+        Route::get('form-penilaian/generate','PenilaianController@generatePenilaian')->name('form-penilaian.generate');
+        Route::get('form-penilaian/truncate','PenilaianController@truncate')->name('form-penilaian.truncate');
+        
+        Route::get('form-penilaian/peleton/','PenilaianController@indexPeleton')->name('form-penilaian.indexPeleton');
+        Route::get('form-penilaian/peleton/{peleton}/juri','PenilaianController@indexJuri')->name('form-penilaian.indexJuri');
+        Route::get('form-penilaian/peleton/{peleton}/juri/{juri}','PenilaianController@indexPenilaian')->name('form-penilaian.indexPenilaian');
+        Route::get('form-penilaian/peleton/{peleton}/juri/{juri}/table','PenilaianController@table')->name('form-penilaian.table');
+        Route::get('form-penilaian/peleton/{peleton}/juri/{juri}/kategori/{kategori}/sub/{sub}/sub2/{sub2}/edit','PenilaianController@edit')->name('form-penilaian.edit');
+        Route::put('form-penilaian/peleton/{peleton}/juri/{juri}/kategori/{kategori}/sub/{sub}/sub2/{sub2}','PenilaianController@update')->name('form-penilaian.update');
 
         Route::group(['prefix'=>'kategori/{kategori}'],function(){
             Route::get ('sub','SubController@index')->name('sub.index');
@@ -56,9 +67,13 @@ Route::group(['prefix'=>'admin'],function(){
         });
     });
 
-    Route::resource('laporan','LaporanController');
-    // Route::group(['prefix'=>'laporan'],function(){
 
-    // });
+    Route::group(['prefix'=>'laporan'],function(){
+        Route::get('print-out/{id}','LaporanController@printout')->name('laporan.printout');
+    });
+    Route::resource('laporan','LaporanController');
 
 });
+
+// route test
+Route::get('/','PenilaianController@listPenilaian');

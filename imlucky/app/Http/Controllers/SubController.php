@@ -47,7 +47,7 @@ class SubController extends Controller
         $request->validate([
             'kode'          => 'required|string|max:1|min:1|unique:subs,kode,NULL,kode,kategori_id,'.$kategori->id,
             'kategori_id'   => 'string|unique:subs,kategori_id,NULL,kategori_id,kode,'.$sub,
-            'nama'          => 'required|string',
+            // 'nama'          => 'string',
             'kisaran_nilai' => 'required',
             ]);        
         $sub       = new Sub;
@@ -100,7 +100,7 @@ class SubController extends Controller
         $request->validate([
             'kode'          => 'required|string|max:1|min:1|unique:subs,kode,'.$sub.',kode,kategori_id,'.$kategori->id,
             'kategori_id'   => 'unique:subs,kategori_id,'.$kategori->id.',kategori_id,kode,'.$sub,
-            'nama'          => 'required|string',
+            // 'nama'          => 'string',
             'kisaran_nilai' => 'required|string',
         ]);
         

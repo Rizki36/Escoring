@@ -37,7 +37,7 @@
               <i class="nav-icon fas fa-bell"></i> Peleton</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('form-penilaian.index') }}">
+            <a class="nav-link" href="{{ route('form-penilaian.indexPeleton') }}">
               <i class="nav-icon fas fa-bell"></i> Form Penilaian</a>
           </li>
         </ul>

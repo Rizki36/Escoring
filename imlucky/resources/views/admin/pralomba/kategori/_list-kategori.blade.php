@@ -14,7 +14,9 @@
                                     @include('admin.pralomba.kategori.table._td-kategori',[
                                             'rowspan'  => $kategori->rowspan,
                                             'kategori' => $kategori->kode,
-                                            'nama'     => $kategori->nama])
+                                            'nama'     => $kategori->nama,
+                                            'umum'     => $kategori->bobot_umum,
+                                            'utama'    => $kategori->bobot_utama])
                                 @endif
 
                                 {{-- jika sub2 terletak pada awal sub2 --}}

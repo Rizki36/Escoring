@@ -42,7 +42,8 @@ class KategoriController extends Controller
     public function index()
     {
         $listKategori = $this->listKategori();
-        return view('admin.pralomba.kategori.index',['listKategori'=>$listKategori]);
+        return 
+        view('admin.pralomba.kategori.index',['listKategori'=>$listKategori]);
     }
 
     /**
@@ -67,13 +68,17 @@ class KategoriController extends Controller
     {
         $request->validate([
             'kode'=>'required|string|min:1|max:1|unique:kategoris,kode',
-            'nama'=>'required|string'
+            'nama'=>'required|string',
+            'bobot_umum' =>'required|integer|min:0',
+            'bobot_utama'=>'required|integer|min:0',
         ]);
         $kategori = new Kategori;
 
         $kategori->kode = $request->kode;
         $kategori->nama = $request->nama;
-
+        $kategori->bobot_umum  = $request->bobot_umum;
+        $kategori->bobot_utama = $request->bobot_utama;
+        
         $kategori->save();
     }
 
@@ -115,11 +120,15 @@ class KategoriController extends Controller
     {
         $request->validate([
             'kode'=>'bail|required|string|min:1|max:1|unique:kategoris,kode,'.$kategori.',kode',
-            'nama'=>'required|string'
+            'nama'=>'required|string',
+            'bobot_umum' =>'required|integer|min:0',
+            'bobot_utama'=>'required|integer|min:0',
         ]);
         $kategori= Kategori::where('kode',$kategori)->first();
         $kategori->kode = $request->kode;
         $kategori->nama = $request->nama;
+        $kategori->bobot_umum  = $request->bobot_umum;
+        $kategori->bobot_utama = $request->bobot_utama;
         $kategori->save();
     }
 
