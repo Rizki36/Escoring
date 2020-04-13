@@ -6,4 +6,4 @@
         <a role="button" class="btn-delete-kategori" href="{{ route('kategori.destroy',['kategori'=>$kategori]) }}">Hapus</a>
     </small>
 </td>    
-<td class="align-middle" rowspan="{{ $rowspan }}"><span class="d-block">Umum: <br>{{ $umum }}</span><span class="d-block">Utama: <br>{{ $utama }}</span></td>
+<td class="align-middle" rowspan="{{ $rowspan }}"><small class="d-block">Umum: <br>{{ $umum }}</small><small class="d-block">Utama: <br>{{ $utama }}</small></td>

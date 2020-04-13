@@ -40,6 +40,7 @@
     {{-- @include('common.aside') --}}
   </div>
   <script src="{{ mix('js/app.js') }}"></script>  
+  {{-- <script src="{{ asset('js/jquery.mask.min.js') }}"></script> --}}
   <script>
     $.ajaxSetup({
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}

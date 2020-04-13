@@ -15,6 +15,10 @@ try {
     require('bootstrap')
     require('bootstrap-select')
     window.Swal = require('sweetalert2')
+    $.inputmask = window.inputmask = require('inputmask/dist/jquery.inputmask');
+    // require('inputmask/dist/inputmask');
+    // $.inputmask = inputmask;
+    // window.inputmask = inputmask;
 } catch (e) {
     console.log(e)
 }

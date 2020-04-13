@@ -2,7 +2,7 @@
 
     <div class="form-group">
         <label for="kode">Kode</label>
-        <input id="kode" name="kode" type="text" class="form-control" value="{{ $kategori->kode ?? '' }}">
+        <input id="kode" name="kode" type="text" data-inputmask-regex="[a-za-zA-Z0-9]" class="form-control" value="{{ $kategori->kode ?? '' }}">
         <div class="invalid-feedback"></div>
     </div>  
 

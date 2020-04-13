@@ -44,6 +44,11 @@
       </li>
 
       <li class="nav-item">
+        <a class="nav-link" href="{{ route('pinalti.index') }}">
+          <i class="nav-icon icon-pencil"></i> Pinalti</a>
+      </li>
+
+      <li class="nav-item">
         <a class="nav-link" href="{{ route('laporan.index') }}">
           <i class="nav-icon icon-pencil"></i> Laporan</a>
       </li>

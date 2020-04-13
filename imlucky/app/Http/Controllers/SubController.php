@@ -80,8 +80,8 @@ class SubController extends Controller
         $action   = route('sub.update',['kategori'=>$kategori,'sub'=>$sub]);
         $model    = $this->transformModel($kategori,$sub);
         $kategori = $model->kategori;
+        // return
         $sub      = $model->sub;
-
         return view('admin.pralomba.kategori._form-sub',['action'=>$action,'sub'=>$sub]);
     }
 

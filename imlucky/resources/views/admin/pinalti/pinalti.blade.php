@@ -1,25 +1,28 @@
 @extends('layouts.master')
 
 @section('title')
-    test
+    
 @endsection
 
 @section('content')
 <div class="card mt-4 wow fadeIn">
     <div class="card-body d-sm-flex justify-content-between">
-        
-        <table id="table" class="table table-sm border-white" data-href="{{ route('pralomba.listPeleton') }}">
+      
+        <table id="table-pinalti" class="table table-sm" data-href="{{ route('pinalti.listPinalti') }}">
             <thead>
+                <tr>
+                    <th class="text-center" colspan="3">List Pleton</th>
+                </tr>
                 <tr class="text-center">
-                    <th scope="col" style="width: 50px">No</th>
+                    <th scope="col" style="width: 1px">No</th>
                     <th scope="col">Peleton</th>
-                    <th scope="col" style="width: 50px">Action</th>
+                    <th scope="col">Pinalti</th>
+                    <th scope="col" style="width: 15%">Action</th>
                 </tr>
             </thead>
             <tbody>
-                {{ view('admin.laporan._list-peleton',['peletons'=>$peletons]) }}
+                {!! $peletons !!}
             </tbody>
-
         </table>
     </div>
 </div>
@@ -27,8 +30,4 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('js/crud.js') }}"></script>
-    <script>
-
-    </script>
 @endpush

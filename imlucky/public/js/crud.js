@@ -15,8 +15,10 @@ class Crud {
             success: response => {
                 $("#modal-title").html("Tambah " + parent.name);
                 $("#modal-body").html(response);
+                $(":input").inputmask();
                 $("#btn-modal-submit").html(`Tambah ${parent.name}`);
                 $("#modal").modal("show")    
+                
                 $("#btn-modal-submit")
                     .off("click")
                     .on("click", e => {
@@ -35,7 +37,6 @@ class Crud {
             data = $(form).serialize(),
             action = $(form).attr("action"),
             parent = this;
-        console.log(data);
         $.ajax({
             type: "POST",
             url: action,
@@ -76,6 +77,7 @@ class Crud {
             success: function(response) {
                 $("#modal-title").html("Update " + parent.name);
                 $("#modal-body").html(response);
+                $(":input").inputmask();
                 $("#btn-modal-submit").html(`Update ${parent.name}`);
                 $("#modal").modal("show");
                 $("#btn-modal-submit")

@@ -25,7 +25,8 @@
                                             'nama'     => $sub->nama,
                                             'rowspan'  => $sub->rowspan,
                                             'kategori' => $kategori->kode,
-                                            'sub'      => $sub->kode
+                                            'sub'      => $sub->kode,
+                                            'kisaran_nilai' => $sub->kisaran_nilai
                                             ])      
                                 @endif
                                 
@@ -56,6 +57,7 @@
                                     'rowspan'  => $sub->rowspan,
                                     'kategori' => $kategori->kode,
                                     'sub'      => $sub->kode,
+                                    'kisaran_nilai' => $sub->kisaran_nilai
                                     ])
 
                             <td class="align-middle">

@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Peleton extends Model
 {
-    protected $fillable = ['no','nama','ballot','pinalti'];
+    protected $fillable = ['no','nama','ballot','pinalti','pinalti'];
 }

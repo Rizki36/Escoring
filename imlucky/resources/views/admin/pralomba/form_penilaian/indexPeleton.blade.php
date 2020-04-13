@@ -6,11 +6,6 @@
 
 @section('content')
     @if($data->validated)
-        <div class="mb-4">
-            <a id="url-truncate" class="d-none" href="{{ route('form-penilaian.truncate') }}"></a>    
-            <a id="btn-generate" class="btn btn-success mt-4" href="{{ route('form-penilaian.generate') }}">Generate Form Penilaian</a>
-        </div>
-
         @if (session('status'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('status') }}
@@ -19,34 +14,41 @@
                 </button>
             </div>
         @endif
+        <div class="card mt-4 wow fadeIn">
+            <div class="card-header d-flex">
+                <a id="btn-generate" class="btn btn-success btn-sm ml-auto" href="{{ route('form-penilaian.generate') }}">Generate Form Penilaian</a>
+                <a id="url-truncate" class="d-none" href="{{ route('form-penilaian.truncate') }}"></a>    
+            </div>
 
-        <table id="" class="table table-sm table-bordered" data-href="">
-            <thead class="text-center">
-                <tr>
-                    <td colspan="4">
-                        List Form Penilaian
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width: 75px">
-                        No
-                    </td>
-                    <td>
-                        Peleton
-                    </td>
-                    <td style="width: 300px">
-                        Detail
-                    </td>
-                    <td style="width: 150px">
-                        Action
-                    </td>
-                </tr>
-            </thead>
-            <tbody id="table-peleton" class="text-center">
-                {{ view('admin.pralomba.form_penilaian._list-peleton',['peletons'=>$peletons]) }}
-            </tbody>
-        </table>
-
+            <div class="card-body d-sm-flex justify-content-between">
+                <table id="" class="table table-sm table-bordered" data-href="">
+                    <thead class="text-center">
+                        <tr>
+                            <td colspan="4">
+                                List Form Penilaian
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 75px">
+                                No
+                            </td>
+                            <td>
+                                Peleton
+                            </td>
+                            <td style="width: 300px">
+                                Detail
+                            </td>
+                            <td style="width: 150px">
+                                Action
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody id="table-peleton" class="text-center">
+                        {{ view('admin.pralomba.form_penilaian._list-peleton',['peletons'=>$peletons]) }}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     @else
         {{ $data->message }}
     @endif
