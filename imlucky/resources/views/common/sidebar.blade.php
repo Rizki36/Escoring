@@ -37,6 +37,10 @@
               <i class="nav-icon fas fa-bell"></i> Peleton</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="{{ route('pinalti.indexPralomba') }}">
+              <i class="nav-icon fas fa-bell"></i> Pinalti</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="{{ route('form-penilaian.indexPeleton') }}">
               <i class="nav-icon fas fa-bell"></i> Form Penilaian</a>
           </li>

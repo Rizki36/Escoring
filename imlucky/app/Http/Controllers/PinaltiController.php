@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Peleton;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PinaltiController extends Controller
 {
@@ -18,6 +19,41 @@ class PinaltiController extends Controller
         $peletons = $this->listPinalti();
         return view('admin.pinalti.pinalti',['peletons'=>$peletons]);    
     }
+
+    public function indexPralomba()
+    {
+        $pinalti = [
+            'umum' =>DB::table('config')->where('nama','pinalti_umum')->first(),
+            'utama'=>DB::table('config')->where('nama','pinalti_utama')->first(),
+        ];
+        // return dd((object) $pinalti);
+        return view('admin.pralomba.pinalti.index',['pinalti'=>(object) $pinalti]);
+    }
+
+    // public function editPralomba($id)
+    // {
+        
+    // }
+
+    public function updatePralomba(Request $request)
+    {
+        $request->validate([
+            'pinalti_umum'=>'required|integer|min:0',
+            'pinalti_utama'=>'required|integer|min:0'
+        ]);
+        DB::table('config')
+            ->where('nama','pinalti_umum')
+            ->update(['value'=>$request->pinalti_umum]);
+        DB::table('config')
+            ->where('nama','pinalti_utama')
+            ->update(['value'=>$request->pinalti_utama]);
+        return redirect()->back()->with('status','Update data berhasil');
+    }
+
+    // public function listPralomba()
+    // {
+        
+    // }
 
     public function edit($id)
     {

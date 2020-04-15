@@ -22,6 +22,11 @@ Route::group(['prefix'=>'admin'],function(){
         Route::get('list-kategori','KategoriController@listKategori')->name('pralomba.listKategori');
         Route::get('list-group-kategori','GroupKategoriController@list_group_kategori')->name('pralomba.list_group_kategori');
         Route::get('pralomba','PralombaController@index')->name('pralomba.index');
+        
+        Route::get('pinalti','PinaltiController@indexPralomba')->name('pinalti.indexPralomba');
+        // Route::get('pinalti/listPralomba','PinaltiController@listPralomba')->name('pinalti.listPralomba');
+        // Route::get('pinalti/{id}','PinaltiController@editPralomba')->name('pinalti.editPralomba');
+        Route::post('pinalti','PinaltiController@updatePralomba')->name('pinalti.updatePralomba');
 
         Route::resource('peleton','PeletonController',['parameters' => ['peleton' => 'no']]);
         Route::resource('juri','JuriController',['parameters' => ['juri' => 'id']]);
@@ -36,7 +41,6 @@ Route::group(['prefix'=>'admin'],function(){
             Route::put   ('/group-juri/{group_juri}/kategori/{kategori}','GroupKategoriController@update')->name('group-kategori.update');
             Route::delete('/group-juri/{group_juri}/kategori/{kategori}','GroupKategoriController@destroy')->name('group-kategori.destroy');
         }); 
-        
         
         Route::redirect('form-penilaian','form-penilaian/peleton');
         Route::get('form-penilaian/generate','PenilaianController@generatePenilaian')->name('form-penilaian.generate');
@@ -67,6 +71,7 @@ Route::group(['prefix'=>'admin'],function(){
         });
     });
 
+    
     Route::get('pinalti/listPinalti','PinaltiController@listPinalti')->name('pinalti.listPinalti');
     Route::get('pinalti','PinaltiController@index')->name('pinalti.index');
     Route::get('pinalti/{id}','PinaltiController@edit')->name('pinalti.edit');
