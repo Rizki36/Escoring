@@ -11,7 +11,14 @@ class LaporanController extends Controller
 {
     public function printout($id)
     {
-        // return
+        // return 
+        $persetase_pinalti = DB::table('config')
+        ->where('nama','=','pinalti_umum')
+        ->orWhere('nama','=','pinalti_utama')
+        ->get()
+        ->keyBy('nama');
+        // dd($persetase_pinalti['pinalti_umum']);
+                
         $mapper_kategori = Kategori::with('sub.sub2')->get();
         $array = array();
         $peleton = $id;
@@ -23,6 +30,7 @@ class LaporanController extends Controller
                 ->join('sub2s as sub2','sub2.id','=','pen.sub2_id')
                 ->select([
                     'pel.no AS no',
+                    'pel.pinalti AS pinalti',
                     'pel.nama AS peleton',
                     'kat.kode as kategori_kode',
                     'sub.kode as sub_kode',
@@ -44,6 +52,7 @@ class LaporanController extends Controller
         foreach ($data as $dt) {
             $array['no'] = $dt->no;
             $array['peleton'] = $dt->peleton;
+            $array['pinalti'] = $dt->pinalti;
             $array['penilaian'][$dt->kategori_kode]["kategori"] = $dt->kategori;
             $array['penilaian'][$dt->kategori_kode]["bobot_umum"] = $dt->bobot_umum;
             $array['penilaian'][$dt->kategori_kode]["bobot_utama"] = $dt->bobot_utama;
@@ -92,8 +101,11 @@ class LaporanController extends Controller
         }
 
         $array['length'] = $this->countLength($array);
-
+        $array['umum'] = $array['umum'] - ($array['pinalti'] * $persetase_pinalti['pinalti_umum']->value/100);
+        $array['utama'] = $array['utama'] - ($array['pinalti'] * $persetase_pinalti['pinalti_utama']->value/100);
         // return $array;
+
+
         return view('admin.laporan.print-out')
                 ->with('data',$array);
     }

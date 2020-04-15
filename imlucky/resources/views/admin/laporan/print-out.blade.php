@@ -135,6 +135,10 @@
                 </tr>
                 @endforeach
                 <tr class="head text-center">
+                    <td colspan="2">Pinalti</td>
+                    <td colspan="{{ $data['length'] + 1 }}">{{ $data['pinalti'] }}</td>
+                </tr>
+                <tr class="head text-center">
                     <td colspan="2">Jumlah Juara Utama</td>
                     <td colspan="{{ $data['length'] + 1 }}">{{ $data['utama'] }}</td>
                 </tr>
