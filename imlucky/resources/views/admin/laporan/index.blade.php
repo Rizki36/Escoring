@@ -27,7 +27,6 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('js/crud.js') }}"></script>
     <script>
 
     </script>

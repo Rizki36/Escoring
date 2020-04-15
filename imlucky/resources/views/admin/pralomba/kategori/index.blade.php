@@ -8,7 +8,7 @@
 <div class="card mt-4 wow fadeIn">
     <div class="card-body d-sm-flex justify-content-between">        
 
-        <table id="table-kategori" class="table table-sm table-bordered" data-href="{{ route('pralomba.listKategori') }}">
+        <table id="table" class="table table-sm table-bordered" data-href="{{ route('pralomba.listKategori') }}">
             <thead>
                 <tr>
                     <th class="text-center" colspan="5">List Kategori</th>
@@ -37,15 +37,14 @@
 @include('common.modal')
 @endsection
 
+
 @push('scripts')
-<script src="{{ asset('js/crud.js') }}"></script>
 {{-- kategori --}}
 <script>
     $('#form-kategori').inputmask('0');
     $('#form-sub').inputmask('0');
     $('#form-sub2').inputmask('00');
-    let refreshKategori = $('#table-kategori').attr('data-href'),
-        kategori = new Crud('kategori', refreshKategori,'kategori')
+    let kategori = new Crud('kategori')
 
     $('body').on('click', '#btn-add-kategori', function (e) {
         e.preventDefault()
@@ -63,7 +62,7 @@
         kategori.destroy(href)
     })
    
-    let sub = new Crud('sub',refreshKategori,'kategori')
+    let sub = new Crud('sub')
     $('body').on('click', '.btn-add-sub', function (e) {
         e.preventDefault()
         let href = $(this).attr('href')
@@ -80,7 +79,7 @@
         sub.destroy(href)
     })
     
-    let sub2 = new Crud('sub2',refreshKategori,'kategori')
+    let sub2 = new Crud('sub2')
     $('body').on('click', '.btn-add-sub2', function (e) {
         e.preventDefault()
         let href = $(this).attr('href')

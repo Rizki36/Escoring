@@ -1,8 +1,7 @@
 class Crud {
-    constructor(name, urlRefresh, refreshTable) {
+    constructor(name) {
         this.name = name;
-        this.urlRefresh = urlRefresh;
-        this.refreshTable = refreshTable;
+        this.urlRefresh = $('#table').attr('data-href');
     }
     create(href) {
         let parent = this;
@@ -33,7 +32,7 @@ class Crud {
         });
     }
     store() {
-        let form = $("#form-" + this.name),
+        let form = $('#form'),
             data = $(form).serialize(),
             action = $(form).attr("action"),
             parent = this;
@@ -93,7 +92,7 @@ class Crud {
         });
     }
     update() {
-        let form = $(`#form-${this.name}`),
+        let form = $('#form'),
             data = $(form).serialize(),
             action = $(form).attr("action"),
             parent = this;
@@ -170,7 +169,7 @@ class Crud {
             type: "GET",
             url: parent.urlRefresh,
             success: function(response) {
-                $(`#table-${parent.refreshTable} tbody`).html(response);
+                $(`#table tbody`).html(response);
             },
             error(e) {
                 Swal.fire(
@@ -183,3 +182,5 @@ class Crud {
         });
     }
 }
+module.exports = Crud
+

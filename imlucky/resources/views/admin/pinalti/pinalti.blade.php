@@ -6,9 +6,8 @@
 
 @section('content')
 <div class="card mt-4 wow fadeIn">
-    <div class="card-body d-sm-flex justify-content-between">
-      
-        <table id="table-pinalti" class="table table-sm" data-href="{{ route('pinalti.listPinalti') }}">
+    <div class="card-body d-sm-flex justify-content-between"> 
+        <table id="table" class="table table-sm" data-href="{{ route('pinalti.listPinalti') }}">
             <thead>
                 <tr>
                     <th class="text-center" colspan="3">List Pleton</th>
@@ -30,4 +29,12 @@
 @endsection
 
 @push('scripts')
+<script>
+    let test = new Crud('pinalti');
+    $('body').on('click','.btn-edit-pinalti',function(e){
+        e.preventDefault()
+        let href = $(this).attr('href')
+        test.edit(href)
+    })
+</script>
 @endpush

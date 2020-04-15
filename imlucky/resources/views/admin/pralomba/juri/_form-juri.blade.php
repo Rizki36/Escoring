@@ -1,4 +1,4 @@
-<form id="form-juri" action="{{ $action }}">
+<form id="form" action="{{ $action }}">
     @if (route('juri.store') == $action)
     <div class="form-group">
         <label for="group_juri">Group Juri</label>

@@ -1,4 +1,4 @@
-<form id="form-peleton" action="{{ $action }}">
+<form id="form" action="{{ $action }}">
     <div class="form-group">
         <label for="no">Nomer Urut</label>
         <input id="no" name="no" type="number" class="form-control" value="{{ $peleton->no ?? '' }}">

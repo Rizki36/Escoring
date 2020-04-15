@@ -1,4 +1,4 @@
-<form id="form-group-kategori" action="{{ $action }}">
+<form id="form" action="{{ $action }}">
     <div class="form-group">
         <label for="kategori">Group Juri</label>
         <select id="kategori" class="form-control" name="kategori">

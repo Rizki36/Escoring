@@ -67,10 +67,10 @@ Route::group(['prefix'=>'admin'],function(){
         });
     });
 
-    Route::get('pinalti','PinaltiController@index')->name('pinalti.index');
-    Route::get('pinalti/{id}','PinaltiController@index')->name('pinalti.edit');
-    Route::put('pinalti/{id}','PinaltiController@update')->name('pinalti.update');
     Route::get('pinalti/listPinalti','PinaltiController@listPinalti')->name('pinalti.listPinalti');
+    Route::get('pinalti','PinaltiController@index')->name('pinalti.index');
+    Route::get('pinalti/{id}','PinaltiController@edit')->name('pinalti.edit');
+    Route::put('pinalti/{id}','PinaltiController@update')->name('pinalti.update');
 
     Route::group(['prefix'=>'laporan'],function(){
         Route::get('print-out/{id}','LaporanController@printout')->name('laporan.printout');

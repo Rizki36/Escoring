@@ -8,7 +8,7 @@
 <div class="card mt-4 wow fadeIn">
     <div class="card-body d-sm-flex justify-content-between">
 
-        <table id="table-group-juri" class="table table-sm table-bordered" data-href="{{ route('pralomba.listGroupJuri') }}">
+        <table id="table" class="table table-sm table-bordered" data-href="{{ route('pralomba.listGroupJuri') }}">
             <thead>
                 <tr>
                     <th class="text-center" colspan="4">List Juri</th>
@@ -36,13 +36,9 @@
 @endsection
 
 @push('scripts')
-<script src="{{ asset('js/crud.js') }}">
-
-</script>
 {{-- juri --}}
 <script>
-    let refreshGroupJuri = $('#table-group-juri').attr('data-href'),
-            groupJuri = new Crud('group-juri',refreshGroupJuri,'group-juri')
+    let groupJuri = new Crud('group-juri')
     $('#btn-add-group-juri').click(function (e) {
         e.preventDefault()
         let href = $(this).attr('href')

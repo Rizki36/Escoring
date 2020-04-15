@@ -49,7 +49,9 @@
                                 @include('admin.pralomba.kategori.table._td-kategori',[
                                         'rowspan'  => $kategori->rowspan,
                                         'kategori' => $kategori->kode,
-                                        'nama'     => $kategori->nama])
+                                        'nama'     => $kategori->nama,
+                                        'umum'     => $kategori->bobot_umum,
+                                        'utama'    => $kategori->bobot_utama])
                             @endif
 
                             @include('admin.pralomba.kategori.table._td-sub',[
@@ -75,7 +77,9 @@
                 @include('admin.pralomba.kategori.table._td-kategori',[
                     'kategori' => $kategori->kode,
                     'nama'     => $kategori->nama,
-                    'rowspan'  => 1])
+                    'rowspan'  => 1,
+                    'umum'     => $kategori->bobot_umum,
+                    'utama'    => $kategori->bobot_utama])
                 <td class="align-middle" colspan="2">Belum ada sub</td>
                 <td class="align-middle" >{{ $kategori->kode }}</td>
             </tr>

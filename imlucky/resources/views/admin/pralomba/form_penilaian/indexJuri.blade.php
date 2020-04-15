@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-        <table class="table table-sm table-bordered mt-4">
+        <table id="table" class="table table-sm table-bordered mt-4">
             <thead class="text-center">
                 <tr>
                     <td colspan="4">
@@ -27,7 +27,7 @@
                     </td>
                 </tr>
             </thead>
-            <tbody id="table-peleton" class="text-center">
+            <tbody class="text-center">
                 @foreach ($juris as $juri)
                     <tr>
                         <td>

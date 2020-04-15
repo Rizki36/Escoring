@@ -11,7 +11,7 @@
     </div>
 
     <div class="card-body d-sm-flex justify-content-between">
-        <table id="table-peleton" class="table table-sm table-bordered" data-href="{{ route('pralomba.listPeleton') }}">
+        <table id="table" class="table table-sm table-bordered" data-href="{{ route('pralomba.listPeleton') }}">
             <thead>
                 <tr>
                     <th class="text-center" colspan="3">List Pleton</th>
@@ -32,11 +32,9 @@
 @endsection
 
 @push('scripts')
-<script src="{{ asset('js/crud.js') }}"></script>
 {{-- peleton --}}
 <script>
-    let refreshPeleton = $('#table-peleton').attr('data-href'),
-            peleton = new Crud('peleton',refreshPeleton,'peleton');
+    let peleton = new Crud('peleton');
     
     $('#btn-add-peleton').click(function (e) {
         e.preventDefault()

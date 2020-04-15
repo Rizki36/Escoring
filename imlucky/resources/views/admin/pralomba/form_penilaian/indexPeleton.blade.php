@@ -21,7 +21,7 @@
             </div>
 
             <div class="card-body d-sm-flex justify-content-between">
-                <table id="" class="table table-sm table-bordered" data-href="">
+                <table id="table" class="table table-sm table-bordered" data-href="">
                     <thead class="text-center">
                         <tr>
                             <td colspan="4">
@@ -43,7 +43,7 @@
                             </td>
                         </tr>
                     </thead>
-                    <tbody id="table-peleton" class="text-center">
+                    <tbody class="text-center">
                         {{ view('admin.pralomba.form_penilaian._list-peleton',['peletons'=>$peletons]) }}
                     </tbody>
                 </table>
@@ -57,7 +57,6 @@
 @push('scripts')
     <script>
         let url_truncate = $("#url-truncate").attr('href')
-        
         $('#btn-generate').on('click',function(e){
             e.preventDefault()
             let url_generate = $(this).attr('href')

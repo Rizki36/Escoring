@@ -8,7 +8,7 @@
 <div class="card mt-4 wow fadeIn">
     <div class="card-body d-sm-flex justify-content-between">
         
-        <table id="table-juri" class="table table-sm table-bordered" data-href="{{ route('pralomba.listJuri') }}">
+        <table id="table" class="table table-sm table-bordered" data-href="{{ route('pralomba.listJuri') }}">
             <thead>
                 <tr>
                     <th class="text-center" colspan="5">List Juri</th>
@@ -39,19 +39,22 @@
 @endsection
 
 @push('scripts')
-<script src="{{ asset('js/crud.js') }}">
-
-</script>
 {{-- juri --}}
 <script>
-    let refreshJuri = $('#table-juri').attr('data-href'),
-            juri = new Crud('juri',refreshJuri,'juri')
+    let juri = new Crud('juri')
     
     $('#btn-add-juri').click(function (e) {
         e.preventDefault()
         let href = $(this).attr('href')
         juri.create(href)
+    })
+
+    $('body').on('click','.btn-edit-juri',function (e) {
+        e.preventDefault()
+        let href = $(this).attr('href')
+        juri.edit(href)
     })    
+
     $('body').on('click','.btn-delete-juri',function(e){
         e.preventDefault()
         let href = $(this).attr('href')

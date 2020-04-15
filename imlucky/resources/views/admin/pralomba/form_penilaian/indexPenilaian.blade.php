@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <table id="table-penilaian" class="table table-sm table-bordered mt-4" data-href="{{ route('form-penilaian.table',['peleton'=>$data->peleton_id,'juri'=>$data->juri_id]) }}">
+    <table id="table" class="table table-sm table-bordered mt-4" data-href="{{ route('form-penilaian.table',['peleton'=>$data->peleton_id,'juri'=>$data->juri_id]) }}">
             <thead class="text-center">
                 <tr>
                     <td colspan="5">
@@ -31,7 +31,7 @@
                 </tr>
             </thead>
             
-            <tbody id="table-peleton" class="text-center">
+            <tbody class="text-center">
                 {{ view('admin.pralomba.form_penilaian._listPenilaian',['penilaians'=>$data->penilaian,'data'=>$data]) }}
             </tbody>
         </table>
@@ -39,10 +39,8 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('js/crud.js') }}"></script>
     <script>
-        let refreshPenilaian = $('#table-penilaian').attr('data-href'),
-            penilaian = new Crud('penilaian',refreshPenilaian,'penilaian')
+        let penilaian = new Crud('penilaian')
         $('body').on('click','.btn-edit-penilaian',function(e){
             e.preventDefault()
             let href = $(this).attr('href')

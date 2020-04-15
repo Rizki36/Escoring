@@ -7,7 +7,7 @@
 @section('content')
 <div class="card mt-4 wow fadeIn">
     <div class="card-body d-sm-flex justify-content-between">
-        <table id="table-group-kategori" class="table table-sm table-bordered" data-href="{{ route('pralomba.list_group_kategori') }}">
+        <table id="table" class="table table-sm table-bordered" data-href="{{ route('pralomba.list_group_kategori') }}">
             <thead>
                 <tr>
                     <th class="text-center" colspan="5">List Juri</th>
@@ -27,13 +27,8 @@
 @endsection
 
 @push('scripts')
-<script src="{{ asset('js/crud.js') }}">
-
-</script>
-
 <script>
-    let refreshGroupKategori = $('#table-group-kategori').attr('data-href'),
-            groupKategori = new Crud('group-kategori',refreshGroupKategori,'group-kategori')
+    let groupKategori = new Crud('group-kategori')
     
     $('body').on('click','.btn-add-group-kategori',function (e) {
         e.preventDefault()

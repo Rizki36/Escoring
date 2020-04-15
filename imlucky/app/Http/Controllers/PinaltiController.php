@@ -31,6 +31,7 @@ class PinaltiController extends Controller
         $peleton = Peleton::find($id);
         $peleton->pinalti = $request->pinalti;
         $peleton->save();
+        
     }
 
 }

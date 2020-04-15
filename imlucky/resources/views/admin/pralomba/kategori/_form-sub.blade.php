@@ -1,4 +1,4 @@
-<form id="form-sub" action="{{ $action }}">
+<form id="form" action="{{ $action }}">
 
     <div class="form-group">
         <label for="kode">Kode</label>
