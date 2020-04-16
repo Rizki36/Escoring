@@ -52,6 +52,11 @@
       </li>
 
       <li class="nav-item">
+        <a class="nav-link" href="{{ route('ballot.index') }}">
+          <i class="nav-icon icon-pencil"></i> Ballot</a>
+      </li>
+
+      <li class="nav-item">
         <a class="nav-link" href="{{ route('pinalti.index') }}">
           <i class="nav-icon icon-pencil"></i> Pinalti</a>
       </li>

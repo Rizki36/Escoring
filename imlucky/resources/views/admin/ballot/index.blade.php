@@ -7,7 +7,7 @@
 @section('content')
 <div class="card mt-4 wow fadeIn">
     <div class="card-body d-sm-flex justify-content-between"> 
-        <table id="table" class="table table-sm" data-href="{{ route('pinalti.listPinalti') }}">
+        <table id="table" class="table table-sm" data-href="{{ route('ballot.listBallot') }}">
             <thead>
                 <tr>
                     <th class="text-center" colspan="3">List Pleton</th>
@@ -15,7 +15,7 @@
                 <tr class="text-center">
                     <th scope="col" style="width: 1px">No</th>
                     <th scope="col">Peleton</th>
-                    <th scope="col">Pinalti</th>
+                    <th scope="col">Ballot</th>
                     <th scope="col" style="width: 15%">Action</th>
                 </tr>
             </thead>
@@ -30,11 +30,11 @@
 
 @push('scripts')
 <script>
-    let pinalti = new Crud('pinalti');
-    $('body').on('click','.btn-edit-pinalti',function(e){
+    let ballot = new Crud('ballot');
+    $('body').on('click','.btn-edit-ballot',function(e){
         e.preventDefault()
         let href = $(this).attr('href')
-        pinalti.edit(href)
+        ballot.edit(href)
     })
 </script>
 @endpush

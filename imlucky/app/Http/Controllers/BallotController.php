@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Peleton;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -33,9 +34,33 @@ class BallotController extends Controller
         return redirect()->back()->with('status','Update data berhasil');
     }
 
+    public static function listBallot()
+    {
+        $peletons = Peleton::all();
+        return view('admin.ballot._list-ballot',compact('peletons'));
+    }
+
     public function index()
     {
-        return 'test';
+        $peletons = $this->listBallot();
+        return view('admin.ballot.index',['peletons'=>$peletons]);
     }
+
+    public function edit($id)
+    {
+        $action = route('ballot.update',['id'=>$id]);
+        $peleton = Peleton::find($id);
+        return view('admin.ballot._form',['action'=>$action,'peleton'=>$peleton]);   
+    }
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'ballot'=>'required|integer|min:0'
+        ]);
+        $peleton = Peleton::find($id);
+        $peleton->ballot = $request->ballot;
+        $peleton->save();
+    }
+
 
 }

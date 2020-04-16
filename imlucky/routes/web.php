@@ -72,7 +72,13 @@ Route::group(['prefix'=>'admin'],function(){
         });
     });
 
+    Route::get('ballot/listBallot','BallotController@listBallot')->name('ballot.listBallot');
+    Route::get('ballot','BallotController@index')->name('ballot.index');
+    Route::get('ballot/{id}','BallotController@edit')->name('ballot.edit');
+    Route::put('ballot/{id}','BallotController@update')->name('ballot.update');
+
     Route::get('sortasi','SortasiController@index')->name('sortasi.index');
+    
     Route::get('pinalti/listPinalti','PinaltiController@listPinalti')->name('pinalti.listPinalti');
     Route::get('pinalti','PinaltiController@index')->name('pinalti.index');
     Route::get('pinalti/{id}','PinaltiController@edit')->name('pinalti.edit');
