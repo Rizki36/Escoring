@@ -24,6 +24,8 @@ class CreateConfigTable extends Migration
         DB::table('config')->insert([
                 ['nama'=>'pinalti_umum','value'=>100],
                 ['nama'=>'pinalti_utama','value'=>100],
+                ['nama'=>'ballot_umum','value'=>0],
+                ['nama'=>'ballot_utama','value'=>0],
             ]);
     }
 

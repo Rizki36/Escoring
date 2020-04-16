@@ -22,11 +22,13 @@ class PinaltiController extends Controller
 
     public function indexPralomba()
     {
+        $config = DB::table('config')->get()->keyBy('nama');
+        // return $config;
         $pinalti = [
-            'umum' =>DB::table('config')->where('nama','pinalti_umum')->first(),
-            'utama'=>DB::table('config')->where('nama','pinalti_utama')->first(),
+            'umum' =>$config['pinalti_umum']->value,
+            'utama'=>$config['pinalti_utama']->value,
         ];
-        // return dd((object) $pinalti);
+        // return dd($pinalti);
         return view('admin.pralomba.pinalti.index',['pinalti'=>(object) $pinalti]);
     }
 

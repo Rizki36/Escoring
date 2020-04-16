@@ -41,6 +41,10 @@
               <i class="nav-icon fas fa-bell"></i> Pinalti</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="{{ route('ballot.indexPralomba') }}">
+              <i class="nav-icon fas fa-bell"></i> Ballot</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="{{ route('form-penilaian.indexPeleton') }}">
               <i class="nav-icon fas fa-bell"></i> Form Penilaian</a>
           </li>
@@ -50,6 +54,11 @@
       <li class="nav-item">
         <a class="nav-link" href="{{ route('pinalti.index') }}">
           <i class="nav-icon icon-pencil"></i> Pinalti</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="{{ route('sortasi.index') }}">
+          <i class="nav-icon icon-pencil"></i> Sortasi</a>
       </li>
 
       <li class="nav-item">

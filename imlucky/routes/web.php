@@ -23,10 +23,11 @@ Route::group(['prefix'=>'admin'],function(){
         Route::get('list-group-kategori','GroupKategoriController@list_group_kategori')->name('pralomba.list_group_kategori');
         Route::get('pralomba','PralombaController@index')->name('pralomba.index');
         
-        Route::get('pinalti','PinaltiController@indexPralomba')->name('pinalti.indexPralomba');
-        // Route::get('pinalti/listPralomba','PinaltiController@listPralomba')->name('pinalti.listPralomba');
-        // Route::get('pinalti/{id}','PinaltiController@editPralomba')->name('pinalti.editPralomba');
+        Route::get('pinalti' ,'PinaltiController@indexPralomba')->name('pinalti.indexPralomba');
         Route::post('pinalti','PinaltiController@updatePralomba')->name('pinalti.updatePralomba');
+
+        Route::get('ballot' ,'BallotController@indexPralomba')->name('ballot.indexPralomba');
+        Route::post('ballot','BallotController@updatePralomba')->name('ballot.updatePralomba');
 
         Route::resource('peleton','PeletonController',['parameters' => ['peleton' => 'no']]);
         Route::resource('juri','JuriController',['parameters' => ['juri' => 'id']]);
@@ -71,7 +72,7 @@ Route::group(['prefix'=>'admin'],function(){
         });
     });
 
-    
+    Route::get('sortasi','SortasiController@index')->name('sortasi.index');
     Route::get('pinalti/listPinalti','PinaltiController@listPinalti')->name('pinalti.listPinalti');
     Route::get('pinalti','PinaltiController@index')->name('pinalti.index');
     Route::get('pinalti/{id}','PinaltiController@edit')->name('pinalti.edit');
@@ -81,7 +82,7 @@ Route::group(['prefix'=>'admin'],function(){
         Route::get('print-out/{id}','LaporanController@printout')->name('laporan.printout');
     });
     Route::resource('laporan','LaporanController');
-
+    
 
 });
 
