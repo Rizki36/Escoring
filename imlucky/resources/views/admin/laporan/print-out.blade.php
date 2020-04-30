@@ -58,29 +58,29 @@
     <table>
         <thead>
             <tr>
-                <th colspan="{{ $data['length'] + 3 }}">LEMBAR PENILAIAN</th>
+                <th colspan="{{ $juri_lenght + 3 }}">LEMBAR PENILAIAN</th>
             </tr>
             <tr>
-                <th colspan="{{ $data['length'] + 3 }}">TES</th>
+                <th colspan="{{ $juri_lenght + 3 }}">TES</th>
             </tr>
             <tr>
-                <th colspan="{{ $data['length'] + 3 }}">GERAK KREATIVITAS GENERASI MUDA PASKIBRA</th>
+                <th colspan="{{ $juri_lenght + 3 }}">GERAK KREATIVITAS GENERASI MUDA PASKIBRA</th>
             </tr>
             
             <tr class="head text-center">
                 <td></td>
                 <td>NOMOR UNDIAN</td>
-                <td colspan="{{ $data['length'] + 1 }}">{{ $data['no'] }}</td>
+                <td colspan="{{ $juri_lenght + 1 }}">{{ $data['no'] }}</td>
             </tr>
             <tr class="head text-center">
                 <td></td>
                 <td>PELETON</td>
-                <td colspan="{{ $data['length'] + 1 }}">{{ $data['peleton'] }}</td>
+                <td colspan="{{ $juri_lenght + 1 }}">{{ $data['peleton'] }}</td>
             </tr>
             
             <tr class="head text-center">
                 <td colspan="2"></td>
-                @for ($i = 0; $i < $data['length']; $i++)
+                @for ($i = 0; $i < $juri_lenght; $i++)
                 <td>JURI {{ $i + 1 }}</td>
                 @endfor
                 <td>TOTAL</td>
@@ -91,24 +91,24 @@
             @foreach ($data['penilaian'] as $kategori)
                 <tr class="text-center">
                     {{-- 2 => column no dan peleton,  --}}
-                    {{-- $data['length'] => column juri,  --}}
+                    {{-- $juri_lenght => column juri,  --}}
                     {{-- 1=> column total --}}
-                    <td class="head" colspan="{{ 2 + $data['length'] + 1 }}">{{ $kategori['kategori'] }}</td>
+                    <td class="head" colspan="{{ 2 + $juri_lenght + 1 }}">{{ $kategori['kategori'] }}</td>
                 </tr>
                 @foreach ($kategori['subs'] as $key_sub => $sub)
                     @if (count($kategori['subs']) > 1)
                         <tr>
                             <td class="head text-center">{{ $key_sub }}</td>
-                                {{-- $data['length'] => column juri,  --}}
+                                {{-- $juri_lenght => column juri,  --}}
                                 {{-- 1=> column total --}}
-                            <td class="head" colspan="{{ 1 + $data['length'] +1 }}"> &nbsp;{{ $sub['sub'] }}</td>
+                            <td class="head" colspan="{{ 1 + $juri_lenght +1 }}"> &nbsp;{{ $sub['sub'] }}</td>
                         </tr>
                     @endif
                     @foreach ($sub['sub2s'] as $key_sub2 => $sub2)
                         <tr>
                             <td class="text-center">{{ $loop->index + 1 }}</td>
                             <td>&nbsp;{{ $key_sub2 }}</td>
-                            @for ($i = 0; $i < $data['length']; $i++)
+                            @for ($i = 0; $i < $juri_lenght; $i++)
                                 @if (array_key_exists($i,$sub2))
                                     <td class="text-center">{{ $sub2[$i] }}</td>
                                 @else
@@ -131,20 +131,20 @@
             @foreach ($data['penilaian'] as $kategori)
                 <tr class="head text-center">
                     <td colspan="2">{{ $kategori['kategori'] }}</td>
-                    <td colspan="{{ $data['length'] + 1 }}">{{ $kategori['total'] }}</td>
+                    <td colspan="{{ $juri_lenght + 1 }}">{{ $kategori['total'] }}</td>
                 </tr>
                 @endforeach
                 <tr class="head text-center">
                     <td colspan="2">Pinalti</td>
-                    <td colspan="{{ $data['length'] + 1 }}">{{ $data['pinalti'] }}</td>
+                    <td colspan="{{ $juri_lenght + 1 }}">{{ $data['pinalti'] }}</td>
                 </tr>
                 <tr class="head text-center">
                     <td colspan="2">Jumlah Juara Utama</td>
-                    <td colspan="{{ $data['length'] + 1 }}">{{ $data['utama'] }}</td>
+                    <td colspan="{{ $juri_lenght + 1 }}">{{ $data['utama'] }}</td>
                 </tr>
                 <tr class="head text-center">
                     <td colspan="2">Jumlah Juara Umum</td>
-                    <td colspan="{{ $data['length'] + 1 }}">{{ $data['umum'] }}</td>
+                    <td colspan="{{ $juri_lenght + 1 }}">{{ $data['umum'] }}</td>
                 </tr>
         </tbody>
     </table>

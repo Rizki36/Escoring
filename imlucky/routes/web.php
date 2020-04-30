@@ -14,8 +14,9 @@
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix'=>'admin'],function(){
-
+    Route::redirect('/','admin/pralomba');
     Route::group(['prefix'=>'pralomba'],function(){    
+        Route::redirect('/','pralomba/group-juri-juri');
         Route::get('list-peleton','PeletonController@listPeleton')->name('pralomba.listPeleton');
         Route::get('list-juri','JuriController@listJuri')->name('pralomba.listJuri');
         Route::get('list-group-juri','GroupJuriController@listGroupJuri')->name('pralomba.listGroupJuri');
@@ -44,6 +45,7 @@ Route::group(['prefix'=>'admin'],function(){
         }); 
         
         Route::redirect('form-penilaian','form-penilaian/peleton');
+
         Route::get('form-penilaian/generate','PenilaianController@generatePenilaian')->name('form-penilaian.generate');
         Route::get('form-penilaian/truncate','PenilaianController@truncate')->name('form-penilaian.truncate');
         
@@ -85,12 +87,10 @@ Route::group(['prefix'=>'admin'],function(){
     Route::put('pinalti/{id}','PinaltiController@update')->name('pinalti.update');
 
     Route::group(['prefix'=>'laporan'],function(){
-        Route::get('print-out/{id}','LaporanController@printout')->name('laporan.printout');
+        Route::get('print-out/{no}','LaporanController@printout')->name('laporan.printout');
     });
     Route::resource('laporan','LaporanController');
     
 
 });
-
-// route test
-Route::get('/','PenilaianController@listPenilaian');
+Route::redirect('/','admin/pralomba');

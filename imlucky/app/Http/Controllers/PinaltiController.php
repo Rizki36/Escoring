@@ -32,11 +32,6 @@ class PinaltiController extends Controller
         return view('admin.pralomba.pinalti.index',['pinalti'=>(object) $pinalti]);
     }
 
-    // public function editPralomba($id)
-    // {
-        
-    // }
-
     public function updatePralomba(Request $request)
     {
         $request->validate([
@@ -52,11 +47,6 @@ class PinaltiController extends Controller
         return redirect()->back()->with('status','Update data berhasil');
     }
 
-    // public function listPralomba()
-    // {
-        
-    // }
-
     public function edit($id)
     {
         $action = route('pinalti.update',['id'=>$id]);   
@@ -66,6 +56,9 @@ class PinaltiController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'pinalti'=>'required|integer'
+        ]);
         $peleton = Peleton::find($id);
         $peleton->pinalti = $request->pinalti;
         $peleton->save();
