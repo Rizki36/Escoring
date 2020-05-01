@@ -90,7 +90,10 @@ Route::group(['prefix'=>'admin'],function(){
         Route::get('print-out/{no}','LaporanController@printout')->name('laporan.printout');
     });
     Route::resource('laporan','LaporanController');
-    
-
 });
-Route::redirect('/','admin/pralomba');
+
+Route::group(['prefix'=>'juri'],function(){
+    Route::get('peleton/{no}','JuriController@peleton')->name('juri');
+});
+
+Route::redirect('/','juri/peleton/1');

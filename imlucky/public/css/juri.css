@@ -1,0 +1,67 @@
+#kategori-container{
+    /* background-color: brown; */
+    overflow-x: auto;
+    flex-wrap: nowrap;
+}
+
+.kategori-item{
+    flex: 0 0 auto;
+    margin: 10px 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* padding: 20px; */
+
+    width: 140px;
+    height: 45px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #000;
+    background-color: #fff;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+}
+
+.radio-title{
+  display: block;
+  margin-bottom: 5px;
+}
+
+.group-radio{
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+
+.custom-radio{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20px;
+}
+.custom-radio label{
+  text-align: center;
+}
+
+input[type="radio"]:not(old){
+  display: block;
+  width: 2em !important;
+  height: 2em !important;
+  
+}
+
+  
+  /* .button:hover {
+    background-color: #2EE59D;
+    box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+    color: #fff;
+    transform: translateY(-7px);
+  } */

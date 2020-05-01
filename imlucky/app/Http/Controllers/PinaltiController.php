@@ -17,7 +17,7 @@ class PinaltiController extends Controller
     public function index()
     {
         $peletons = $this->listPinalti();
-        return view('admin.pinalti.pinalti',['peletons'=>$peletons]);    
+        return view('admin.pinalti.index',['peletons'=>$peletons]);    
     }
 
     public function indexPralomba()
