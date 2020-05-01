@@ -2,9 +2,9 @@
   <nav class="sidebar-nav">
     <ul class="nav">
       <li class="nav-title">Peleton</li>
-      @foreach ($peletons as $peleton)
+      @foreach ($peletons as $pel)
       <li class="nav-item">
-        <a class="nav-link" href="{{ route('juri',['no'=>$peleton->id]) }}">{{ $peleton->nama }}</a>
+        <a class="nav-link" href="{{ route('juriInput',['no'=>$pel->id]) }}">{{ $pel->nama }}</a>
       </li>
       @endforeach
       

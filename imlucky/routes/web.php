@@ -93,7 +93,9 @@ Route::group(['prefix'=>'admin'],function(){
 });
 
 Route::group(['prefix'=>'juri'],function(){
-    Route::get('peleton/{no}','JuriController@peleton')->name('juri');
+    Route::get('peleton/{no}','JuriInputController@index')->name('juriInput');
+    Route::post('peleton/{peleton_id}','JuriInputController@update_one')->name('juriInput.update_one');
+    Route::post('peleton/{peleton_id}/more','JuriInputController@update_more')->name('juriInput.update_more');
 });
 
 Route::redirect('/','juri/peleton/1');

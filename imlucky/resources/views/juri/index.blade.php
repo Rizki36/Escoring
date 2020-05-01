@@ -5,6 +5,8 @@
 @endsection
 
 @section('content')
+<input type="hidden" name="url_post_one" value="{{ route('juriInput.update_one',['peleton_id'=>$peleton->id]) }}">
+<input type="hidden" name="url_post_more" value="{{ route('juriInput.update_more',['peleton_id'=>$peleton->id]) }}">
 <div id="kategori-container" class="mt-1 d-flex">
     @foreach ($kategoris as $kategori)
     <a class="btn kategori-item" data-id="{{ $kategori->id }}">
@@ -18,7 +20,6 @@
     <div class="card-body"> 
         <h4 class="card-title text-center">{{ $kategori['nama'] }}</h4>
         <div class="row">
-            {{-- @for ($u = 0; $u < 3; $u++) --}}
             @foreach ($kategori['subs'] as $sub_id => $sub)
             @foreach ($sub['sub2s'] as $sub2_id => $sub2)
             <div class="col-12">
@@ -26,7 +27,8 @@
                 <div class="group-radio">
                     @foreach ($sub['kisaran_nilai'] as $kisaran)
                     <div class="custom-radio">
-                        <input name="nilai[{{ $kategori_id }}][{{ $sub_id }}][{{ $sub2_id }}]" type="radio" value="{{ $kisaran }}">
+                        <input class="input-radio" name="nilai[{{ $kategori_id }}][{{ $sub_id }}][{{ $sub2_id }}]" type="radio" value="{{ $kisaran }}" {{ $sub2['nilai'] == $kisaran ? "checked" : null }}
+                        data-id="{{ $kategori_id }},{{ $sub_id }},{{ $sub2_id }}">
                         <label for="nilai">{{ $kisaran }}</label>
                     </div>
                     @endforeach
@@ -35,7 +37,6 @@
             </div>
             @endforeach
             @endforeach
-            {{-- @endfor --}}
             <div class="col-12">
                 <button class="btn btn-primary w-100">Simpan</button>
             </div>
@@ -47,5 +48,22 @@
 @endsection
 
 @push('scripts')
-    
+    <script>
+        const url_post_one  = $("input[name='url_post_one']").val(),
+              url_post_more = $("input[name='url_post_more']").val()
+        $('.input-radio').on('change', function () {
+            let data = {
+                value : $(this).val(),
+                id : $(this).attr('data-id'),
+            }
+            $.ajax({
+                type: "POST",
+                url: url_post_one,
+                data: data,
+                success: function (response) {
+                    console.log(response)
+                }
+            });
+        });
+    </script>
 @endpush
