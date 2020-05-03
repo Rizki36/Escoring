@@ -16,7 +16,7 @@
 </div>
 
 @foreach ($penilaian as $kategori_id => $kategori)
-<div class="card mt-4 wow fadeIn">
+<div class="card mt-4 wow fadeIn d-none" data-id="{{ $kategori_id }}">
     <div class="card-body"> 
         <h4 class="card-title text-center">{{ $kategori['nama'] }}</h4>
         <div class="row">
@@ -51,6 +51,15 @@
     <script>
         const url_post_one  = $("input[name='url_post_one']").val(),
               url_post_more = $("input[name='url_post_more']").val()
+
+        $('.kategori-item').on('click',function(e){
+            $('.card').addClass('d-none')
+            $('.kategori-item').removeClass('kategori-active')
+            $(this).addClass('kategori-active')
+            const id = $(this).attr('data-id')
+            $(`.card[data-id="${id}"]`).removeClass('d-none')
+        })
+
         $('.input-radio').on('change', function () {
             let data = {
                 value : $(this).val(),
@@ -62,6 +71,8 @@
                 data: data,
                 success: function (response) {
                     console.log(response)
+                },error:function(e){
+
                 }
             });
         });
