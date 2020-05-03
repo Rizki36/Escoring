@@ -16,6 +16,7 @@
 </div>
 
 @foreach ($penilaian as $kategori_id => $kategori)
+<form data-id="{{ $kategori_id }}">
 <div class="card mt-4 wow fadeIn d-none" data-id="{{ $kategori_id }}">
     <div class="card-body"> 
         <h4 class="card-title text-center">{{ $kategori['nama'] }}</h4>
@@ -38,11 +39,12 @@
             @endforeach
             @endforeach
             <div class="col-12">
-                <button class="btn btn-primary w-100">Simpan</button>
+                <button type="submit" class="btn-simpan btn btn-primary w-100">Simpan</button>
             </div>
         </div>
     </div>
 </div>
+</form>
 @endforeach
 
 @endsection
@@ -66,7 +68,7 @@
                 id : $(this).attr('data-id'),
             }
             $.ajax({
-                type: "POST",
+                type: "PUT",
                 url: url_post_one,
                 data: data,
                 success: function (response) {
@@ -76,5 +78,18 @@
                 }
             });
         });
+
+        $('.btn-simpan').on('click',function(e){
+            e.preventDefault()
+            const data = $(this).closest('form').serialize()
+            $.ajax({
+                type: "PUT",
+                url: url_post_more,
+                data: data,
+                success: function (response) {
+                    console.log(response)
+                }
+            });
+        })
     </script>
 @endpush

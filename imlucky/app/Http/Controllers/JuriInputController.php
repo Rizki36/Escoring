@@ -76,6 +76,18 @@ class JuriInputController extends Controller
 
     public function update_more(Request $request,$peleton_id)
     {
-        
+        $juri = session('juri');
+        $array = [];
+        $nilai = $request->nilai;
+        foreach($nilai as $kategori_id => $sub){
+            foreach($sub as $sub_id => $sub2){
+                foreach($sub2 as $sub2_id => $nilai){
+                    DB::table('penilaian')
+                        ->where(['juri_id'=>$juri->id,'peleton_id'=>$peleton_id,'kategori_id'=>$kategori_id,'sub_id'=>$sub_id,'sub2_id'=>$sub2_id])
+                        ->update(['nilai'=>$nilai]);
+                }
+            }
+        }
+        return 'sukses';
     }
 }
