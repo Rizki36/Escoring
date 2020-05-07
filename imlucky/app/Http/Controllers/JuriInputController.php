@@ -19,7 +19,8 @@ class JuriInputController extends Controller
         session(['juri'=>$juri]);
         $juri = session('juri');
         $kategoris = GroupJuri::where('id',$juri->group_juri_id)->with('kategoris')->first();
-        $penilaian =DB::table('penilaian as pen')
+
+        $penilaian = DB::table('penilaian as pen')
                         ->where('juri_id',$juri->id)
                         ->where('peleton_id',$no)
                         ->select([
@@ -77,17 +78,28 @@ class JuriInputController extends Controller
     public function update_more(Request $request,$peleton_id)
     {
         $juri = session('juri');
-        $array = [];
-        $nilai = $request->nilai;
+        return
+        $nilai = $request->nilai ;
         foreach($nilai as $kategori_id => $sub){
             foreach($sub as $sub_id => $sub2){
                 foreach($sub2 as $sub2_id => $nilai){
                     DB::table('penilaian')
                         ->where(['juri_id'=>$juri->id,'peleton_id'=>$peleton_id,'kategori_id'=>$kategori_id,'sub_id'=>$sub_id,'sub2_id'=>$sub2_id])
-                        ->update(['nilai'=>$nilai]);
+                        ->update(['nilai'=>$nilai,'is_complete' => true]);
                 }
             }
         }
-        return 'sukses';
+        $penilaian = DB::table('penilaian')
+                    ->where(['juri_id'=>$juri->id,'peleton_id'=>$peleton_id])
+                    ->distinct(['kategori_id','is_complete'])
+                    ->get(['kategori_id','is_complete']);
+        return $penilaian;
+    }
+
+    public function reset()
+    {
+        DB::table('penilaian')
+            ->update(['nilai'=>null,'is_complete'=>false]);
+        // return redirect()->back();
     }
 }

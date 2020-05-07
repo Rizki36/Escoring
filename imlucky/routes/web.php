@@ -97,5 +97,5 @@ Route::group(['prefix'=>'juri'],function(){
     Route::put('peleton/{peleton_id}','JuriInputController@update_one')->name('juriInput.update_one');
     Route::put('peleton/{peleton_id}/more','JuriInputController@update_more')->name('juriInput.update_more');
 });
-
+Route::get('juri/reset','JuriInputController@reset');
 Route::redirect('/','juri/peleton/1');

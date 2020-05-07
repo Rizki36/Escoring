@@ -15,6 +15,7 @@
     @endforeach
 </div>
 
+
 @foreach ($penilaian as $kategori_id => $kategori)
 <form data-id="{{ $kategori_id }}">
 <div class="card mt-4 wow fadeIn d-none" data-id="{{ $kategori_id }}">
@@ -88,6 +89,8 @@
                 data: data,
                 success: function (response) {
                     console.log(response)
+                },error(e){
+                    console.log(e)
                 }
             });
         })
