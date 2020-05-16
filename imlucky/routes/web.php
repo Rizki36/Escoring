@@ -99,3 +99,6 @@ Route::group(['prefix'=>'juri'],function(){
 });
 Route::get('juri/reset','JuriInputController@reset');
 Route::redirect('/','juri/peleton/1');
+
+Route::get('login','LoginController@index')->name('login.index');
+Route::post('login','LoginController@post')->name('login.post');

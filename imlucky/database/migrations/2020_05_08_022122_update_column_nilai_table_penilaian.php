@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColumnIsCompleteTablePenilaian extends Migration
+class UpdateColumnNilaiTablePenilaian extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddColumnIsCompleteTablePenilaian extends Migration
     public function up()
     {
         Schema::table('penilaian', function (Blueprint $table) {
-            $table->boolean('is_complete')->default(false);
+            $table->float('nilai')->nullable()->change();
         });
     }
 
@@ -26,7 +26,7 @@ class AddColumnIsCompleteTablePenilaian extends Migration
     public function down()
     {
         Schema::table('penilaian', function (Blueprint $table) {
-            $table->dropColumn('is_complete');
+            $table->float('nilai')->change();
         });
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Kategori;
+use App\Peleton;
 
 class DataController extends Controller
 {
@@ -50,6 +51,7 @@ class DataController extends Controller
         }
         // retrieve one data
         else{
+            $peleton = Peleton::where('no','=',$no)->first();
             $data = DB::table('penilaian as pen')
             ->join('juris as jur','jur.id','=','pen.juri_id')
             ->join('peletons as pel','pel.id','=','pen.peleton_id')
@@ -72,7 +74,7 @@ class DataController extends Controller
                 'kat.bobot_utama AS bobot_utama',
                 'pen.nilai AS nilai',
                 ])
-            ->where('pen.peleton_id','=',$no)
+            ->where('pen.peleton_id','=',$peleton->id)
             ->orderBy('no')
             ->orderBy('kategori_kode')
             ->orderBy('sub_kode')
@@ -80,7 +82,6 @@ class DataController extends Controller
             ->orderBy('juri_id')
             ->get();
         }
-        
         foreach ($data as $dt) {
             $array[$dt->no]['no'] = $dt->no;
             $array[$dt->no]['peleton'] = $dt->peleton;

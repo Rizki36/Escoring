@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColumnIsCompleteTablePenilaian extends Migration
+class AddColumnRememberTokenTableJuris extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddColumnIsCompleteTablePenilaian extends Migration
      */
     public function up()
     {
-        Schema::table('penilaian', function (Blueprint $table) {
-            $table->boolean('is_complete')->default(false);
+        Schema::table('juris', function (Blueprint $table) {
+            $table->rememberToken();
         });
     }
 
@@ -25,8 +25,8 @@ class AddColumnIsCompleteTablePenilaian extends Migration
      */
     public function down()
     {
-        Schema::table('penilaian', function (Blueprint $table) {
-            $table->dropColumn('is_complete');
+        Schema::table('juris', function (Blueprint $table) {
+            $table->dropColumn('remember_token');
         });
     }
 }

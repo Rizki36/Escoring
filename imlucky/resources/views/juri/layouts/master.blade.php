@@ -35,7 +35,6 @@
         </div>
       </div>
     </main>
-    @include('juri.layouts.aside')
   </div>
   <script src="{{ mix('js/app.js') }}"></script>  
   <script>

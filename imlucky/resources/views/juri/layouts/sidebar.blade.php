@@ -4,7 +4,7 @@
       <li class="nav-title">Peleton</li>
       @foreach ($peletons as $pel)
       <li class="nav-item">
-        <a class="nav-link" href="{{ route('juriInput',['no'=>$pel->id]) }}">{{ $pel->nama }}</a>
+        <a class="nav-link" href="{{ route('juriInput',['no'=>$pel->no]) }}">{{ $pel->nama }}</a>
       </li>
       @endforeach
       

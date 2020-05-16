@@ -1,7 +1,7 @@
 @foreach ($peletons as $peleton)
 <tr>
     <td class="align-middle">
-        {{ $peleton->id }}        
+        {{ $peleton->no }}        
     </td>
     <td class="align-middle">
         {{ $peleton->nama }}  

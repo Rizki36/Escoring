@@ -8,11 +8,7 @@
 <input type="hidden" name="url_post_one" value="{{ route('juriInput.update_one',['peleton_id'=>$peleton->id]) }}">
 <input type="hidden" name="url_post_more" value="{{ route('juriInput.update_more',['peleton_id'=>$peleton->id]) }}">
 <div id="kategori-container" class="mt-1 d-flex">
-    @foreach ($kategoris as $kategori)
-    <a class="btn kategori-item" data-id="{{ $kategori->id }}">
-        {{ $kategori->nama }}
-    </a>
-    @endforeach
+    {{ view('juri._kategori-items',['kategoris'=>$kategoris]) }}
 </div>
 
 
@@ -25,11 +21,11 @@
             @foreach ($kategori['subs'] as $sub_id => $sub)
             @foreach ($sub['sub2s'] as $sub2_id => $sub2)
             <div class="col-12">
-                <span class="radio-title">{{ $sub2['nama'] }}</span>
+                <span class="radio-title" data-name="nilai[{{ $kategori_id }}][{{ $sub_id }}][{{ $sub2_id }}]">{{ $sub2['nama'] }}</span>
                 <div class="group-radio">
                     @foreach ($sub['kisaran_nilai'] as $kisaran)
                     <div class="custom-radio">
-                        <input class="input-radio" name="nilai[{{ $kategori_id }}][{{ $sub_id }}][{{ $sub2_id }}]" type="radio" value="{{ $kisaran }}" {{ $sub2['nilai'] == $kisaran ? "checked" : null }}
+                        <input class="input-radio" autocomplete="off" name="nilai[{{ $kategori_id }}][{{ $sub_id }}][{{ $sub2_id }}]" type="radio" value="{{ $kisaran }}" {{ $sub2['nilai'] == $kisaran ? "checked" : null }}
                         data-id="{{ $kategori_id }},{{ $sub_id }},{{ $sub2_id }}">
                         <label for="nilai">{{ $kisaran }}</label>
                     </div>
@@ -55,7 +51,7 @@
         const url_post_one  = $("input[name='url_post_one']").val(),
               url_post_more = $("input[name='url_post_more']").val()
 
-        $('.kategori-item').on('click',function(e){
+        $('body').on('click','.kategori-item',function(e){
             $('.card').addClass('d-none')
             $('.kategori-item').removeClass('kategori-active')
             $(this).addClass('kategori-active')
@@ -82,13 +78,31 @@
 
         $('.btn-simpan').on('click',function(e){
             e.preventDefault()
+            const form      = $(this).closest('form'),
+                  inputName = $(form).find('.radio-title')
+         
+            
+            inputName.each(function(){
+                let name = $(this).attr('data-name');
+                if($(`input[name*='${name}']:checked`).length === 0){
+                    $('html, body').animate({
+                        scrollTop: $(`input[name*='${name}']`).offset().top - 100
+                    }, 2000);
+                    throw 'not valid!';
+                }
+            })
+    
+
             const data = $(this).closest('form').serialize()
             $.ajax({
                 type: "PUT",
                 url: url_post_more,
                 data: data,
                 success: function (response) {
-                    console.log(response)
+                    $('#kategori-container').html(response)
+                    $('html, body').animate({
+                        scrollTop: $(`body`).offset().top -10
+                    }, 2000);
                 },error(e){
                     console.log(e)
                 }

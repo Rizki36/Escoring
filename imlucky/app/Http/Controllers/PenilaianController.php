@@ -83,12 +83,7 @@ class PenilaianController extends Controller
         $data->penilaian = $penilaians;
         return $data;
     }
-    private function test(Collection $test)
-    {
-        foreach ($test as $key => $val) {
-            
-        }
-    }
+
     
     private function validateData(Collection $peleton,Collection $sub2,Collection $juri)
     {
@@ -219,6 +214,7 @@ class PenilaianController extends Controller
         $request->validate([
             'nilai'=>'required'
         ]);
+        
         $nilai = $request->nilai;
         DB::table('penilaian')
             ->where('peleton_id','=',$peleton)

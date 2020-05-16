@@ -23,6 +23,7 @@
         "@coreui/coreui": "^2.1.16",
         "@coreui/icons": "^1.0.0",
         "@fortawesome/fontawesome-free": "^5.12.1",
+        "animejs": "^3.2.0",
         "bootstrap": "^4.4.1",
         "bootstrap-select": "^1.13.12",
         "chart.js": "^2.9.3",

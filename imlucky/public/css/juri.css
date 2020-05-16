@@ -30,6 +30,10 @@
 }
 
 .kategori-active{
+  background-color: rgba(217, 0, 255, 0.972);
+  transform: scale(1.1);
+}
+.kategori-complete{
   background-color: rgba(0, 255, 157, 0.972);
 }
 
