@@ -1,69 +1,99 @@
-#kategori-container{
+#kategori-container {
     /* background-color: brown; */
     overflow-x: auto;
     flex-wrap: nowrap;
 }
 
-.kategori-item{
+.kategori-item {
     flex: 0 0 auto;
-    margin: 10px 15px;
+    margin: 20px 40px 20px 0px;
     display: flex;
     justify-content: center;
     align-items: center;
     /* padding: 20px; */
 
-    width: 140px;
+    width: 180px;
     height: 45px;
-    font-family: 'Roboto', sans-serif;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 2.5px;
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+    text-transform: capitalize;
+    letter-spacing: 0.05em;
     font-weight: 500;
-    color: #000;
+    color: rgba(0, 0, 0, 0.6) !important;
     background-color: #fff;
-    border: none;
-    border-radius: 45px;
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 50px;
     transition: all 0.3s ease 0s;
     cursor: pointer;
     outline: none;
 }
 
-.kategori-active{
-  background-color: rgba(0, 255, 157, 0.972);
+.kategori-active {
+    background-color: #3d9f7f;
+    color: #ffffff !important;
+    border: none;
 }
 
-.radio-title{
-  display: block;
-  margin-bottom: 5px;
+.kategori-complete {
+    background-color: #e5f4ef;
+    color: #3d9f7f !important;
+    border: none;
 }
 
-.group-radio{
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
+.btn-simpan {
+    height: 45px;
+    background-color: #3d9f7f;
+    color: #ffffff !important;
+    border: none;
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+    text-transform: capitalize;
+    letter-spacing: 0.05em;
+    font-weight: 500;
+    border-radius: 50px;
 }
 
-.custom-radio{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-right: 20px;
-}
-.custom-radio label{
-  text-align: center;
+.btn-simpan:hover {
+    background-color: #49a98a;
+    color: #ffffff !important;
+    border: none;
 }
 
-input[type="radio"]:not(old){
-  display: block;
-  width: 2em !important;
-  height: 2em !important;
-  
+.btn-simpan:active {
+    background-color: #3d9f7f !important;
+    color: #ffffff !important;
+    border: none;
 }
 
-  
-  /* .button:hover {
+.radio-title {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.group-radio {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+}
+
+.custom-radio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+}
+.custom-radio label {
+    text-align: center;
+}
+
+input[type="radio"]:not(old) {
+    display: block;
+    width: 2em !important;
+    height: 2em !important;
+}
+
+/* .button:hover {
     background-color: #2EE59D;
     box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
     color: #fff;

@@ -10,6 +10,7 @@
 <div id="kategori-container" class="mt-1 d-flex">
     @foreach ($kategoris as $kategori)
     <a class="btn kategori-item" data-id="{{ $kategori->id }}">
+        <i class="fa fa-check" style="padding-right:5px;"></i>
         {{ $kategori->nama }}
     </a>
     @endforeach
@@ -40,7 +41,7 @@
             @endforeach
             @endforeach
             <div class="col-12">
-                <button type="submit" class="btn-simpan btn btn-primary w-100">Simpan</button>
+                <button type="submit" class="btn btn-simpan w-100">Simpan</button>
             </div>
         </div>
     </div>
