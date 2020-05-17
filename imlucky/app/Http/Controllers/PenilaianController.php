@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Juri;
-use App\Kategori;
 use App\Peleton;
 use App\Sub2;
 use Illuminate\Database\Eloquent\Collection;
@@ -12,8 +11,7 @@ use Illuminate\Support\Facades\DB;
 
 class PenilaianController extends Controller
 {
-    
-
+    // return list peleton
     public function listPeleton()
     {
         $Peletons = DB::table('penilaian')
@@ -29,6 +27,7 @@ class PenilaianController extends Controller
         return $Peletons;
     }
 
+    // return list juri yang menilai $peleton
     public function listJuri($peleton)
     {
         $juris = DB::table('penilaian')
@@ -45,6 +44,7 @@ class PenilaianController extends Controller
         return $juris;
     }
 
+    // return penilaian $peleton $juri
     public function listPenilaian($peleton,$juri)
     {
         $data = collect(DB::table('penilaian AS pen')
@@ -77,8 +77,6 @@ class PenilaianController extends Controller
                             'pen.nilai',
                             ])
                         ->get();
-
-        // $penilaians = $penilaians->groupBy(['kategori_id'],true);
         
         $data->penilaian = $penilaians;
         return $data;
@@ -123,15 +121,9 @@ class PenilaianController extends Controller
     public function truncate()
     {
         DB::table('penilaian')->truncate();
-        // return back()->with('status','Hapus semua form penilaian berhasil');
         return 'sukses';
     }
     
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function indexPeleton()
     {
         $juri    = Juri::all();
@@ -140,27 +132,33 @@ class PenilaianController extends Controller
 
         $data    = $this->validateData($peleton,$sub2,$juri);
         $peletons = $this->listPeleton();
-        return view('admin.pralomba.form_penilaian.indexPeleton',['data'=>$data,'peletons'=>$peletons]);
+        return view('admin.pralomba.form_penilaian.indexPeleton')
+                ->with('data',$data)
+                ->with('peletons',$peletons);
     }
 
     public function indexJuri($peleton)
     {
         $juris = $this->listJuri($peleton);
         $peleton = Peleton::find($peleton);
-        return view('admin.pralomba.form_penilaian.indexJuri',['juris'=>$juris,'peleton'=>$peleton]);
+        return view('admin.pralomba.form_penilaian.indexJuri')
+                ->with('juris',$juris)
+                ->with('peleton',$peleton);
     }
 
     public function indexPenilaian($peleton,$juri)
     {
         $data = $this->listPenilaian($peleton,$juri);
-        return view('admin.pralomba.form_penilaian.indexPenilaian',['data'=> $data]);
-        return dd($data);
+        return view('admin.pralomba.form_penilaian.indexPenilaian')
+                ->with('data',$data);
     }
 
     public function table($peleton,$juri)
     {
         $data = $this->listPenilaian($peleton,$juri);
-        return view('admin.pralomba.form_penilaian._listPenilaian',['data'=>$data,'penilaians'=>$data->penilaian]);
+        return view('admin.pralomba.form_penilaian._listPenilaian')
+                ->with('data',$data)
+                ->with('penilaians',$data->penilaian);
     }
 
     public function getIds(Collection $peletons,Collection $juris)
@@ -182,12 +180,6 @@ class PenilaianController extends Controller
         return $penilaian;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($peleton,$juri,$kategori,$sub,$sub2)
     {
         $penilaian = DB::table('penilaian')
@@ -199,22 +191,18 @@ class PenilaianController extends Controller
                         ->select('nilai')
                         ->first();
         $action = route('form-penilaian.update',['peleton'=>$peleton,'juri'=>$juri,'kategori'=>$kategori,'sub'=>$sub,'sub2'=>$sub2]);
-        return view('admin.pralomba.form_penilaian._form',['action'=>$action,'penilaian'=>$penilaian]);
+        
+        return view('admin.pralomba.form_penilaian._form')
+                ->with('action',$action)
+                ->with('penilaian',$penilaian);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $peleton,$juri,$kategori,$sub,$sub2)
     {
         $request->validate([
             'nilai'=>'required'
         ]);
-        
+    
         $nilai = $request->nilai;
         DB::table('penilaian')
             ->where('peleton_id','=',$peleton)
@@ -223,5 +211,7 @@ class PenilaianController extends Controller
             ->where('sub_id','=',$sub)
             ->where('sub2_id','=',$sub2)
             ->update(['nilai'=>$nilai]);
+    
+        return 'sukses';
     }
 }

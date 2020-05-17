@@ -9,6 +9,7 @@ use App\Peleton;
 
 class DataController extends Controller
 {
+    // 
     public static function list($no = null)
     {
         $persetase_pinalti = DB::table('config')
@@ -16,9 +17,8 @@ class DataController extends Controller
             ->orWhere('nama','=','pinalti_utama')
             ->get()
             ->keyBy('nama');
-        $mapper_kategori = Kategori::with('sub.sub2')->get();
         $array = array();
-        // retrieve all data
+        // response semua data
         if($no == null){
             $data = DB::table('penilaian as pen')
             ->join('juris as jur','jur.id','=','pen.juri_id')
@@ -49,7 +49,7 @@ class DataController extends Controller
             ->orderBy('juri_id')
             ->get();
         }
-        // retrieve one data
+        // retrieve satu data
         else{
             $peleton = Peleton::where('no','=',$no)->first();
             $data = DB::table('penilaian as pen')
@@ -82,6 +82,7 @@ class DataController extends Controller
             ->orderBy('juri_id')
             ->get();
         }
+
         foreach ($data as $dt) {
             $array[$dt->no]['no'] = $dt->no;
             $array[$dt->no]['peleton'] = $dt->peleton;
@@ -120,22 +121,24 @@ class DataController extends Controller
             $array[$dt->no]['utama'] = array_key_exists('utama',$array[$dt->no]) ? $array[$dt->no]['utama'] + ($dt->nilai * $dt->bobot_utama / 100) : $dt->nilai * $dt->bobot_utama / 100; // belum dikurangi dengan pinalti
         }
         
+        // pengurangi nilai dengan pinalti
         foreach ($array as $key => $value) {
             $array[$key]['umum'] = $array[$key]['umum']  - $array[$key]['pinalti']  * $persetase_pinalti['pinalti_umum']->value / 100;
             $array[$key]['utama']= $array[$key]['utama'] - $array[$key]['pinalti']  * $persetase_pinalti['pinalti_utama']->value / 100;
         }
+        // response semua data
         if($no == null){
             return $array;
         }
+        // response satu data
         else{
             return $array[$no];
         }
     }
 
+    // Menghitung juri paling banyak pada sub2
     public static function juri_lenght(array $array)
     {
-        // Mencari jumlah juri paling banyak pada sub2
-
         $max_length = 0;
 
         // kategori
@@ -152,6 +155,7 @@ class DataController extends Controller
         return $max_length;
     }
 
+    // Mencari juara tiap kategori 
     public static function juara($juara_per_kategori = 3)
     {
         $kategoris = Kategori::all(['kode','nama']);

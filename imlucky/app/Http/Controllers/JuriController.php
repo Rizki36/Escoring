@@ -10,42 +10,29 @@ use Illuminate\Support\Facades\DB;
 
 class JuriController extends Controller
 {
+    // response list juri
     public function listJuri()
     {
-        // return
         $juri = Juri::with('group_juri')->get()->sortBy('kode');
-        return view('admin.pralomba.juri._list-juri',['juris'=>$juri]);
+        return view('admin.pralomba.juri._list-juri')
+                ->with('juris',$juri);
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $listJuri = $this->listJuri();
         return view('admin.pralomba.juri.index',['listJuri'=>$listJuri]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $action      = route('juri.store');
         $group_juris = GroupJuri::all();
-        return view('admin.pralomba.juri._form-juri',['action'=>$action,'group_juris'=>$group_juris]);
+        return view('admin.pralomba.juri._form-juri')
+                ->with('action',$action)
+                ->with('group_juris',$group_juris);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -60,40 +47,24 @@ class JuriController extends Controller
         $juri->password      = $request->password;
         $juri->group_juri_id = $request->group_juri;
         $juri->save();
+        return 'sukses';
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $action = route('juri.update',['id'=>$id]);
         $juri = Juri::find($id);
 
-        return view('admin.pralomba.juri._form-juri',['action'=>$action,'juri'=>$juri]);
+        return view('admin.pralomba.juri._form-juri')
+                ->with('action',$action)
+                ->with('juri',$juri);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $juri = Juri::find($id);
@@ -108,17 +79,13 @@ class JuriController extends Controller
         $juri->nama = $request->nama;
         $juri->password = $request->password;
         $juri->save();
+        return 'sukses';
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         Juri::destroy($id);
+        return 'sukses';
     }
 
 }

@@ -13,9 +13,12 @@ class JuriInputController extends Controller
 {
     public function index($no)
     {
-        $peleton = Peleton::where('no',$no)->first();
+        // start dev
         $juri    = Juri::find(4);
         session(['juri'=>$juri]);
+        // end dev
+
+        $peleton = Peleton::where('no',$no)->first();
         $juri = session('juri');
         $kategoris = $this->refresh_kategori($peleton->id,$juri->id);
         $penilaian = DB::table('penilaian as pen')
@@ -68,6 +71,7 @@ class JuriInputController extends Controller
         return response('sukses');
     }
 
+    // response kategori yang dinilai juri $juri_id dan peleton $peleton_id
     private function refresh_kategori($peleton_id,$juri_id)
     {
         return
@@ -106,5 +110,6 @@ class JuriInputController extends Controller
     {
         DB::table('penilaian')
             ->update(['nilai'=>null,'is_complete'=>0]);
+        return redirect()->back();
     }
 }

@@ -20,6 +20,7 @@ class LaporanController extends Controller
     public function index()
     {
         $peletons = Peleton::all();
-        return view('admin.laporan.index',compact('peletons'));
+        return view('admin.laporan.index')
+                ->with('peletons',$peletons);
     }
 }

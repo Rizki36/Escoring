@@ -8,13 +8,14 @@ use Illuminate\Http\Request;
 
 class KategoriController extends Controller
 {
-
+    // return list kategori
     public function listKategori()
     {
         $kategoris = Kategori::with('sub.sub2')->get()->sortBy('kode');
         $kategoris = $this->addKode($kategoris);
-        return 
-        view('admin.pralomba.kategori._list-kategori',['kategoris'=>$kategoris]);
+
+        return view('admin.pralomba.kategori._list-kategori')
+                ->with('kategoris',$kategoris);
     }
 
     public function addKode($kategoris)
@@ -34,36 +35,20 @@ class KategoriController extends Controller
         return $kategoris;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $listKategori = $this->listKategori();
-        return 
-        view('admin.pralomba.kategori.index',['listKategori'=>$listKategori]);
+        return view('admin.pralomba.kategori.index')
+                ->with('listKategori',$listKategori);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        $action = route('kategori.store');
-        
-        return view('admin.pralomba.kategori._form-kategori',['action'=>$action]);
+        $action = route('kategori.store');        
+        return view('admin.pralomba.kategori._form-kategori')
+                ->with('action',$action);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -80,25 +65,14 @@ class KategoriController extends Controller
         $kategori->bobot_utama = $request->bobot_utama;
         
         $kategori->save();
+        return 'sukses';
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $kategori
-     * @return \Illuminate\Http\Response
-     */
     public function show($kategori)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $kategori
-     * @return \Illuminate\Http\Response
-     */
     public function edit($kategori)
     {
         $action = route('kategori.update',['kategori'=>$kategori]);
@@ -109,13 +83,6 @@ class KategoriController extends Controller
                     ->with('action',$action);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $kategori
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $kategori)
     {
         $request->validate([
@@ -130,17 +97,13 @@ class KategoriController extends Controller
         $kategori->bobot_umum  = $request->bobot_umum;
         $kategori->bobot_utama = $request->bobot_utama;
         $kategori->save();
+        return 'sukses';
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $kategori
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($kategori)
     {
         Kategori::where('kode',$kategori)->delete();
+        return 'sukses';
     }
 
 }

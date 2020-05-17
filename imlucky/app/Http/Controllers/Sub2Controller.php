@@ -9,33 +9,20 @@ use Illuminate\Http\Request;
 
 class Sub2Controller extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create($kategori,$sub)
     {
         $action = route('sub2.store',['kategori'=>$kategori,'sub'=>$sub]);
-        return view('admin.pralomba.kategori._form-sub2',['action'=>$action]);
+        
+        return view('admin.pralomba.kategori._form-sub2')
+                ->with('action',$action);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request,$kategori,$sub)
     {
         $model = $this->transformModel($kategori,$sub);  
@@ -51,25 +38,15 @@ class Sub2Controller extends Controller
         $sub2->kode = $request->kode;
         $sub2->nama = $request->nama;
         $sub->sub2()->save($sub2);
+
+        return 'sukses';
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $sub2
-     * @return \Illuminate\Http\Response
-     */
     public function show($sub2)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $sub2
-     * @return \Illuminate\Http\Response
-     */
     public function edit($kategori,$sub,$sub2)
     {
         $action = route('sub2.update',[
@@ -79,19 +56,11 @@ class Sub2Controller extends Controller
                         ]);
         $model = $this->transformModel($kategori,$sub,$sub2);
         $sub2 = $model->sub2;
-        return view('admin.pralomba.kategori._form-sub2',[
-                    'action' => $action,
-                    'sub2'   => $sub2
-                    ]);
+        return view('admin.pralomba.kategori._form-sub2')
+                ->with('action',$action)
+                ->with('sub2',$sub2);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $sub2
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $kategori, $sub, $sub2)
     {
         $model = $this->transformModel($kategori,$sub,$sub2);
@@ -105,15 +74,8 @@ class Sub2Controller extends Controller
         $sub2->kode = $request->kode;
         $sub2->nama = $request->nama;
         $sub2->save();
-        return 'validated';
+        return 'sukses';
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $sub2
-     * @return \Illuminate\Http\Response
-     */
 
     public function destroy($kategori,$sub,$sub2)
     {
