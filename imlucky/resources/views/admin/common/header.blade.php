@@ -11,20 +11,18 @@
     </button>
 
     <ul class="nav navbar-nav ml-auto">
-        <li class="nav-item d-md-down-none">
-            <a class="nav-link" href="#">
-                <i class="icon-bell"></i>
-                <span class="badge badge-pill badge-danger">5</span>
+        <li class="nav-item mr-2 d-none d-lg-block">
+            <a class="nav-link">
+                <span style="color: #73818f">Admin</span>
+                <img class="img-avatar" src="{{ asset('images/avatar.png') }}" alt="img-admin">
             </a>
         </li>
-        <li class="nav-item d-md-down-none">
-            <a class="nav-link" href="#">
-                <i class="icon-list"></i>
-            </a>
+        <li>
+            <b class="d-none d-lg-block"> | </b>
         </li>
-        <li class="nav-item d-md-down-none">
-            <a class="nav-link" href="#">
-                <i class="icon-location-pin"></i>
+        <li class="nav-item mr-4">
+            <a class="nav-link" href="{{ route('logout.admin') }}">
+                <i class="fa fa-sign-out-alt"></i>
             </a>
         </li>
     </ul>

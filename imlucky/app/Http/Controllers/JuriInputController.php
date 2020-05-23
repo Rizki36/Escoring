@@ -14,8 +14,8 @@ class JuriInputController extends Controller
     public function index($no)
     {
         // start dev
-        $juri    = Juri::find(4);
-        session(['juri'=>$juri]);
+        // $juri    = Juri::find(4);
+        // session(['juri'=>$juri]);
         // end dev
 
         $peleton = Peleton::where('no',$no)->first();

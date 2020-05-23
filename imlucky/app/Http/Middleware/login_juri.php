@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class Login
+class login_juri
 {
     /**
      * Handle an incoming request.
@@ -15,16 +15,9 @@ class Login
      */
     public function handle($request, Closure $next)
     {
-        if(!empty(session('admin'))){
-            $request->session()->put('admin',time());
+        if (!empty(session('juri'))) {
             return $next($request);
         }
-
-        if(!empty(session('juri'))){
-            $request->session()->put('juri',time());
-            return $next($request);
-        }
-        
         return redirect('/login');
     }
 }

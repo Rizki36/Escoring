@@ -13,7 +13,7 @@
       </li>
 
       <li class="nav-item nav-dropdown">
-        <a class="nav-link nav-dropdown-toggle" href="{{ route('pralomba.index') }}">
+        <a class="nav-link nav-dropdown-toggle" href="">
           <i class="nav-icon icon-pencil"></i> Pralomba</a>
         <ul class="nav-dropdown-items">
           <li class="nav-item">

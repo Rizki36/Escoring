@@ -7,12 +7,12 @@
 .kategori-item{
     flex: 0 0 auto;
     margin: 10px 15px;
+    padding: 0 40px;
     display: flex;
     justify-content: center;
     align-items: center;
-    /* padding: 20px; */
-
-    width: 140px;
+    position: relative;
+    /* min-width: 140px; */
     height: 45px;
     font-family: 'Roboto', sans-serif;
     font-size: 11px;
@@ -29,12 +29,20 @@
     outline: none;
 }
 
-.kategori-active{
-  background-color: rgba(217, 0, 255, 0.972);
-  transform: scale(1.1);
+.kategori-item i{
+  position: absolute;
+  font-size: 1.5em;
+  left: 0;
+  margin-left: 15px;
+  color: rgba(0, 255, 157, 0.972);
 }
-.kategori-complete{
+
+.kategori-active{
   background-color: rgba(0, 255, 157, 0.972);
+}
+
+.kategori-item.kategori-active.kategori-active i{
+  color: #fff;
 }
 
 .radio-title{
@@ -63,7 +71,6 @@ input[type="radio"]:not(old){
   display: block;
   width: 2em !important;
   height: 2em !important;
-  
 }
 
   

@@ -13,8 +13,11 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::group(['prefix'=>'admin'],function(){
-    Route::redirect('/','admin/pralomba');
+Route::redirect('juri','/juri/peleton/1');
+Route::redirect('juri/peleton','/juri/peleton/1');
+
+Route::group(['prefix'=>'admin','middleware'=>['web','login_admin']],function(){
+    Route::redirect('/','/admin/pralomba');
     Route::group(['prefix'=>'pralomba'],function(){    
         Route::redirect('/','pralomba/group-juri-juri');
         Route::get('list-peleton','PeletonController@listPeleton')->name('pralomba.listPeleton');
@@ -22,7 +25,6 @@ Route::group(['prefix'=>'admin'],function(){
         Route::get('list-group-juri','GroupJuriController@listGroupJuri')->name('pralomba.listGroupJuri');
         Route::get('list-kategori','KategoriController@listKategori')->name('pralomba.listKategori');
         Route::get('list-group-kategori','GroupKategoriController@list_group_kategori')->name('pralomba.list_group_kategori');
-        Route::get('pralomba','PralombaController@index')->name('pralomba.index');
         
         Route::get('pinalti' ,'PinaltiController@indexPralomba')->name('pinalti.indexPralomba');
         Route::post('pinalti','PinaltiController@updatePralomba')->name('pinalti.updatePralomba');
@@ -92,13 +94,20 @@ Route::group(['prefix'=>'admin'],function(){
     Route::resource('laporan','LaporanController');
 });
 
-Route::group(['prefix'=>'juri'],function(){
+Route::group(['prefix'=>'juri','middleware'=>['web','login_juri']],function(){
     Route::get('peleton/{no}','JuriInputController@index')->name('juriInput');
     Route::put('peleton/{peleton_id}','JuriInputController@update_one')->name('juriInput.update_one');
     Route::put('peleton/{peleton_id}/more','JuriInputController@update_more')->name('juriInput.update_more');
 });
-Route::get('juri/reset','JuriInputController@reset');
-Route::redirect('/','juri/peleton/1');
+
+Route::redirect('/','/login');
 
 Route::get('login','LoginController@index')->name('login.index');
 Route::post('login','LoginController@post')->name('login.post');
+
+Route::get('login/admin','LoginController@indexAdmin')->name('login.index.admin');
+Route::post('login/admin','LoginController@postAdmin')->name('login.post.admin');
+
+Route::get('logout','LoginController@logout')->name('logout');
+Route::get('logout/juri','LoginController@logout_juri')->name('logout.juri');
+Route::get('logout/admin','LoginController@logout_admin')->name('logout.admin');

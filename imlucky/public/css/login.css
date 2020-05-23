@@ -1,0 +1,87 @@
+body {
+  background-color: #ffffff;
+}
+h2 {
+  margin: 0;
+}
+
+#card {
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: -4px -4px 10px rgba(0, 0, 0, 0.1), 4px 4px 10px rgba(0, 0, 0, 0.1);
+  height: 480px;
+  width: 480px;
+  margin: 6rem auto 8.1rem auto;
+}
+#card-content {
+  padding: 12px 44px;
+  margin: auto 30px;
+}
+#card-title {
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+  color: #505050;
+  padding-bottom: 23px;
+  padding-top: 25px;
+}
+.underline-title {
+  background: #09c499;
+  height: 2px;
+  margin: 10px auto;
+  width: 120px;
+}
+
+input {
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  width: 100%;
+  padding: 12px 20px;
+  margin: 10px 0;
+  display: inline-block;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+  background-color: #fafafa;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  outline: none;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+  border: 2px solid #09c499;
+  background-color: #f7f7f7;
+}
+
+input[type="submit"] {
+  cursor: pointer;
+  border: none;
+  color: #ffffff;
+  background-color: #09c499;
+  margin-bottom: 20px;
+}
+
+input[type="submit"]:hover {
+  background-color: #09b48c;
+}
+
+#option {
+  display: block;
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  margin: auto;
+  width: 100%;
+  height: 25px;
+  color: #505050;
+  background-color: #ffffff;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
+}
+
+#option:hover {
+  color: #09c499;
+}

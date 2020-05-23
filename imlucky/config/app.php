@@ -228,4 +228,7 @@ return [
 
     ],
 
+    'judul_aplikasi' => env('JUDUL_APLIKASI'),
+    'admin' => env('USER_ADMIN',''),
+    'Password' =>env('PASSWORD_ADMIN','')
 ];
