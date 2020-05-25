@@ -32,6 +32,7 @@ Route::group(['prefix'=>'admin','middleware'=>['web','login_admin']],function(){
         Route::get('ballot' ,'BallotController@indexPralomba')->name('ballot.indexPralomba');
         Route::post('ballot','BallotController@updatePralomba')->name('ballot.updatePralomba');
 
+        Route::get('peleton/import-excel','PeletonController@formImport')->name('peleton.import');
         Route::resource('peleton','PeletonController',['parameters' => ['peleton' => 'no']]);
         Route::resource('juri','JuriController',['parameters' => ['juri' => 'id']]);
         Route::resource('group-juri-juri','GroupJuriController',['parameters' => ['group-juri-juri'=>'id']])->names('group-juri');
@@ -82,7 +83,8 @@ Route::group(['prefix'=>'admin','middleware'=>['web','login_admin']],function(){
     Route::put('ballot/{id}','BallotController@update')->name('ballot.update');
 
     Route::get('sortasi','SortasiController@index')->name('sortasi.index');
-    
+    Route::post('sortasi/cetak','SortasiController@cetak')->name('sortasi.cetak');
+
     Route::get('pinalti/listPinalti','PinaltiController@listPinalti')->name('pinalti.listPinalti');
     Route::get('pinalti','PinaltiController@index')->name('pinalti.index');
     Route::get('pinalti/{id}','PinaltiController@edit')->name('pinalti.edit');

@@ -5,10 +5,16 @@
 
 @section('content')
 
+<form id="form-cetak" action="{{ route('sortasi.cetak') }}" method="post">
+    <input id="html" type="hidden" name="html" value="">     
+    <input id="orientasi" type="hidden" name="orientasi">
+    @csrf
+</form>
+
 <div class="card mt-4 wow fadeIn">
     <div class="card-header d-flex ">
         <b>Tabel Juara</b>
-        <button id="btn-cetak-juara" class="btn btn-sm btn-primary ml-auto">Cetak</button>
+        <button class="btn btn-sm btn-primary ml-auto btn-cetak" data-orientasi="landscape">Cetak</button>
     </div>
     <div class="card-body d-sm-flex justify-content-between">
         <table class="table table-sm table-bordered text-center">
@@ -38,7 +44,7 @@
 <div class="card mt-4 wow fadeIn">
     <div class="card-header d-flex ">
         <b>Tabel Sortasi</b>
-        <button id="btn-cetak-sortasi" class="btn btn-sm btn-primary ml-auto">Cetak</button>
+        <button class="btn btn-sm btn-primary ml-auto btn-cetak" data-orientasi="landscape">Cetak</button>
     </div>
     <div class="card-body d-sm-flex justify-content-between">
         <table class="table table-sm table-bordered">
@@ -80,3 +86,16 @@
 </div>
 
 @endsection
+
+@push('scripts')
+    <script>
+        $('.btn-cetak').on('click', function () {
+            const html = $(this).closest('.card').find('.card-body').html(),
+                orientasi = $(this).attr('data-orientasi');
+            
+            $('#html').val(html);
+            $('#orientasi').val(orientasi);
+            $('#form-cetak').submit();
+        });
+    </script>
+@endpush

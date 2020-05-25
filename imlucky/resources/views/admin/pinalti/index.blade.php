@@ -10,7 +10,7 @@
         <table id="table" class="table table-sm" data-href="{{ route('pinalti.listPinalti') }}">
             <thead>
                 <tr>
-                    <th class="text-center" colspan="3">List Pleton</th>
+                    <th class="text-center" colspan="4">Pinalti Pleton</th>
                 </tr>
                 <tr class="text-center">
                     <th scope="col" style="width: 1px">No</th>

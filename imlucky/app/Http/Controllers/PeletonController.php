@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class PeletonController extends Controller
 {
+    public function formImport()
+    {
+        return view('admin.pralomba.peleton._form-import');
+    }
+
     // return list peleton
     public function listPeleton()
     {

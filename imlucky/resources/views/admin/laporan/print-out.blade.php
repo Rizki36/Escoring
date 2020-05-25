@@ -29,7 +29,7 @@
         }
 
         table {
-            border-collapse: collapse;
+            /* border-collapse: collapse; */
             width: 100%;
         }
 
@@ -37,6 +37,7 @@
         td,
         th {
             border: 1px solid black;
+            border-spacing: 0px;
         }
 
         .head {
@@ -56,7 +57,7 @@
 </head>
 <body>
     <table>
-        <thead>
+        <tbody>
             <tr>
                 <th colspan="{{ $juri_lenght + 3 }}">LEMBAR PENILAIAN</th>
             </tr>
@@ -85,7 +86,7 @@
                 @endfor
                 <td>TOTAL</td>
             </tr>
-        </thead>
+        </tbody>
         <tbody>
             
             @foreach ($data['penilaian'] as $kategori)
