@@ -128,16 +128,16 @@ class DataController extends Controller
         }
         // response semua data
         if($no == null){
-            return $array;
+            return collect($array);
         }
         // response satu data
         else{
-            return $array[$no];
+            return collect($array[$no]);
         }
     }
 
     // Menghitung juri paling banyak pada sub2
-    public static function juri_lenght(array $array)
+    public static function juri_lenght($array)
     {
         $max_length = 0;
 
@@ -179,4 +179,5 @@ class DataController extends Controller
         }
         return $juara;
     }
+
 }

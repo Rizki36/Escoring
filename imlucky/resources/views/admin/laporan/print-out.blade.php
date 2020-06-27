@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Document</title>
+    <title>Lembar Nilai {{ $data['peleton'] }}</title>
     <style>
         @page {
             margin: 0cm 0cm;
@@ -36,7 +36,7 @@
         table,
         td,
         th {
-            border: 1px solid black;
+            border: 0.5px solid black;
             border-spacing: 0px;
         }
 
@@ -50,24 +50,31 @@
             /* position: relative; */
             /* display: inline-block; */
         }
-        .border-white{
-            border-color: #fff
+        .border-white, .border-white thead, .border-white thead tr, .border-white thead tr td {
+            border-color: #fff !important;
+            text-align: center;
+        }
+        .border-white thead tr td{
+            padding-bottom: 10px;
         }
     </style>
 </head>
 <body>
+    <table style="margin-bottom: 30px" class="border-white head">
+        <thead>
+            <tr>
+                <td style="width: 150px">
+                    <img width="100%" src="{{ base_path('public/images/logo-print.png') }}" alt="">
+                </td>
+                <td>
+                    {!! $judul !!}
+                </td>
+            </tr>
+        </thead>
+    </table>
+
     <table>
         <tbody>
-            <tr>
-                <th colspan="{{ $juri_lenght + 3 }}">LEMBAR PENILAIAN</th>
-            </tr>
-            <tr>
-                <th colspan="{{ $juri_lenght + 3 }}">TES</th>
-            </tr>
-            <tr>
-                <th colspan="{{ $juri_lenght + 3 }}">GERAK KREATIVITAS GENERASI MUDA PASKIBRA</th>
-            </tr>
-            
             <tr class="head text-center">
                 <td></td>
                 <td>NOMOR UNDIAN</td>
@@ -78,7 +85,6 @@
                 <td>PELETON</td>
                 <td colspan="{{ $juri_lenght + 1 }}">{{ $data['peleton'] }}</td>
             </tr>
-            
             <tr class="head text-center">
                 <td colspan="2"></td>
                 @for ($i = 0; $i < $juri_lenght; $i++)
@@ -86,8 +92,6 @@
                 @endfor
                 <td>TOTAL</td>
             </tr>
-        </tbody>
-        <tbody>
             
             @foreach ($data['penilaian'] as $kategori)
                 <tr class="text-center">
@@ -149,5 +153,6 @@
                 </tr>
         </tbody>
     </table>
+    <img style="margin-top: 30px" width="100%" src="{{ base_path('public/images/ttd.png') }}" alt="">
 </body>
 </html>

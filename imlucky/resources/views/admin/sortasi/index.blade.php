@@ -14,7 +14,7 @@
 <div class="card mt-4 wow fadeIn">
     <div class="card-header d-flex ">
         <b>Tabel Juara</b>
-        <button class="btn btn-sm btn-primary ml-auto btn-cetak" data-orientasi="landscape">Cetak</button>
+        <button data-title="LEMBAR JUARA" class="btn btn-sm btn-primary ml-auto btn-cetak" data-orientasi="landscape">Cetak</button>
     </div>
     <div class="card-body d-sm-flex justify-content-between">
         <table class="table table-sm table-bordered text-center">
@@ -27,6 +27,22 @@
                 </tr>
             </thead>
             <tbody>
+                {{--  juara umum --}}
+                <tr>
+                    <td>Juara Umum</td>
+                    <td>{{ $umum['peleton'] }}</td>
+                    <td>{{ $umum['umum'] }}</td>
+                </tr>
+                
+                {{-- Juara utama --}}
+                @foreach ($utama as $juaraUtama)                    
+                <tr>
+                    <td>Juara Utama {{ $loop->index + 1 }}</td>
+                    <td>{{ $juaraUtama['peleton'] }}</td>
+                    <td>{{ $juaraUtama['utama'] }}</td>
+                </tr>
+                @endforeach
+
                 @foreach ($juara as $peletons)
                     @foreach ($peletons as $index => $peleton)
                     <tr>

@@ -32,14 +32,28 @@
         th {
             border: 1px solid black;
         }
-        
-        /* #logo{
-            width:auto;
-            height:90;
-        } */
+        .border-white, .border-white thead, .border-white thead tr, .border-white thead tr td {
+            border-color: #fff !important;
+            text-align: center;
+        }
+        .border-white thead tr td{
+            padding-bottom: 10px;
+        }
     </style>
     </head>
     <body>
+        <table style="margin-bottom: 30px" class="border-white head">
+            <thead>
+                <tr>
+                    <td style="width: 150px">
+                        <img width="100%" src="{{ base_path('public/images/logo-print.png') }}" alt="">
+                    </td>
+                    <td>
+                        {!! $judul ?? 'test' !!}
+                    </td>
+                </tr>
+            </thead>
+        </table>
         {!! $html !!}
     </body>
 </html>

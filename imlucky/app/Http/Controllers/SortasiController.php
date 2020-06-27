@@ -22,11 +22,15 @@ class SortasiController extends Controller
                                 ->keyBy('nama');
         $kategoris = Kategori::all(['kode','nama'])->sortBy('kode')->toArray();        
         $sortasi  = DataController::list();
-
+        $umum = $sortasi->sortByDesc('umum')->values()->first();
+        // dd($umum);
+        $utama = $sortasi->sortByDesc('utama')->values()->take(3);
         return view('admin.sortasi.index')
                     ->with('kategoris',$kategoris)
                     ->with('sortasi',$sortasi)
                     ->with('persentase_ballot',$persetase_ballot)
+                    ->with('umum',$umum)
+                    ->with('utama',$utama)
                     ->with('juara',$juara);
     }
     public function cetak(Request $request)

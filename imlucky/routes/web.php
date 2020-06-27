@@ -33,6 +33,7 @@ Route::group(['prefix'=>'admin','middleware'=>['web','login_admin']],function(){
         Route::post('ballot','BallotController@updatePralomba')->name('ballot.updatePralomba');
 
         Route::get('peleton/import-excel','PeletonController@formImport')->name('peleton.import');
+        Route::post('peleton/import-excel/post','PeletonController@postFormImport')->name('peleton.import.post');
         Route::resource('peleton','PeletonController',['parameters' => ['peleton' => 'no']]);
         Route::resource('juri','JuriController',['parameters' => ['juri' => 'id']]);
         Route::resource('group-juri-juri','GroupJuriController',['parameters' => ['group-juri-juri'=>'id']])->names('group-juri');

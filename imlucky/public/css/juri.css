@@ -2,6 +2,7 @@
     /* background-color: brown; */
     overflow-x: auto;
     flex-wrap: nowrap;
+    padding-bottom: 10px;
 }
 
 .kategori-item{

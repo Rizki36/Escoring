@@ -2,14 +2,38 @@
 
 namespace App\Http\Controllers;
 
-use App\Peleton;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use App\Imports\PeletonsImport;
+use App\Peleton;
+use Excel;
 
 class PeletonController extends Controller
 {
     public function formImport()
     {
+
         return view('admin.pralomba.peleton._form-import');
+    }
+
+    public function postFormImport(Request $request)
+    {
+        $data['peletons'] = Excel::toArray(new PeletonsImport, request()->file('excel'))[0];
+        $messages = [
+            'peletons.*.NO.required' => 'Kolom NO perlu diisi.',
+            'peletons.*.NO.unique' => 'NO peleton suda dipakai.',
+            'peletons.*.NAMA.required' => 'Kolom NAMA perlu diisi.',
+        ];
+        $validator = Validator::make($data,[
+            'peletons.*.NO' => 'required|unique:peletons,no'
+        ],$messages);
+        
+        if ($validator->fails()) {
+            
+            // dd($validator->errors());
+        }
+        return 'sukses';
     }
 
     // return list peleton

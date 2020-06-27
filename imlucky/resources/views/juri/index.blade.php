@@ -7,7 +7,7 @@
 @section('content')
 <input type="hidden" name="url_post_one" value="{{ route('juriInput.update_one',['peleton_id'=>$peleton->id]) }}">
 <input type="hidden" name="url_post_more" value="{{ route('juriInput.update_more',['peleton_id'=>$peleton->id]) }}">
-<div id="kategori-container" class="mt-1 d-flex">
+<div id="kategori-container" class="mt-1 mb-4 d-flex">
     {{ view('juri._kategori-items',['kategoris'=>$kategoris]) }}
 </div>
 
