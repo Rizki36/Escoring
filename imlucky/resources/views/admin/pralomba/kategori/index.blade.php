@@ -5,9 +5,14 @@
 @endsection
 
 @section('content')
+<div class="callout callout-info">
+    Perhatian!<br>
+    <small class="text-muted">Persentase sebagai bobot dari kategori : Nilai kategori = Total nilai kategori - (Total nilai kategori * persetase / 100)</small><br>
+    <small class="text-muted">Kisaran nilai adalah nilai yang bisa dipilih juri, ex: 0,5,10,15,20</small><br>
+    <small class="text-muted">Kode Kategori : Gunakan 1 digit huruf, Kode sub : Gunakan 1 digit huruf, Kode Kategori : Gunakan 2 digit angka</small><br>
+</div>
 <div class="card mt-4 wow fadeIn">
     <div class="card-body d-sm-flex justify-content-between">        
-
         <table id="table" class="table table-sm table-bordered" data-href="{{ route('pralomba.listKategori') }}">
             <thead>
                 <tr>

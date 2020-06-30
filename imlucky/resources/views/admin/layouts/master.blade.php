@@ -39,6 +39,7 @@
     </main>
   </div>
   <script src="{{ mix('js/app.js') }}"></script>  
+  @include('sweetalert::alert')
   <script>
     $.ajaxSetup({
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}

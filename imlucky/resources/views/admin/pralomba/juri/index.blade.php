@@ -5,9 +5,13 @@
 @endsection
 
 @section('content')
+@section('content')
+<div class="callout callout-info">
+    Perhatian!<br>
+    <small class="text-muted">User dan Password untuk login juri</small><br>
+</div>
 <div class="card mt-4 wow fadeIn">
     <div class="card-body d-sm-flex justify-content-between">
-        
         <table id="table" class="table table-sm table-bordered" data-href="{{ route('pralomba.listJuri') }}">
             <thead>
                 <tr>

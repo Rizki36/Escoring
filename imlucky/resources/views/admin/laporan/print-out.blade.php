@@ -47,8 +47,7 @@
 
         .ttd{
             margin-top: 30mm;
-            /* position: relative; */
-            /* display: inline-block; */
+
         }
         .border-white, .border-white thead, .border-white thead tr, .border-white thead tr td {
             border-color: #fff !important;

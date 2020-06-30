@@ -18,8 +18,12 @@ Route::redirect('juri/peleton','/juri/peleton/1');
 
 Route::group(['prefix'=>'admin','middleware'=>['web','login_admin']],function(){
     Route::redirect('/','/admin/pralomba');
+
     Route::group(['prefix'=>'pralomba'],function(){    
         Route::redirect('/','pralomba/group-juri-juri');
+        Route::get('preferences','PreferencesController@index')->name('preferences.index');
+        Route::post('preferences','PreferencesController@post')->name('preferences.post');
+
         Route::get('list-peleton','PeletonController@listPeleton')->name('pralomba.listPeleton');
         Route::get('list-juri','JuriController@listJuri')->name('pralomba.listJuri');
         Route::get('list-group-juri','GroupJuriController@listGroupJuri')->name('pralomba.listGroupJuri');
@@ -32,6 +36,7 @@ Route::group(['prefix'=>'admin','middleware'=>['web','login_admin']],function(){
         Route::get('ballot' ,'BallotController@indexPralomba')->name('ballot.indexPralomba');
         Route::post('ballot','BallotController@updatePralomba')->name('ballot.updatePralomba');
 
+        Route::get('peleton/export-excel','PeletonController@export')->name('peleton.export');
         Route::get('peleton/import-excel','PeletonController@formImport')->name('peleton.import');
         Route::post('peleton/import-excel/post','PeletonController@postFormImport')->name('peleton.import.post');
         Route::resource('peleton','PeletonController',['parameters' => ['peleton' => 'no']]);

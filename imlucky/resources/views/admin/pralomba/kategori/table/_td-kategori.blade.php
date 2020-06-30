@@ -7,4 +7,4 @@
     </small>
 </td>    
 
-<td class="align-middle" rowspan="{{ $rowspan }}"><small class="d-block">Umum: <br>{{ $umum }}</small><small class="d-block">Utama: <br>{{ $utama }}</small></td>
+<td class="align-middle" rowspan="{{ $rowspan }}"><small class="d-block">Umum: <br>{{ $umum }}%</small><small class="d-block">Utama: <br>{{ $utama }}%</small></td>

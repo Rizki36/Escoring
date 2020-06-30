@@ -6,7 +6,7 @@ use App\Peleton;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Imports\HeadingRowFormatter;
-HeadingRowFormatter::default('none');
+// HeadingRowFormatter::default('none');
 
 class PeletonsImport implements ToModel,WithHeadingRow
 {
@@ -18,11 +18,10 @@ class PeletonsImport implements ToModel,WithHeadingRow
     */
     public function model(array $row)
     {
+        
         return new Peleton([
             'no' => $row['NO'],
-            'nama' => $row['NAMA'],
-            'ballot' => 0,
-            'pinalti' => 0
+            'nama' => $row['NAMA']
         ]);
     }
 }

@@ -15,10 +15,8 @@ class AddDataSortasiConfigTable extends Migration
     public function up()
     {
         DB::table('config')->insert([
-            ['nama'=>'title_sortasi_default','value'=>'LEMBAR SORTASI ~ GARUDA 9.0 ~ GERAK KREATIVITAS GENERASI MUDA PASKIBRA'],
-            ['nama'=>'title_sortasi','value' => null],
-            ['nama'=>'title_juara_default','value'=>'LEMBAR JUARA ~ GARUDA 9.0 ~ GERAK KREATIVITAS GENERASI MUDA PASKIBRA'],
-            ['nama'=>'title_juara','value' => null],
+            ['nama'=>'title_sortasi','value'=>'LEMBAR SORTASI <br> GARUDA 9.0 <br> GERAK KREATIVITAS GENERASI MUDA PASKIBRA'],
+            ['nama'=>'title_juara','value'=>'LEMBAR JUARA <br> GARUDA 9.0 <br> GERAK KREATIVITAS GENERASI MUDA PASKIBRA'],
         ]); 
     }
 
@@ -29,9 +27,7 @@ class AddDataSortasiConfigTable extends Migration
      */
     public function down()
     {
-        DB::table('config')->where('nama','title_sortasi_default')->delete();
         DB::table('config')->where('nama','title_sortasi')->delete();
-        DB::table('config')->where('nama','title_juara_default')->delete();
         DB::table('config')->where('nama','title_juara')->delete();
     }
 }

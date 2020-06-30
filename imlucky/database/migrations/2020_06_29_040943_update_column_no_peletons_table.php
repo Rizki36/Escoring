@@ -2,10 +2,9 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class AddDataTitleConfigTable extends Migration
+class UpdateColumnNoPeletonsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,9 +13,9 @@ class AddDataTitleConfigTable extends Migration
      */
     public function up()
     {
-        DB::table('config')->insert([
-            ['nama'=>'title_laporan','value' => 'LEMBAR PENILAIAN <br> GARUDA 9.0 <br> GERAK KREATIVITAS GENERASI MUDA PASKIBRA']
-        ]); 
+        Schema::table('peletons', function (Blueprint $table) {
+            $table->integer('no')->unique()->change();
+        });
     }
 
     /**
@@ -26,6 +25,8 @@ class AddDataTitleConfigTable extends Migration
      */
     public function down()
     {
-        DB::table('config')->where('nama','title_laporan')->delete();
+        Schema::table('peletons', function (Blueprint $table) {
+            $table->integer('no')->change();
+        });
     }
 }

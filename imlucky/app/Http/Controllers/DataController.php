@@ -101,10 +101,12 @@ class DataController extends Controller
                 array_key_exists("total",$array[$dt->no]['penilaian'][$dt->kategori_kode]) ?
                 $array[$dt->no]['penilaian'][$dt->kategori_kode]["total"] + $dt->nilai : 
                 $dt->nilai;
+            
             $array[$dt->no]['penilaian'][$dt->kategori_kode]["umum"]  = 
                 array_key_exists("umum",$array[$dt->no]['penilaian'][$dt->kategori_kode])  ? 
                 $array[$dt->no]['penilaian'][$dt->kategori_kode]["umum"]  + ($dt->nilai * $dt->bobot_umum / 100): 
                 $dt->nilai * $dt->bobot_umum / 100;
+
             $array[$dt->no]['penilaian'][$dt->kategori_kode]["utama"] = 
                 array_key_exists("utama",$array[$dt->no]['penilaian'][$dt->kategori_kode]) ? 
                 $array[$dt->no]['penilaian'][$dt->kategori_kode]["utama"] + ($dt->nilai * $dt->bobot_utama / 100) : 

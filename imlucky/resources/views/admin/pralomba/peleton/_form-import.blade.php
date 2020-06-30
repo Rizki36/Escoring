@@ -9,5 +9,5 @@
             <label class="custom-file-label" for="upload-data">Upload Data Excel(xls)</label>
         </div>
     </div>
-    <a href="{{ url('/files/sekolah.xlsx') }}" role="button" id="btn-download" class="btn btn-primary w-100">Download Template</a>
+    <a href="{{ url('/files/peleton.xlsx') }}" role="button" id="btn-download" class="btn btn-primary w-100">Download Template</a>
 </form>

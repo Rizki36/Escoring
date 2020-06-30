@@ -15,33 +15,31 @@ class SortasiController extends Controller
     public function index()
     {
         $juara = DataController::juara();
-        $persetase_ballot = DB::table('config')
-                                ->where('nama','=','ballot_umum')
-                                ->orWhere('nama','=','ballot_utama')
-                                ->get()
-                                ->keyBy('nama');
+        $config = DB::table('config')
+        ->get(['nama','value'])
+        ->keyBy('nama');
         $kategoris = Kategori::all(['kode','nama'])->sortBy('kode')->toArray();        
+        return
         $sortasi  = DataController::list();
         $umum = $sortasi->sortByDesc('umum')->values()->first();
-        // dd($umum);
         $utama = $sortasi->sortByDesc('utama')->values()->take(3);
+        
         return view('admin.sortasi.index')
                     ->with('kategoris',$kategoris)
-                    ->with('sortasi',$sortasi)
-                    ->with('persentase_ballot',$persetase_ballot)
+                    ->with('config',$config)
                     ->with('umum',$umum)
                     ->with('utama',$utama)
-                    ->with('juara',$juara);
+                    ->with('juara',$juara)
+                    ->with('sortasi',$sortasi);
     }
+
     public function cetak(Request $request)
     {
-        // $pdf = App::make('dompdf.wrapper');
         $html = $request->input('html','data kosong');
-        $title = $request->input('title','download.pdf');
+        $title = $request->input('title','Judul');
+        $nama_file = $request->input('nama_file','Document');
         $orientasi = $request->input('orientasi','portrait');
-        $pdf = PDF::loadView('admin.sortasi.cetak',['html'=>$html])->setPaper('a4',$orientasi)->setWarnings(false);
-        return $pdf->stream($title);
-        // $pdf->loadHTML($html)->setPaper('a4')->setWarnings(false)->save('myfile.pdf');
-        // return $pdf->stream();
+        $pdf = PDF::loadView('admin.sortasi.cetak',['html'=>$html,'title'=>$title])->setPaper('a4',$orientasi)->setWarnings(false);
+        return $pdf->stream($nama_file.'.pdf');
     }
 }

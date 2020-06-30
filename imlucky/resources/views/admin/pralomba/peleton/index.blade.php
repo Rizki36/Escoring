@@ -9,14 +9,14 @@
 <div class="d-flex mt-4">
     <div class="btn-group ml-auto">
         <a id="btn-add-peleton" href="{{ route('peleton.create') }}" role="button" id="btn-tambah" class="btn btn-primary modal-show" title="Tambah Sekolah">Tambah Peleton</a>
-        <a id="btn-import-peleton" href="{{ route('peleton.import') }}" role="button" id="btn-tambah" class="btn modal-show" title="Tambah Sekolah">Import</a>
+        <a id="btn-import-peleton" href="{{ route('peleton.import') }}" role="button" id="btn-tambah" class="btn modal-show" title="Import Sekolah">Import</a>
+        <a href="{{ route('peleton.export') }}"  class="btn" title="Tambah Sekolah">Export</a>
     </div>
 </div>
 
-
-{{-- <a id="btn-add-peleton" href="{{ route('peleton.create') }}" class="btn btn-sm ml-auto bg-blue text-white">Tambah Peleton</a> --}}
 <div class="card mt-4 wow fadeIn">
     {{-- <div class="card-header d-flex">
+        <button class="btn btn-primary ml-auto">Cetak</button>
     </div> --}}
 
     <div class="card-body d-sm-flex justify-content-between">

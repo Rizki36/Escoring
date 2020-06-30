@@ -5,17 +5,22 @@
 @endsection
 
 @section('content')
+<div class="callout callout-info">
+    Perhatian!<br>
+    <small class="text-muted">Nilai Umum = Nilai Umum - (Nilai Umum * Persentase Pinalti Umum/100) </small><br>
+    <small class="text-muted">Nilai Utama = Nilai Utama - (Nilai Utama * Persentase Pinalti Utama/100) </small><br>
+</div>
 <div class="card mt-4 wow fadeIn">
     <div class="card-body">
         <form action="{{ route('pinalti.updatePralomba') }}" method="post">
             @csrf
             <div class="input-group">
                 <div class="input-group-prepend">
-                    <span class="input-group-text">Persetase Umum</span>
+                    <span class="input-group-text">Persetase Pinalti Umum</span>
                 </div>
                 <input name="pinalti_umum" type="number" class="form-control" value="{{ $pinalti->umum }}">
                 <div class="input-group-prepend">
-                    <span class="input-group-text">Persentase Utama</span>
+                    <span class="input-group-text">Persentase Pinalti Utama</span>
                 </div>
                 <input name="pinalti_utama" type="number" class="form-control" value="{{ $pinalti->utama }}">
                 <div class="input-group-append">

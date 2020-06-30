@@ -6,15 +6,17 @@
 @section('content')
 
 <form id="form-cetak" action="{{ route('sortasi.cetak') }}" method="post">
-    <input id="html" type="hidden" name="html" value="">     
+    <input id="html" type="hidden" name="html">     
+    <input id="title" type="hidden" name="title">
     <input id="orientasi" type="hidden" name="orientasi">
+    <input id="nama_file" type="hidden" name="nama_file">
     @csrf
 </form>
 
 <div class="card mt-4 wow fadeIn">
     <div class="card-header d-flex ">
         <b>Tabel Juara</b>
-        <button data-title="LEMBAR JUARA" class="btn btn-sm btn-primary ml-auto btn-cetak" data-orientasi="landscape">Cetak</button>
+        <button data-nama="Daftar Juara" data-title="{!! $config['title_juara']->value !!}" class="btn btn-sm btn-primary ml-auto btn-cetak" data-orientasi="portrait">Cetak</button>
     </div>
     <div class="card-body d-sm-flex justify-content-between">
         <table class="table table-sm table-bordered text-center">
@@ -23,7 +25,6 @@
                     <td style="width: 250px">JUARA</td>
                     <td>PELETON</td>
                     <td>NILAI</td>
-
                 </tr>
             </thead>
             <tbody>
@@ -60,7 +61,7 @@
 <div class="card mt-4 wow fadeIn">
     <div class="card-header d-flex ">
         <b>Tabel Sortasi</b>
-        <button class="btn btn-sm btn-primary ml-auto btn-cetak" data-orientasi="landscape">Cetak</button>
+        <button data-nama="Sortasi" data-title="{!! $config['title_sortasi']->value !!}" class="btn btn-sm btn-primary ml-auto btn-cetak" data-orientasi="landscape">Cetak</button>
     </div>
     <div class="card-body d-sm-flex justify-content-between">
         <table class="table table-sm table-bordered">
@@ -70,8 +71,8 @@
                     <td class="align-middle" rowspan="2">Sekolah</td>
                     <td class="align-middle" colspan="{{ count($kategoris) + 1 }}">NILAI ORI</td>
                     <td class="align-middle" rowspan="2">PINALTI</td>
-                    <td class="align-middle" rowspan="2">NILAI UMUM</td>
-                    <td class="align-middle" rowspan="2">NILAI UTAMA</td>
+                    <td class="align-middle" rowspan="2">NILAI<br>UMUM</td>
+                    <td class="align-middle" rowspan="2">NILAI<br>UTAMA</td>
                 </tr>
                 <tr>
                     @foreach ($kategoris as $kategori)
@@ -92,8 +93,8 @@
                     @endforeach
                     <td>{{ $peleton_value['ballot'] }}</td>
                     <td>{{ $peleton_value['pinalti'] }}</td>
-                    <td>{{ $peleton_value['umum']  + $peleton_value['ballot'] * $persentase_ballot['ballot_umum']->value/100 }}</td>
-                    <td>{{ $peleton_value['utama'] + $peleton_value['ballot'] * $persentase_ballot['ballot_utama']->value/100 }}</td>
+                    <td>{{ $peleton_value['umum']  + $peleton_value['ballot'] * $config['ballot_umum']->value/100 }}</td>
+                    <td>{{ $peleton_value['utama'] + $peleton_value['ballot'] * $config['ballot_utama']->value/100 }}</td>
                 </tr>
                 @endforeach
             </tbody>
@@ -107,10 +108,14 @@
     <script>
         $('.btn-cetak').on('click', function () {
             const html = $(this).closest('.card').find('.card-body').html(),
-                orientasi = $(this).attr('data-orientasi');
+                orientasi = $(this).attr('data-orientasi'),
+                title = $(this).attr('data-title'),
+                nama_file = $(this).attr('data-nama');
             
             $('#html').val(html);
             $('#orientasi').val(orientasi);
+            $('#title').val(title);
+            $('#nama_file').val(nama_file);
             $('#form-cetak').submit();
         });
     </script>

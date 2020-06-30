@@ -5,13 +5,18 @@
 @endsection
 
 @section('content')
+<div class="callout callout-info">
+    Perhatian!<br>
+    <small class="text-muted">Kategori juri berfungsi untuk <b> mengelompokan Juri</b></small><br>
+    <small class="text-muted">ex. Group Juri PBB, FARVORYEL, FARVORYELKOS</small><br>
+</div>
+
 <div class="card mt-4 wow fadeIn">
     <div class="card-body d-sm-flex justify-content-between">
-
         <table id="table" class="table table-sm table-bordered" data-href="{{ route('pralomba.listGroupJuri') }}">
             <thead>
                 <tr>
-                    <th class="text-center" colspan="4">List Juri</th>
+                    <th class="text-center" colspan="4">Group Juri</th>
                 </tr>
                 <tr class="text-center">
                     <th scope="col">kategori</th>

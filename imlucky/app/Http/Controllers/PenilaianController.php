@@ -170,7 +170,7 @@ class PenilaianController extends Controller
                 foreach ($juri->group_juri->kategoris as $kategori) {
                     foreach ($kategori->sub as $sub) {
                         foreach ($sub->sub2 as $sub2) {
-                            array_push($penilaian,['juri_id'=>$juri->id,'peleton_id'=>$peleton->id,'kategori_id'=>$kategori->id,'sub_id'=>$sub->id,'sub2_id'=>$sub2->id,'nilai'=>0]);
+                            array_push($penilaian,['juri_id'=>$juri->id,'peleton_id'=>$peleton->id,'kategori_id'=>$kategori->id,'sub_id'=>$sub->id,'sub2_id'=>$sub2->id,'nilai'=> null]);
                         }
                     }
                 }   

@@ -7,30 +7,26 @@
         </a>
       </li>
       <li class="nav-title">Menu</li>
-      <li class="nav-item">
-        <a class="nav-link" href="">
-          <i class="nav-icon icon-drop"></i> Setup</a>
-      </li>
 
       <li class="nav-item nav-dropdown">
         <a class="nav-link nav-dropdown-toggle" href="">
           <i class="nav-icon icon-pencil"></i> Pralomba</a>
         <ul class="nav-dropdown-items">
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('group-juri.index') }}">
-              <i class="nav-icon fas fa-bell"></i>Group Juri</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('juri.index') }}">
-              <i class="nav-icon fas fa-bell"></i> Juri</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="{{ route('kategori.index') }}">
               <i class="nav-icon fas fa-bell"></i> Kategori</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="{{ route('group-juri.index') }}">
+              <i class="nav-icon fas fa-bell"></i> Group Juri</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="{{ route('group-kategori.index') }}">
               <i class="nav-icon fas fa-bell"></i> Group Kategori</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('juri.index') }}">
+              <i class="nav-icon fas fa-bell"></i> Juri</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ route('peleton.index') }}">
@@ -47,6 +43,10 @@
           <li class="nav-item">
             <a class="nav-link" href="{{ route('form-penilaian.indexPeleton') }}">
               <i class="nav-icon fas fa-bell"></i> Form Penilaian</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('preferences.index') }}">
+              <i class="nav-icon fas fa-bell"></i> preferences</a>
           </li>
         </ul>
       </li>

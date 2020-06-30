@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Validator;
 use App\Imports\PeletonsImport;
 use App\Peleton;
 use Excel;
+Use Alert;
+use App\Exports\PeletonExport;
+use Illuminate\Support\Facades\DB;
 
 class PeletonController extends Controller
 {
@@ -19,21 +22,24 @@ class PeletonController extends Controller
 
     public function postFormImport(Request $request)
     {
-        $data['peletons'] = Excel::toArray(new PeletonsImport, request()->file('excel'))[0];
-        $messages = [
-            'peletons.*.NO.required' => 'Kolom NO perlu diisi.',
-            'peletons.*.NO.unique' => 'NO peleton suda dipakai.',
-            'peletons.*.NAMA.required' => 'Kolom NAMA perlu diisi.',
-        ];
-        $validator = Validator::make($data,[
-            'peletons.*.NO' => 'required|unique:peletons,no'
-        ],$messages);
-        
-        if ($validator->fails()) {
+        DB::beginTransaction();
+        try {
+            $data['peletons'] = Excel::toArray(new PeletonsImport, request()->file('excel'))[0];
             
-            // dd($validator->errors());
+            DB::table('peletons')->insert($data['peletons']); 
+            DB::commit();
+            Alert::success('Import Berhasil!', 'Import Peleton dari excel berhasil');
+            return redirect()->back();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Alert::error('Import Gagal!', 'Terjadi kesalahan, coba cek kembali no peleton');
+            return redirect()->back();
         }
-        return 'sukses';
+    }
+    
+    public function export()
+    {
+        return Excel::download(new PeletonExport, 'peleton.xlsx');
     }
 
     // return list peleton

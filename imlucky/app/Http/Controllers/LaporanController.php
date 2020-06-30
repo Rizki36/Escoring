@@ -13,10 +13,8 @@ class LaporanController extends Controller
     {
         $data = DataController::list($no);
         $juri_lenght = DataController::juri_lenght($data);
-
-        $judul_default = DB::table('config')->where('nama','title_laporan_default')->first()->value;
+        
         $judul = DB::table('config')->where('nama','title_laporan')->first()->value;
-        $judul === '' ? $judul=$judul_default : '';
 
         $pdf = PDF::loadView('admin.laporan.print-out',['judul'=>$judul,'data'=>$data,'juri_lenght'=>$juri_lenght])->setPaper('a4','portrait')->setWarnings(false);
         return $pdf->stream('Lembar Nilai No.'.$data['no'] . ' ' . $data['peleton'].'.pdf');

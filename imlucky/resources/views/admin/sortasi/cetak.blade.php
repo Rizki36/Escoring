@@ -30,7 +30,7 @@
         table,
         td,
         th {
-            border: 1px solid black;
+            border: 0.5px solid black;
         }
         .border-white, .border-white thead, .border-white thead tr, .border-white thead tr td {
             border-color: #fff !important;
@@ -39,6 +39,11 @@
         .border-white thead tr td{
             padding-bottom: 10px;
         }
+        .head,thead tr td {
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
     </style>
     </head>
     <body>
@@ -48,8 +53,8 @@
                     <td style="width: 150px">
                         <img width="100%" src="{{ base_path('public/images/logo-print.png') }}" alt="">
                     </td>
-                    <td>
-                        {!! $judul ?? 'test' !!}
+                    <td class="head">
+                        {!! nl2br(e($title)) ?? 'test' !!}
                     </td>
                 </tr>
             </thead>
