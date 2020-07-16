@@ -5,6 +5,11 @@
 @endsection
 
 @section('content')
+<div class="callout callout-info">
+    Perhatian!<br>
+    <small class="text-muted">Nilai Umum = Nilai Umum + (Nilai ballot * Persentase Ballot Umum/100) </small><br>
+    <small class="text-muted">Nilai Utama = Nilai Utama + (Nilai ballot * Persentase Ballot Utama/100) </small><br>
+</div>
 <div class="card mt-4 wow fadeIn">
     <div class="card-body">
         <form action="{{ route('ballot.updatePralomba') }}" method="post">

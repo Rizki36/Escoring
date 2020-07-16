@@ -14,9 +14,7 @@ try {
     window.$ = window.jQuery = require('jquery')
     require('bootstrap')
     require('bootstrap-select')
-    window.Swal = require('sweetalert2')
-    $.inputmask = window.inputmask = require('inputmask/dist/jquery.inputmask');
-    window.Crud = require('./crud')
+
 } catch (e) {
     console.log(e)
 }

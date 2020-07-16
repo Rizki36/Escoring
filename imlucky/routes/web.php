@@ -17,10 +17,11 @@ Route::redirect('juri','/juri/peleton/1');
 Route::redirect('juri/peleton','/juri/peleton/1');
 
 Route::group(['prefix'=>'admin','middleware'=>['web','login_admin']],function(){
-    Route::redirect('/','/admin/pralomba');
+    Route::get('/','DashboardController@index')->name('dashboard.index');
+    // Route::redirect('/','/admin/pralomba');
 
     Route::group(['prefix'=>'pralomba'],function(){    
-        Route::redirect('/','pralomba/group-juri-juri');
+        Route::redirect('/','pralomba/kategori');
         Route::get('preferences','PreferencesController@index')->name('preferences.index');
         Route::post('preferences','PreferencesController@post')->name('preferences.post');
 

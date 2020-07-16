@@ -14,16 +14,15 @@ class SortasiController extends Controller
 {
     public function index()
     {
+        $config = DB::table('config')->get(['nama','value'])->keyBy('nama');
+
         $juara = DataController::juara();
-        $config = DB::table('config')
-        ->get(['nama','value'])
-        ->keyBy('nama');
-        $kategoris = Kategori::all(['kode','nama'])->sortBy('kode')->toArray();        
+        $utama = DataController::utama();
+        $umum = DataController::umum();
         return
         $sortasi  = DataController::list();
-        $umum = $sortasi->sortByDesc('umum')->values()->first();
-        $utama = $sortasi->sortByDesc('utama')->values()->take(3);
-        
+
+        $kategoris = Kategori::all(['kode','nama'])->sortBy('kode')->toArray();
         return view('admin.sortasi.index')
                     ->with('kategoris',$kategoris)
                     ->with('config',$config)

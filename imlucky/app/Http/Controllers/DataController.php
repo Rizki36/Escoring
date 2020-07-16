@@ -182,4 +182,16 @@ class DataController extends Controller
         return $juara;
     }
 
+    public static function utama()
+    {
+        return
+        $utama = self::list()->sortByDesc('utama')->values()->take(3);        
+    }
+    
+    public static function umum()
+    {
+        return
+        $umum = self::list()->sortByDesc('umum')->values()->first();
+    }
+
 }

@@ -66,7 +66,7 @@
                     <img width="100%" src="{{ base_path('public/images/logo-print.png') }}" alt="">
                 </td>
                 <td>
-                    {!! $judul !!}
+                    {!! nl2br(e($judul)) ?? 'test' !!}
                 </td>
             </tr>
         </thead>

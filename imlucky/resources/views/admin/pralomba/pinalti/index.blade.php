@@ -14,18 +14,27 @@
     <div class="card-body">
         <form action="{{ route('pinalti.updatePralomba') }}" method="post">
             @csrf
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">Persetase Pinalti Umum</span>
+            <div class="row ">
+                <div class="col-md-6 col-12">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Persetase Pinalti Umum  &nbsp;</span>
+                        </div>
+                        <input name="pinalti_umum" type="number" class="form-control" value="{{ $pinalti->umum }}">
+                    </div>
                 </div>
-                <input name="pinalti_umum" type="number" class="form-control" value="{{ $pinalti->umum }}">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">Persentase Pinalti Utama</span>
+
+                <div class="col-md-6 col-12">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Persentase Pinalti Utama</span>
+                        </div>
+                        <input name="pinalti_utama" type="number" class="form-control" value="{{ $pinalti->utama }}">
+                    </div>
                 </div>
-                <input name="pinalti_utama" type="number" class="form-control" value="{{ $pinalti->utama }}">
-                <div class="input-group-append">
-                    <button class="btn btn-primary" type="submit">Update</button>
-                </div>
+            </div>
+            <div class="d-flex mt-3">
+                <button class="btn btn-primary w-100" type="submit">Update</button>
             </div>
         </form>
     </div>
