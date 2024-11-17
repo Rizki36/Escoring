@@ -28,7 +28,7 @@ insede folder imlucky
 - `Group Kategori` : it's grouping Kategori and Juri where are admin can generate List Form Penilaian
 - `List Form Penilaian` : rating list
 - `Peleton` : Contestants
-- `Pinalti` : Deduction due to Peleton error
+- `Pinalti` : Deduction due to Peleton mistake
 - `Ballot` : Extra scores
 - `Sortasi` : list of competition winners
 
