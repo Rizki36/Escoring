@@ -10,27 +10,27 @@ Digunakan untuk penilaian lomba paskibra di SMAN 3 Jombang. <br>
 - MySql
 
 ## How To Run
-insede folder imlucky
+Inside folder imlucky
 - Create database imlucky then import `database_contoh.sql` or `database_kosong.sql`
 - Copy `.env.example` into `.env`
 - Open cmd / terminal and run `php arisan serve`
 - Open `http://127.0.0.1:8000` or another port you are using
 
 ## Words to know
-- `Kategori` : Category competition <br> 
-  it's have one or many Sub Kategori.
-- `Sub Kategori` : Sub Category competition <br>
-  it's have one or many Sub2 Kategori and it's has scores where are Juri can rate.
-- `Sub2 Kategori` : Sub2 Category <br>
-   it's the point judged by the jury
+- `Kategori` : Category of the competition <br> 
+  It can have one or more Sub Kategori.
+- `Sub Kategori` : Sub-category of the competition <br>
+  It can have one or more Sub2 Kategori and includes scores that can be rated by the Juri.
+- `Sub2 Kategori` : Second-level sub-category <br>
+  This is the specific point judged by the Juri.
 - `Juri` : Jury / Scorer in the competition <br>
-  it's can assigned to Group Kategori <br>
-- `Group Kategori` : it's grouping Kategori and Juri where are admin can generate List Form Penilaian
-- `List Form Penilaian` : rating list
-- `Peleton` : Contestants
-- `Pinalti` : Deduction due to Peleton mistake
-- `Ballot` : Extra scores
-- `Sortasi` : list of competition winners
+  Can be assigned to a Group Kategori. <br>
+- `Group Kategori` : A grouping of Kategori and Juri, where the admin can generate the List Form Penilaian.
+- `List Form Penilaian` : Rating list or scoring form.
+- `Peleton` : Contestants or participants.
+- `Pinalti` : Deduction due to a Peleton's mistake.
+- `Ballot` : Extra scores.
+- `Sortasi` : List of competition winners.
 
 ## Access Role
 - Admin
